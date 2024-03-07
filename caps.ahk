@@ -60,9 +60,17 @@ CapsLock & '::
 	SendInput("{Ctrl down}{Left}{Ctrl up}{Backspace}{Ctrl down}{Right}{Ctrl up}")
 }
 
+; Send without space
+SendRmLast(text) 
+{
+	SendInput("{Backspace}")
+	SendText text
+}
+
 ; Personal shortcuts
 :*:;mail::account@ascyt.com
 :*:;website::https://ascyt.com/
+:*:;gh::https://github.com/Ascyt/
 
 ; Shortcuts for faster writing
 :*:;sth::something
@@ -75,16 +83,40 @@ CapsLock & '::
 :*:;misc::miscellaneous
 
 ; Symbols
-:*:;euro::€
-:*:;tm::™
-:*:;copyright::©
-:*:;zws::​
+:*:;euro::
+{
+	SendRmLast("€")
+}
+:*:;tm::
+{
+	SendRmLast("™")
+}
+:*:;copyright::
+{
+	SendRmLast("©")
+}
+:*:;zws::
+{
+	SendRmLast("​")
+}
 
 ; Emojis
-:*:;skull::💀
-:*:;nerd::🤓
-:*:;tu::👍
-:*:;td::👎
+:*:;skull::
+{
+	SendRmLast("💀")
+}
+:*:;nerd::
+{
+	SendRmLast("🤓")
+}
+:*:;tu::
+{
+	SendRmLast("👍")
+}
+:*:;td::
+{
+	SendRmLast("👎")
+}
 
 ; System info shorthands
 :*:;date::
@@ -94,4 +126,8 @@ CapsLock & '::
 :*:;time::
 {
 	Send FormatTime(, "hh:mm")
+}
+:*:;home::
+{
+	SendRmLast("%USERPROFILE%/")
 }
