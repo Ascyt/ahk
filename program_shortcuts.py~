@@ -1,0 +1,8 @@
+import os
+
+arg = input('> ')
+
+match arg:
+    case 'explorer':
+        os.system('start explorer.exe')
+

@@ -129,5 +129,5 @@ SendRmLast(text)
 }
 :*:;home::
 {
-	SendText "%USERPROFILE%/"
+	SendRmLast("%USERPROFILE%/")
 }
