@@ -25,8 +25,6 @@ CapsLock & `;::^Left
 CapsLock & e::Right
 CapsLock & j::^Right
 CapsLock & ,::Up
-CapsLock & o::Down
-
 ; Other faster keys
 CapsLock & 1::Home
 CapsLock & 2::End
@@ -130,4 +128,16 @@ SendRmLast(text)
 :*:;home::
 {
 	SendText "%USERPROFILE%/"
+}
+:*:;docs::
+{
+	SendText "%USERPROFILE%/Documents/"
+}
+:*:;pics::
+{
+	SendText "%USERPROFILE%/Pictures/"
+}
+:*:;downloads::
+{
+	SendText "%USERPROFILE%/Downloads/"
 }
