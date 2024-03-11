@@ -2,10 +2,12 @@
 #SingleInstance
 A_MaxHotkeysPerInterval := 300
 
-CapsLock::F13
-^CapsLock::CapsLock
-+CapsLock::CapsLock
-!F13::CapsLock
+CapsLock::
+{
+	SetCapsLockState false
+}
+
+!CapsLock::CapsLock
 
 ; Homerow right
 CapsLock & h::Backspace
@@ -45,6 +47,12 @@ CapsLock & r::SendText "ü"
 CapsLock & v::SendText "Ü"
 
 CapsLock & -::SendText "ß"
+
+; Other empty shortcuts so I don't keep hitting Caps Lock on accident
+CapsLock & .::Send ""
+CapsLock & p::Send ""
+CapsLock & y::Send ""
+CapsLock & f::Send ""
 
 ; Mouse shortcuts
 CapsLock & LButton::^v
