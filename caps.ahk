@@ -29,6 +29,10 @@ CapsLock & o::Down
 ; Other faster keys
 CapsLock & 1::Home
 CapsLock & 2::End
+CapsLock & Alt:: 
+{
+	SendInput "{End}{Enter}"
+}
 
 ; German Umlaute
 CapsLock & g::SendText "ä"
