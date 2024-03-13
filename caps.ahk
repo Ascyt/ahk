@@ -9,13 +9,52 @@ CapsLock::
 
 !CapsLock::CapsLock
 
+CapsLock & u::
+{
+	if !GetKeyState("Shift")
+	{
+		SendInput "{Backspace}"
+	}
+	if GetKeyState("Shift")
+	{
+		SendInput "{Ctrl down}z{Ctrl up}"
+	}
+}
 ; Homerow right
-CapsLock & h::Backspace
-CapsLock & t::^Backspace
+CapsLock & h::
+{
+	if !GetKeyState("Shift")
+	{
+		SendInput "{Shift down}{Left}{Shift up}"
+	}
+	if GetKeyState("Shift")
+	{
+		SendInput "{Shift down}{Right}{Shift up}"
+	}
+}
+CapsLock & t::
+{
+	if !GetKeyState("Shift")
+	{
+		SendInput "{Ctrl down}{Shift down}{Left}{Shift up}{Ctrl up}"
+	}
+	if GetKeyState("Shift")
+	{
+		SendInput "{Ctrl down}{Shift down}{Right}{Shift up}{Ctrl up}"
+	}
+}
 CapsLock & n:: 
 {
-	SendInput "{Backspace 5}"
+	if !GetKeyState("Shift")
+	{
+		SendInput "{Shift down}{Left 5}{Shift up}"
+	}
+	if GetKeyState("Shift")
+	{
+		SendInput "{Shift down}{Right 5}{Shift up}"
+	}
 }
+
 CapsLock & s:: 
 {
 	SendInput "{End}{Shift down}{Home}{Shift up}"
