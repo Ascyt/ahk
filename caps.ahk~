@@ -179,6 +179,8 @@ SendRmLast(text)
 {
 	Send FormatTime(, "hh:mm")
 }
+
+; Commands and system shortcuts
 :*:;home::
 {
 	SendText "%USERPROFILE%/"
@@ -194,4 +196,20 @@ SendRmLast(text)
 :*:;downloads::
 {
 	SendText "%USERPROFILE%/Downloads/"
+}
+
+GitCommitM()
+{
+	SendText "git commit -m `"`""
+	SendInput "{Left}"
+}
+:*:;gitcm::
+{
+	GitCommitM()
+}
+:*:;gitacm::
+{
+	SendText "git add ."
+	SendInput "{Enter}"
+	GitCommitM()
 }
