@@ -1,4 +1,3 @@
-
 import os
 
 USERNAME = 'filip'
@@ -45,11 +44,19 @@ commands = {
 }
 
 repeat = True
+tried_arg = False
 
 while repeat:
     repeat = False
 
-    full_arg = input('> ').lower()
+    # If there are arguments, use them instead of input
+    if len(os.sys.argv) > 1 and not tried_arg:
+        full_arg = ' '.join(os.sys.argv[1:]).lower()
+        print("> " + full_arg)
+        tried_arg = True
+    else: 
+        full_arg = input('> ').lower()
+    
     arg = full_arg if ' ' not in full_arg else full_arg[:full_arg.find(' ')]
     extra_args = full_arg[len(arg) + 1:]
 

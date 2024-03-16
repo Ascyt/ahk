@@ -109,7 +109,7 @@ CapsLock & XButton2::^y
 ; Open special run dialogue
 CapsLock & ':: 
 {
-	Run "python.exe program_shortcuts.py"
+	Run "type_shortcut.exe"
 }
 
 ; Send without space
