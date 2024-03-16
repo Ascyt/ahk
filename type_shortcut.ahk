@@ -105,10 +105,6 @@ Calculate(str)
                 }
                 else if (operator == "/")
                 {
-                    if (Float(value) == 0)
-                    {
-                        return "Error: Division by zero"
-                    }
                     result /= Float(value)
                 }
                 else if (operator == "^")
@@ -117,11 +113,6 @@ Calculate(str)
                 }
                 else if (operator == "%")
                 {
-                    if (Float(value) == 0)
-                    {
-                        return "Error: Division by zero"
-                    }
-
                     result := Mod(result, Float(value))
                 }
                 else
@@ -159,11 +150,6 @@ Calculate(str)
         }
         else if (operator == "/")
         {
-            if (Float(value) == 0)
-            {
-                return "Error: Division by zero"
-            }
-
             result /= Float(value)
         }
         else if (operator == "^")
@@ -172,11 +158,6 @@ Calculate(str)
         }
         else if (operator == "%")
         {
-            if (Float(value) == 0)
-            {
-                return "Error: Division by zero"
-            }
-            
             result := Mod(result, Float(value))
         }
     }
