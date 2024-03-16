@@ -1,6 +1,7 @@
 import os
 import random
 import pyperclip
+from math import *
 
 USERNAME = 'filip'
 
@@ -68,6 +69,11 @@ def get_random(arg):
 
     return random.choice(arg.split(','))
 
+def calc(args):
+    args = args.replace('^', '**')
+    print(eval(args))
+    return 0
+
 repeat = True
 tried_arg = False
 
@@ -89,7 +95,12 @@ while repeat:
         case 'rand':
             repeat = randomizer(extra_args)
             repeat = True
-            continue    
+            continue
+        case 'calc':
+            repeat = calc(extra_args)
+            repeat = True
+            continue
+
 
     extra_args_first = extra_args.split(' ')[0] if ' ' in extra_args else extra_args
     if extra_args_first == 'h':
