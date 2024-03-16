@@ -34,7 +34,23 @@ RemoveUntilSpace()
         RemoveLast()
     }
 }
+RemoveAmount(amount)
+{
+    global keyList
+    keyList := SubStr(keyList, 1, StrLen(keyList) - amount)
+}
+ClearAll()
+{
+    global keyList
+    keyList := ""
+}
 
+ExitCopy() 
+{
+    global keyList
+    A_Clipboard := keyList
+    ExitStop()
+}
 ExitConfirm() 
 {
     global confirm
@@ -100,11 +116,15 @@ BackSpace::RemoveLast()
 ^BackSpace::RemoveUntilSpace()
 CapsLock & H::RemoveLast()
 Capslock & T::RemoveUntilSpace()
+CapsLock & N::RemoveAmount(5)
+CapsLock & S::ClearAll()
 
 Enter::ExitConfirm()
++Enter::ExitCopy()
 Esc::ExitStop()
 LButton::ExitStop()
 RButton::ExitConfirm()
+MButton::ExitCopy()
 
 while !confirm && !stop
 {
