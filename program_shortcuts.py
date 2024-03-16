@@ -27,12 +27,20 @@ commands = {
     'py': 'python.exe "{{+}}"',
     't': 'cd "{{+}}" && cmd.exe .',
     'ta': 'cd "{{+}}" && "C:\\Users\\filip\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Windows PowerShell\\Windows PowerShell - Administrator.lnk"',
+    'edit': 'code .',
 
     'yt': 'start https://www.youtube.com/{{+}}',
     'gh': 'start https://github.com/{{+}}',
     'ghp': 'start https://github.com/Ascyt/{{+}}',
     's': 'start https://{{+}}',
     'sp': 'start https://{{+}}.ascyt.com/',
+
+    'sd': 'shutdown /s /t 0',
+    'sr': 'shutdown /r /t 0',
+    'sdf': 'shutdown /s /f /t 0',
+    'srf': 'shutdown /r /f /t 0',
+    'kill': 'taskkill /f /im {{+}}',
+
     '': 'exit',
 }
 
@@ -60,6 +68,6 @@ while repeat:
     extra_args = extra_args.replace(' ', '\\')
 
     if arg in commands:
-        os.system(commands[arg].replace('{{+}}', extra_args))
+        repeat = os.system(commands[arg].replace('{{+}}', extra_args))
     else:
         repeat = True
