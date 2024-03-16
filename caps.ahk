@@ -237,13 +237,3 @@ GitCommitM()
 	SendInput "{Enter}"
 	GitCommitM()
 }
-
-:*:m;sh::
-{
-	SendText "/sethome "
-}
-
-:*:m;h::
-{
-	SendText "/home "
-}
