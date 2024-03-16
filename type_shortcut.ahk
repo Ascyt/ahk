@@ -53,13 +53,139 @@ ExitCopy()
 }
 ExitConfirm() 
 {
-    global confirm
-    confirm := true
+    global keyList
+    if StartsWithNumber(keyList)
+    {
+        keylist := Calculate(keyList)
+    }
+    else 
+    {
+        global confirm
+        confirm := true
+    }
 }
 ExitStop() 
 {
     global stop
     stop := true
+}
+
+StartsWithNumber(str)
+{
+    return RegExMatch(SubStr(str, 1, 1), "^\d")
+}
+
+Calculate(str)
+{
+    ; Calculate expression from left to right
+    result := 0
+    operator := ""
+    value := ""
+    
+    Loop parse, str, ""
+    {
+        char := A_LoopField
+        i := A_Index
+        if (char == "+" || char == "-" || char == "*" || char == "/" || char == "^" || char == "%" || i == StrLen(str) + 1)
+        {
+            ; evaluate expression
+            if (value != "") ; ensure value is not empty
+            {
+                if (operator == "+")
+                {
+                    result += Float(value)
+                }
+                else if (operator == "-")
+                {
+                    result -= Float(value)
+                }
+                else if (operator == "*")
+                {
+                    result *= Float(value)
+                }
+                else if (operator == "/")
+                {
+                    if (Float(value) == 0)
+                    {
+                        return "Error: Division by zero"
+                    }
+                    result /= Float(value)
+                }
+                else if (operator == "^")
+                {
+                    result := result ** Float(value)
+                }
+                else if (operator == "%")
+                {
+                    if (Float(value) == 0)
+                    {
+                        return "Error: Division by zero"
+                    }
+
+                    result := Mod(result, Float(value))
+                }
+                else
+                {
+                    result := Float(value)
+                }
+            }
+
+            value := "" ; reset value
+            if (i != StrLen(str) + 1) ; only set operator if not end of string
+            {
+                operator := char
+            }
+        }
+        else 
+        {
+            value .= char
+        }
+    }
+
+    ; handle last number
+    if (value != "")
+    {
+        if (operator == "+")
+        {
+            result += Float(value)
+        }
+        else if (operator == "-")
+        {
+            result -= Float(value)
+        }
+        else if (operator == "*")
+        {
+            result *= Float(value)
+        }
+        else if (operator == "/")
+        {
+            if (Float(value) == 0)
+            {
+                return "Error: Division by zero"
+            }
+
+            result /= Float(value)
+        }
+        else if (operator == "^")
+        {
+            result := result ** Float(value)
+        }
+        else if (operator == "%")
+        {
+            if (Float(value) == 0)
+            {
+                return "Error: Division by zero"
+            }
+            
+            result := Mod(result, Float(value))
+        }
+    }
+
+    if Mod(result, 1) < 0.0000000000001 && Mod(result, 1) > -0.0000000000001
+    {
+        return String(Integer(result))
+    }
+    return String(result)
 }
 
 a::OnPress("a")
@@ -88,16 +214,27 @@ w::OnPress("w")
 x::OnPress("x")
 y::OnPress("y")
 z::OnPress("z")
-0::OnPress("0")
+
 1::OnPress("1")
++1::OnPress("!")
 2::OnPress("2")
++2::OnPress("@")
 3::OnPress("3")
++3::OnPress("#")
 4::OnPress("4")
++4::OnPress("$")
 5::OnPress("5")
++5::OnPress("%")
 6::OnPress("6")
++6::OnPress("^")
 7::OnPress("7")
++7::OnPress("&")
 8::OnPress("8")
++8::OnPress("*")
 9::OnPress("9")
++9::OnPress("(")
+0::OnPress("0")
++0::OnPress(")")
 
 /::OnPress("/")
 .::OnPress(".")
@@ -110,6 +247,7 @@ z::OnPress("z")
 \::OnPress("\")
 -::OnPress("-")
 =::OnPress("=")
++=::OnPress("+")
 `::OnPress("``")
 
 Space::OnPress(" ")
