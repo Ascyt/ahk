@@ -1,4 +1,6 @@
 ﻿#Requires AutoHotkey v2.0
+#SingleInstance
+A_MaxHotkeysPerInterval := 300
 
 a::return
 o::return
