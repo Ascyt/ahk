@@ -6,6 +6,7 @@ from math import *
 USERNAME = 'filip'
 
 commands = {
+    'e': 'start explorer.exe {{+}}',
     'h': 'start explorer.exe C:\\Users\\'+USERNAME+'\\{{+}}',
     'd': 'start explorer.exe C:\\Users\\'+USERNAME+'\\Documents\\{{+}}',
     'p': 'start explorer.exe C:\\Users\\'+USERNAME+'\\Pictures\\{{+}}',
