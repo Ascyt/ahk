@@ -5,12 +5,12 @@ import pyperclip
 USERNAME = 'filip'
 
 commands = {
-    'h': 'start explorer.exe %USERPROFILE%\\{{+}}',
-    'd': 'start explorer.exe %USERPROFILE%\\Documents\\{{+}}',
-    'p': 'start explorer.exe %USERPROFILE%\\Pictures\\{{+}}',
-    'dl': 'start explorer.exe %USERPROFILE%\\Downloads\\{{+}}',
-    'desktop': 'start explorer.exe %USERPROFILE%\\Desktop\\{{+}}',
-    'ss': 'start explorer.exe %USERPROFILE%\\Pictures\\Screenshots\\{{+}}',
+    'h': 'start explorer.exe C:\\Users\\'+USERNAME+'\\{{+}}',
+    'd': 'start explorer.exe C:\\Users\\'+USERNAME+'\\Documents\\{{+}}',
+    'p': 'start explorer.exe C:\\Users\\'+USERNAME+'\\Pictures\\{{+}}',
+    'dl': 'start explorer.exe C:\\Users\\'+USERNAME+'\\Downloads\\{{+}}',
+    'desktop': 'start explorer.exe C:\\Users\\'+USERNAME+'\\Desktop\\{{+}}',
+    'ss': 'start explorer.exe C:\\Users\\'+USERNAME+'\\Pictures\\Screenshots\\{{+}}',
     'trash': 'start explorer.exe shell:RecycleBinFolder',
 
     'ff': '"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Firefox.lnk"',
@@ -26,7 +26,7 @@ commands = {
     'code': 'cd "{{+}}" && code .',
     'vim': 'vim "{{+}}"',
     'py': 'python.exe "{{+}}"',
-    't': 'cd "{{+}}" && cmd.exe .',
+    't': 'cd "{{+}}" && "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"',
     'ta': 'cd "{{+}}" && "C:\\Users\\filip\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Windows PowerShell\\Windows PowerShell - Administrator.lnk"',
     'edit': 'code .',
 
@@ -91,21 +91,22 @@ while repeat:
             repeat = True
             continue    
 
-    if ' ' in extra_args:
-        extra_args_first = extra_args.split(' ')[0]
-        if extra_args_first == 'h':
-            extra_args_first = '%USERPROFILE%'
-        if extra_args_first == 'd':
-            extra_args_first = '%USERPROFILE%\\Documents'
-        if extra_args_first == 'p':
-            extra_args_first = '%USERPROFILE%\\Pictures'
-        if extra_args_first == 'dl':
-            extra_args_first = '%USERPROFILE%\\Downloads'
-        extra_args = extra_args_first + extra_args[extra_args.find(' '):]
+    extra_args_first = extra_args.split(' ')[0] if ' ' in extra_args else extra_args
+    if extra_args_first == 'h':
+        extra_args_first = 'C:\\Users\\'+USERNAME+''
+    if extra_args_first == 'd':
+        extra_args_first = 'C:\\Users\\'+USERNAME+'\\Documents'
+    if extra_args_first == 'p':
+        extra_args_first = 'C:\\Users\\'+USERNAME+'\\Pictures'
+    if extra_args_first == 'dl':
+        extra_args_first = 'C:\\Users\\'+USERNAME+'\\Downloads'
+    extra_args = extra_args_first + extra_args[extra_args.find(' '):] if ' ' in extra_args else extra_args_first
 
     extra_args = extra_args.replace(' ', '\\')
 
     if arg in commands:
-        repeat = os.system(commands[arg].replace('{{+}}', extra_args))
+        command = commands[arg].replace('{{+}}', extra_args)
+        print('# '+command)
+        repeat = os.system(command)
     else:
         repeat = True
