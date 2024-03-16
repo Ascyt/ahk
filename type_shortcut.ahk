@@ -81,12 +81,13 @@ Calculate(str)
     result := 0
     operator := ""
     value := ""
+    lastOperatorIndex := -1
     
     Loop parse, str, ""
     {
         char := A_LoopField
         i := A_Index
-        if (char == "+" || char == "-" || char == "*" || char == "/" || char == "^" || char == "%" || i == StrLen(str) + 1)
+        if ((char == "+" || char == "-" || char == "*" || char == "/" || char == "^" || char == "%" || i == StrLen(str) + 1) && (i - lastOperatorIndex > 1))
         {
             ; evaluate expression
             if (value != "") ; ensure value is not empty
@@ -120,11 +121,11 @@ Calculate(str)
                     result := Float(value)
                 }
             }
-
             value := "" ; reset value
             if (i != StrLen(str) + 1) ; only set operator if not end of string
             {
                 operator := char
+                lastOperatorIndex := i
             }
         }
         else 
