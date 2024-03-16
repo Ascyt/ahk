@@ -22,11 +22,14 @@ RemoveLast()
 RemoveUntilSpace()
 {
     global keyList
-    while (StrLen(keyList) > 0 && SubStr(keyList, -1) != " ")
+    ; Remove last if space 
+    if (SubStr(keyList, -1) == " ")
     {
         RemoveLast()
+        return
     }
-    if StrLen(keyList) > 0
+
+    while (StrLen(keyList) > 0 && SubStr(keyList, -1) != " ")
     {
         RemoveLast()
     }
