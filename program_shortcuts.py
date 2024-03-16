@@ -1,4 +1,6 @@
 import os
+import random
+import pyperclip
 
 USERNAME = 'filip'
 
@@ -43,6 +45,29 @@ commands = {
     '': 'exit',
 }
 
+def randomizer(args): 
+    args = args.split(' ')
+
+    if len(args) == 0:
+        print('No argument')
+        return 1
+    if len(args) > 1:
+        print('Too many arguments')
+        return 1
+
+    value = get_random(args[0])
+    print(value)
+    pyperclip.copy(value)
+    return 0
+
+def get_random(arg):
+    if ':' in arg:
+        numA = int(arg[:arg.find(':')])
+        numB = int(arg[arg.find(':') + 1:])
+        return str(random.randint(numA, numB))
+
+    return random.choice(arg.split(','))
+
 repeat = True
 tried_arg = False
 
@@ -59,6 +84,12 @@ while repeat:
     
     arg = full_arg if ' ' not in full_arg else full_arg[:full_arg.find(' ')]
     extra_args = full_arg[len(arg) + 1:]
+
+    match arg:
+        case 'rand':
+            repeat = randomizer(extra_args)
+            repeat = True
+            continue    
 
     if ' ' in extra_args:
         extra_args_first = extra_args.split(' ')[0]
