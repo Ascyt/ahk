@@ -242,6 +242,7 @@ CapsLock & S::ClearAll()
 
 Enter::ExitConfirm()
 +Enter::ExitCopy()
+Alt::ExitCopy()
 Esc::ExitStop()
 LButton::ExitStop()
 RButton::ExitConfirm()
