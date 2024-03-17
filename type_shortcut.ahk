@@ -1,5 +1,6 @@
 #Requires AutoHotKey v2
 #SingleInstance
+A_MaxHotkeysPerInterval := 3000
 
 keyList := ""
 previousKeyList := ""
