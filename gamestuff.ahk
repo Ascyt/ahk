@@ -55,4 +55,8 @@ A_MaxHotkeysPerInterval := 300
     {
         SendCommand "/home __temp"
     }
+    CapsLock & i::
+    {
+        SendCommand "/home h"
+    }
 }
