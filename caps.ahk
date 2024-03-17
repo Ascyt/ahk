@@ -207,6 +207,24 @@ SendRmLast(text)
 {
 	Send FormatTime(, "HH:mm")
 }
+:*:;coin::
+{
+	Send Random(0, 1) ? "heads" : "tails"
+}
+:*:;rand::
+{
+	Send Random(0.0, 1.0)
+}
+:*:;hash::
+{
+	hash := ""
+	Loop 32
+	{
+		value := Random(0, 15)
+		hash .= (value < 10) ? value : Chr(value + 87)
+	}
+	Send hash
+}
 
 ; Commands and system shortcuts
 :*:;home::
