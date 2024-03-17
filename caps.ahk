@@ -175,6 +175,10 @@ SendRmLast(text)
 {
 	SendRmLast("​")
 }
+:*:;spanishn::
+{
+	SendRmLast("ñ")
+}
 
 ; Emojis
 :*:;skull::
@@ -201,7 +205,7 @@ SendRmLast(text)
 }
 :*:;time::
 {
-	Send FormatTime(, "hh:mm")
+	Send FormatTime(, "HH:mm")
 }
 
 ; Commands and system shortcuts
