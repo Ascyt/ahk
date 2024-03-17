@@ -62,17 +62,6 @@ s & n::+-
 
 #HotIf GetKeyState("u") && !GetKeyState("e") && GetKeyState("o") && !GetKeyState("a")
 {
-    h::SendText "d"
-    t::SendText "l"
-    n::SendText "p"
-
-    s & h::SendText "D"
-    s & t::SendText "L"
-    s & n::SendText "P"
-}
-
-#HotIf !GetKeyState("u") && GetKeyState("e") && GetKeyState("o") && !GetKeyState("a")
-{
     h::SendText "m"
     t::SendText "f"
     n::SendText "b"
@@ -80,6 +69,17 @@ s & n::+-
     s & h::SendText "M"
     s & t::SendText "F"
     s & n::SendText "B"
+}
+
+#HotIf !GetKeyState("u") && GetKeyState("e") && GetKeyState("o") && !GetKeyState("a")
+{
+    h::SendText "d"
+    t::SendText "l"
+    n::SendText "p"
+
+    s & h::SendText "D"
+    s & t::SendText "L"
+    s & n::SendText "P"
 }
 
 #HotIf GetKeyState("u") && GetKeyState("e") && GetKeyState("o") && !GetKeyState("a")
