@@ -18,6 +18,11 @@ SendRmLast(text)
 :*:;ig::i guess
 :*:;idk::i don't know
 :*:;idc::i don't care
+:*:;wdym::what do you mean
+:*:;wby::what about you
+:*:;afaik::as far as i know
+:*:;iirc::if i remember correctly
+:*:;imo::in my opinion
 
 ; Stuff that is a pain to spell
 :*:;def::definitely
