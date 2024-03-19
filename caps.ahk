@@ -130,8 +130,73 @@ CapsLock & WheelRight::Delete
 CapsLock & XButton1::^z
 CapsLock & XButton2::^y
 
+
 ; Open special run dialogue
 CapsLock & ':: 
 {
 	Run "type_shortcut.exe"
+}
+
+; Move mouse
+CapsLock & \::RButton
+CapsLock & =::LButton
+CapsLock & ]::WheelUp
+CapsLock & /::WheelDown
+
+#HotIf GetKeyState("Shift") && !GetKeyState("Ctrl")
+{
+	CapsLock & Right::
+	{
+		MouseMove 256, 0, 0, "R"
+	}
+	CapsLock & Left::
+	{
+		MouseMove -256, 0, 0, "R"
+	}
+	CapsLock & Up::
+	{
+		MouseMove 0, -256, 0, "R"
+	}
+	CapsLock & Down::
+	{
+		MouseMove 0, 256, 0, "R"
+	}
+}
+#HotIf !GetKeyState("Shift") && !GetKeyState("Ctrl")
+{
+	CapsLock & Right::
+	{
+		MouseMove 64, 0, 0, "R"
+	}
+	CapsLock & Left::
+	{
+		MouseMove -64, 0, 0, "R"
+	}
+	CapsLock & Up::
+	{
+		MouseMove 0, -64, 0, "R"
+	}
+	CapsLock & Down::
+	{
+		MouseMove 0, 64, 0, "R"
+	}
+}
+#HotIf !GetKeyState("Shift") && GetKeyState("Ctrl")
+{
+	CapsLock & Right::
+	{
+		MouseMove 16, 0, 0, "R"
+	}
+	CapsLock & Left::
+	{
+		MouseMove -16, 0, 0, "R"
+	}
+	CapsLock & Up::
+	{
+		MouseMove 0, -16, 0, "R"
+	}
+	CapsLock & Down::
+	{
+		MouseMove 0, 16, 0, "R"
+	}
 }
