@@ -11,6 +11,11 @@ ToggleScript()
     if (mouseMode)
     {
         ProcessClose "mousemode.exe"
+
+        ToolTip "..."
+        KeyWait "CapsLock"
+        SetCapsLockState false
+
         run "caps.exe"
 
         mouseMode := false
