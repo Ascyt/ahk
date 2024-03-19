@@ -140,6 +140,7 @@ CapsLock & '::
 ; Move mouse
 CapsLock & RShift::RButton
 CapsLock & Enter::LButton
+CapsLock & RControl::MButton
 CapsLock & PgUp::WheelUp
 CapsLock & PgDn::WheelDown
 
