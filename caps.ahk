@@ -138,10 +138,10 @@ CapsLock & '::
 }
 
 ; Move mouse
-CapsLock & \::RButton
-CapsLock & =::LButton
-CapsLock & ]::WheelUp
-CapsLock & /::WheelDown
+CapsLock & RShift::RButton
+CapsLock & Enter::LButton
+CapsLock & PgUp::WheelUp
+CapsLock & PgDn::WheelDown
 
 #HotIf GetKeyState("Shift") && !GetKeyState("Ctrl")
 {
