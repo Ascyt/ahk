@@ -1,18 +1,18 @@
 Space::LButton
 +Space::RButton
 ^Space::MButton
-o::WheelUp
-n::WheelDown
+n::WheelUp
+o::WheelDown
 
 p::
 {
     MouseMove 256, 0, 0, "R"
 }
-.::
+g::
 {
     MouseMove -256, 0, 0, "R"
 }
-g::
+.::
 {
     MouseMove 0, -256, 0, "R"
 }
@@ -25,11 +25,11 @@ u::
 {
     MouseMove 64, 0, 0, "R"
 }
-e::
+h::
 {
     MouseMove -64, 0, 0, "R"
 }
-h::
+e::
 {
     MouseMove 0, -64, 0, "R"
 }
@@ -42,11 +42,11 @@ j::
 {
     MouseMove 16, 0, 0, "R"
 }
-q::
+m::
 {
     MouseMove -16, 0, 0, "R"
 }
-m::
+q::
 {
     MouseMove 0, -16, 0, "R"
 }
@@ -57,8 +57,10 @@ w::
 
 mouseToFraction(xFract, yFract)
 {
-    x := A_ScreenWidth * xFract
-    y := A_ScreenHeight * yFract
+    WinGetPos , , &height, &width, "A"
+
+    x := height * xFract
+    y := width * yFract
     MouseMove x, y, 0   
 }
 
@@ -68,6 +70,9 @@ mouseToFraction(xFract, yFract)
 z::mouseToFraction(1, 1)
 
 x::mouseToFraction(0.5, 0.5)
+
+a::mouseToFraction(0, 0.5)
+s::mouseToFraction(1, 0.5)
 
 i::mouseToFraction(1/3.0, 0.5)
 d::mouseToFraction(2/3.0, 0.5)
