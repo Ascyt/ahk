@@ -1,9 +1,16 @@
 #Requires AutoHotkey v2.0
 #SingleInstance
 
-CapsLock & .::ToggleScript()
-
 mouseMode := true
+
+#HotIf !mouseMode 
+{
+    CapsLock & .::ToggleScript()
+}
+#HotIf mouseMode 
+{
+    CapsLock::ToggleScript()
+}
 
 ToggleScript()
 {
