@@ -1,8 +1,3 @@
-CapsLock::
-{
-	SetCapsLockState false
-}
-
 Space::LButton
 +Space::RButton
 ^Space::MButton
@@ -60,9 +55,25 @@ w::
     MouseMove 0, 16, 0, "R"
 }
 
+mouseToFraction(xFract, yFract)
+{
+    x := A_ScreenWidth * xFract
+    y := A_ScreenHeight * yFract
+    MouseMove x, y, 0   
+}
 
-; TODO: ' upper left corner, = upper right, \ lower left, z lower right
-; TODO: x center of screen
-; TODO: id center parts
-; TODO: bk bottom parts
-; TODO: yf top parts
+'::mouseToFraction(0, 0)
+/::mouseToFraction(1, 0)
+`;::mouseToFraction(0, 1)
+z::mouseToFraction(1, 1)
+
+x::mouseToFraction(0.5, 0.5)
+
+i::mouseToFraction(1/3.0, 0.5)
+d::mouseToFraction(2/3.0, 0.5)
+
+k::mouseToFraction(1/3.0, 1)
+b::mouseToFraction(2/3.0, 1)
+
+y::mouseToFraction(1/3.0, 0)
+f::mouseToFraction(2/3.0, 0)

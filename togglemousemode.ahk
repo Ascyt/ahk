@@ -3,19 +3,17 @@
 
 mouseMode := true
 
-#HotIf !mouseMode 
-{
-    CapsLock & .::ToggleScript()
-}
-#HotIf mouseMode 
-{
-    CapsLock::ToggleScript()
-}
+CapsLock & .::ToggleScript(true)
+CapsLock::ToggleScript(false)
 
-ToggleScript()
+ToggleScript(toMouseMode)
 {
     global mouseMode
-    if (mouseMode)
+
+    if mouseMode == toMouseMode
+        return
+
+    if mouseMode
     {
         ProcessClose "mousemode.exe"
 
@@ -40,4 +38,4 @@ ToggleScript()
     }
 }
 
-ToggleScript()
+ToggleScript(false)
