@@ -1,58 +1,72 @@
-Space::LButton
-+Space::RButton
-^Space::MButton
 n::WheelUp
 o::WheelDown
+a::return
+s::return
 
-p::
+#HotIf GetKeyState("a") && !GetKeyState("s")
 {
-    MouseMove 256, 0, 0, "R"
-}
-g::
-{
-    MouseMove -256, 0, 0, "R"
-}
-.::
-{
-    MouseMove 0, -256, 0, "R"
-}
-c::
-{
-    MouseMove 0, 256, 0, "R"
-}
+    u::
+    {
+        MouseMove 256, 0, 0, "R"
+    }
+    h::
+    {
+        MouseMove -256, 0, 0, "R"
+    }
+    e::
+    {
+        MouseMove 0, -256, 0, "R"
+    }
+    t::
+    {
+        MouseMove 0, 256, 0, "R"
+    }
 
-u::
-{
-    MouseMove 64, 0, 0, "R"
-}
-h::
-{
-    MouseMove -64, 0, 0, "R"
-}
-e::
-{
-    MouseMove 0, -64, 0, "R"
-}
-t::
-{
-    MouseMove 0, 64, 0, "R"
+    Space::RButton
 }
 
-j::
+#HotIf (!GetKeyState("a") && !GetKeyState("s")) || (GetKeyState("a") && GetKeyState("s"))
 {
-    MouseMove 16, 0, 0, "R"
+    u::
+    {
+        MouseMove 64, 0, 0, "R"
+    }
+    h::
+    {
+        MouseMove -64, 0, 0, "R"
+    }
+    e::
+    {
+        MouseMove 0, -64, 0, "R"
+    }
+    t::
+    {
+        MouseMove 0, 64, 0, "R"
+    }
+
+    Space::LButton
 }
-m::
+
+#HotIf !GetKeyState("a") && GetKeyState("s")
 {
-    MouseMove -16, 0, 0, "R"
-}
-q::
-{
-    MouseMove 0, -16, 0, "R"
-}
-w::
-{
-    MouseMove 0, 16, 0, "R"
+    u::
+    {
+        MouseMove 16, 0, 0, "R"
+    }
+    h::
+    {
+        MouseMove -16, 0, 0, "R"
+    }
+    e::
+    {
+        MouseMove 0, -16, 0, "R"
+    }
+    t::
+    {
+        MouseMove 0, 16, 0, "R"
+    }
+    
+    Space::MButton
 }
 
 mouseToFraction(xFract, yFract)
@@ -70,9 +84,6 @@ mouseToFraction(xFract, yFract)
 z::mouseToFraction(1, 1)
 
 x::mouseToFraction(0.5, 0.5)
-
-a::mouseToFraction(0, 0.5)
-s::mouseToFraction(1, 0.5)
 
 i::mouseToFraction(1/3.0, 0.5)
 d::mouseToFraction(2/3.0, 0.5)
