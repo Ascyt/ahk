@@ -255,6 +255,10 @@ SendRmLast(text)
 {
 	SendRmLast("ñ")
 }
+:*:;thorn::
+{
+    SendRmLast("þ")
+}
 
 ; Emojis
 :*:;skull::
@@ -272,6 +276,10 @@ SendRmLast(text)
 :*:;td::
 {
 	SendRmLast("👎")
+}
+:*:;100::
+{
+    SendRmLast("💯")
 }
 :*:;shrug::
 {
