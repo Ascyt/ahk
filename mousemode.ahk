@@ -25,7 +25,7 @@ s::return
     Space::RButton
 }
 
-#HotIf (!GetKeyState("a") && !GetKeyState("s")) || (GetKeyState("a") && GetKeyState("s"))
+#HotIf !GetKeyState("a") && !GetKeyState("s")
 {
     u::
     {
@@ -67,6 +67,28 @@ s::return
     }
     
     Space::MButton
+}
+
+#HotIf GetKeyState("a") && GetKeyState("s")
+{
+    u::
+    {
+        MouseMove 1, 0, 0, "R"
+    }
+    h::
+    {
+        MouseMove -1, 0, 0, "R"
+    }
+    e::
+    {
+        MouseMove 0, -1, 0, "R"
+    }
+    t::
+    {
+        MouseMove 0, 1, 0, "R"
+    }
+
+    Space::SendInput("{LButton Down}")
 }
 
 mouseToFraction(xFract, yFract)
