@@ -134,13 +134,11 @@ CapsLock & XButton2::^y
 ; Open special run dialogue
 RunDialogue()
 {
-    ArgObj := FileOpen(".\type_shortcut_arg.txt", "w")
-    ArgObj.Write("RUN")
+    ArgObj := FileOpen(".\type_shortcut_args.txt", "w")
+    ArgObj.Write("RUN`n0")
     ArgObj.Close()
 
-	Run "./type_shortcut.exe"
-	WinWait("ahk_exe type_shortcut.exe")
-	WinWaitClose("ahk_exe type_shortcut.exe")
+	RunWait "./type_shortcut.exe"
 
 	OutputObj := FileOpen(".\type_shortcut_output.txt", "r")
 	Line := OutputObj.Read()

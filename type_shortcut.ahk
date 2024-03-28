@@ -3,7 +3,7 @@
 A_MaxHotkeysPerInterval := 3000
 
 keyList := ""
-previousKeyList := ""
+previousKeyList := "{empty}"
 oldMouseX := 0
 oldMouseY := 0
 
@@ -14,11 +14,23 @@ OnPress(key)
 {
     global keyList
     keyList .= key
+
+    global useTextInput
+    if useTextInput
+    {
+        SendText(key)
+    }
 }
 RemoveLast()
 {
     global keyList
     keyList := SubStr(keyList, 1, StrLen(keyList) - 1)
+
+    global useTextInput
+    if useTextInput
+    {
+        SendInput("{Shift down}{Backspace}{Shift up}")
+    }
 }
 RemoveUntilSpace()
 {
@@ -39,10 +51,23 @@ RemoveAmount(amount)
 {
     global keyList
     keyList := SubStr(keyList, 1, StrLen(keyList) - amount)
+
+    global useTextInput
+    if useTextInput
+    {
+        SendInput("{Shift down}{Backspace " amount "}{Shift up}")
+    }
 }
 ClearAll()
 {
     global keyList
+
+    global useTextInput
+    if useTextInput
+    {
+        SendInput("{Shift down}{Backspace " StrLen(keyList) "}{Shift up}")
+    }
+
     keyList := ""
 }
 
@@ -172,25 +197,45 @@ LButton::ExitStop()
 RButton::ExitConfirm()
 MButton::ExitCopy()
 
-ArgObj := FileOpen(".\type_shortcut_arg.txt", "r")
-arg := ArgObj.Read()
+ArgObj := FileOpen(".\type_shortcut_args.txt", "r")
+args := StrSplit(ArgObj.Read(), "`n")
+name := args[1]
+
+useTextInput := args[2] == "1" 
+if useTextInput
+{
+    SendText(name " > []")
+    SendInput("{Left}")
+}
+
+ArgObj.Close()
 
 while !confirm && !stop
 {
-    mouseX := 0
-    mouseY := 0
-    MouseGetPos (&mouseX, &mouseY)
-
-    if (keyList != previousKeyList || oldMouseX != mouseX || oldMouseY != mouseY)
+    if !useTextInput
     {
-        Tooltip arg " > [" keyList "]"
+        mouseX := 0
+        mouseY := 0
+        MouseGetPos (&mouseX, &mouseY)
+    }
+
+    if keyList != previousKeyList || (!useTextInput && (oldMouseX != mouseX || oldMouseY != mouseY))
+    {
+        if !useTextInput 
+        {
+            Tooltip name " > [" keyList "]"
+            oldMouseX := mouseX
+            oldMouseY := mouseY
+        }
         previousKeyList := keyList
-        oldMouseX := mouseX
-        oldMouseY := mouseY
     }
 }
 
 ToolTip
+if useTextInput
+{
+    SendInput("{Right}{Shift down}{Backspace " StrLen(name) + StrLen(keyList) + 5 "}{Shift up}")
+}
 
 if confirm
     output := keyList
