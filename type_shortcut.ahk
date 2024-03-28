@@ -21,6 +21,17 @@ OnPress(key)
         SendText(key)
     }
 }
+SendClipboard()
+{
+    global keyList
+    global useTextInput
+
+    keyList .= A_Clipboard
+    if useTextInput
+    {
+        SendText(A_Clipboard)
+    }
+}
 RemoveLast()
 {
     global keyList
@@ -196,6 +207,8 @@ Esc::ExitStop()
 LButton::ExitStop()
 RButton::ExitConfirm()
 MButton::ExitCopy()
+
+^v::SendClipboard()
 
 ArgObj := FileOpen(".\type_shortcut_args.txt", "r")
 args := StrSplit(ArgObj.Read(), "`n")
