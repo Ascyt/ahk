@@ -275,6 +275,9 @@ LButton::ExitStop()
 RButton::ExitConfirm()
 MButton::ExitCopy()
 
+ArgObj := FileOpen(".\type_shortcut_arg.txt", "r")
+arg := ArgObj.Read()
+
 while !confirm && !stop
 {
     mouseX := 0
@@ -283,7 +286,7 @@ while !confirm && !stop
 
     if (keyList != previousKeyList || oldMouseX != mouseX || oldMouseY != mouseY)
     {
-        Tooltip "> [" keyList "]"
+        Tooltip arg " > [" keyList "]"
         previousKeyList := keyList
         oldMouseX := mouseX
         oldMouseY := mouseY
@@ -294,6 +297,8 @@ ToolTip
 
 if confirm 
 {
-    Run "python.exe program_shortcuts.py " keyList
+    OutputObj := FileOpen(".\type_shortcut_output.txt", "w")
+    OutputObj.Write(keyList)
+    OutputObj.Close()
 }
 ExitApp
