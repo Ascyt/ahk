@@ -37,7 +37,6 @@ commands = {
     'ghp': 'start https://github.com/Ascyt/{{+}}',
     's': 'start https://{{+}}',
     'sp': 'start https://{{+}}.ascyt.com/',
-    'quickshare': 'start https://quickshare.samsungcloud.com/{{+}}',
 
     'sd': 'shutdown /s /t 0',
     'sr': 'shutdown /r /t 0',
@@ -76,6 +75,11 @@ def calc(args):
     print(eval(args))
     return 0
 
+def quickshare(args):
+    pyperclip.copy('https://quickshare.samsungcloud.com/' + args)
+    os.system('start https://quickshare.samsungcloud.com/' + args)
+    return 0
+
 repeat = True
 tried_arg = False
 
@@ -84,11 +88,11 @@ while repeat:
 
     # If there are arguments, use them instead of input
     if len(os.sys.argv) > 1 and not tried_arg:
-        full_arg = ' '.join(os.sys.argv[1:]).lower()
+        full_arg = ' '.join(os.sys.argv[1:])
         print("> " + full_arg)
         tried_arg = True
     else: 
-        full_arg = input('> ').lower()
+        full_arg = input('> ')
     
     arg = full_arg if ' ' not in full_arg else full_arg[:full_arg.find(' ')]
     extra_args = full_arg[len(arg) + 1:]
@@ -100,6 +104,10 @@ while repeat:
             continue
         case 'calc':
             repeat = calc(extra_args)
+            repeat = True
+            continue
+        case 'qs':
+            repeat = quickshare(extra_args)
             repeat = True
             continue
 
