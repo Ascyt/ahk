@@ -37,6 +37,7 @@ commands = {
     'ghp': 'start https://github.com/Ascyt/{{+}}',
     's': 'start https://{{+}}',
     'sp': 'start https://{{+}}.ascyt.com/',
+    'quickshare': 'start https://quickshare.samsungcloud.com/{{+}}',
 
     'sd': 'shutdown /s /t 0',
     'sr': 'shutdown /r /t 0',
