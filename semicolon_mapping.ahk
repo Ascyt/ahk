@@ -351,6 +351,16 @@ Suspense(message)
     numberB := Integer(bounds[2])
     SendText Random(numberA, numberB)
 }
+:*:r;choice::
+{
+    options := RunDialogue("options")
+    if options == "`b"
+        return
+
+    options := StrSplit(options, " ")
+    choice := Random(1, options.Length)
+    SendText options[choice]
+}
 :*:r;coin::
 {
     Suspense "Flipping a coin, please be patient..."
