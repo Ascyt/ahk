@@ -19,6 +19,22 @@ OnPress(key)
     if useTextInput
     {
         SendText(key)
+
+        if key == "("
+        {
+            SendText ")"
+            SendInput("{Shift down}{Backspace}{Shift up}")
+        }
+        if key == "["
+        {
+            SendText "]"
+            SendInput("{Shift down}{Backspace}{Shift up}")
+        }
+        if key == "{"
+        {
+            SendText "}"
+            SendInput("{Shift down}{Backspace}{Shift up}")
+        }
     }
 }
 SendClipboard()
