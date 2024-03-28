@@ -1,6 +1,23 @@
 #Requires AutoHotkey v2.0
 #SingleInstance
 
+RunDialogue(arg)
+{
+    ArgObj := FileOpen(".\type_shortcut_arg.txt", "w")
+    ArgObj.Write(arg)
+    ArgObj.Close()
+
+	Run "./type_shortcut.exe"
+	WinWait("ahk_exe type_shortcut.exe")
+	WinWaitClose("ahk_exe type_shortcut.exe")
+
+	OutputObj := FileOpen(".\type_shortcut_output.txt", "r")
+	Line := OutputObj.Read()
+	OutputObj.Close()
+
+    return Line
+}
+
 ; Send without space
 SendRmLast(text) 
 {
@@ -323,6 +340,17 @@ Suspense(message)
 }
 
 ; Random stuff
+:*:r;num::
+{
+    bounds := RunDialogue("bounds")
+    if bounds == "`b"
+        return
+
+    bounds := StrSplit(bounds, " ")
+    numberA := Integer(bounds[1])
+    numberB := Integer(bounds[2])
+    SendText Random(numberA, numberB)
+}
 :*:r;coin::
 {
     Suspense "Flipping a coin, please be patient..."
