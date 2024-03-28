@@ -26,6 +26,15 @@ A_MaxHotkeysPerInterval := 300
         SendText "/warp "
     }
 
+    :*:m;casino::
+    {
+        SendInput "{Esc}"
+        Sleep 75
+        SendCommand "/itemlore add &0"
+        SendCommand "/itemlore add &8&oThis item is from &5&oAscyt's Casino&8&o."
+        SendCommand "/itemlore add &8&oCheck it out using &2&o/warp ascyt-casino&8&o!"
+    }
+
     SendCommand(command)
     {
         SendInput "{Enter}"
