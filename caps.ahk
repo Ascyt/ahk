@@ -135,7 +135,7 @@ CapsLock & XButton2::^y
 RunDialogue()
 {
     ArgObj := FileOpen(".\type_shortcut_arg.txt", "w")
-    ArgObj.Write("run")
+    ArgObj.Write("RUN")
     ArgObj.Close()
 
 	Run "./type_shortcut.exe"
@@ -146,7 +146,7 @@ RunDialogue()
 	Line := OutputObj.Read()
 	OutputObj.Close()
 
-	if Trim(Line) != "" 
+	if Line != "`b"
 	{
 		Run "python.exe program_shortcuts.py " Line
 	}

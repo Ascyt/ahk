@@ -295,10 +295,12 @@ while !confirm && !stop
 
 ToolTip
 
-if confirm 
-{
-    OutputObj := FileOpen(".\type_shortcut_output.txt", "w")
-    OutputObj.Write(keyList)
-    OutputObj.Close()
-}
+if confirm
+    output := keyList
+else if stop
+    output := "`b"
+
+OutputObj := FileOpen(".\type_shortcut_output.txt", "w")
+OutputObj.Write(output)
+OutputObj.Close()
 ExitApp
