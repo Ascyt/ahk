@@ -464,13 +464,11 @@ Suspense(message)
 
     SendText "..."
 
-    RunWait "python.exe ./calc.py " expression
+    RunWait("python.exe ./calc.py " expression, "", "Hide")
 
     OutputObj := FileOpen(".\calc_output.txt", "r")
     Output := OutputObj.Read()
     OutputObj.Close()
-
-    Sleep 100
 
     SendInput("{Backspace 3}")
     
