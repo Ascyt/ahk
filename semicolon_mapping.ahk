@@ -456,6 +456,26 @@ Suspense(message)
 }
 
 ; Commands and system shortcuts
+:*:;calc::
+{
+    expression := RunDialogue("calc")
+    if expression == "`b"
+        return
+
+    SendText "..."
+
+    RunWait "python.exe ./calc.py " expression
+
+    OutputObj := FileOpen(".\calc_output.txt", "r")
+    Output := OutputObj.Read()
+    OutputObj.Close()
+
+    Sleep 100
+
+    SendInput("{Backspace 3}")
+    
+    SendText Output
+}
 :*:;home::
 {
 	SendText "%USERPROFILE%/"
