@@ -384,6 +384,33 @@ Suspense(message)
     choice := Random(1, options.Length)
     SendText options[choice]
 }
+::r;shuffle::
+{
+    options := RunDialogue("options")
+    if options == "`b" || options == ""
+        return
+
+    options := StrSplit(options, " ")
+    choices := []
+
+    while options.Length > 0
+    {
+        choices.Push(options.RemoveAt(Random(1, options.Length)))
+    } 
+
+    output := ""
+    index := 1
+    while index <= choices.Length
+    {
+        output .= choices[index]
+        if index < choices.Length
+            output .= " "
+
+        index += 1
+    }
+
+    SendText output
+}
 ::r;coin::
 {
     Suspense "Flipping a coin, please be patient..."
