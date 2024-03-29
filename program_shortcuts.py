@@ -71,8 +71,11 @@ def get_random(arg):
     return random.choice(arg.split(','))
 
 def calc(args):
-    args = args.replace('^', '**')
-    print(eval(args))
+    os.system('python calc.py ' + args)
+    with open('calc_output.txt', 'r') as f:
+        output = f.read()
+    print(output)
+    pyperclip.copy(output)
     return 0
 
 def quickshare(args):

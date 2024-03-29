@@ -279,6 +279,10 @@ SendRmLast(text)
 {
     SendRmLast("þ")
 }
+::;thornup::
+{
+    SendRmLast("Þ")
+}
 
 ; Emojis
 ::;skull::
@@ -297,6 +301,10 @@ SendRmLast(text)
 {
 	SendRmLast("👎")
 }
+::;standing::
+{
+    SendRmLast("🧍‍♂️")
+}
 ::;100::
 {
     SendRmLast("💯")
@@ -305,23 +313,34 @@ SendRmLast(text)
 {
     SendRmLast("¯\_(ツ)_/¯")
 }
-::;shrugmd::
+::;clap::
 {
-    SendRmLast("¯\\_(ツ)_/¯")
+    SendRmLast("👏")
 }
+::;clown::
+{
+    SendRmLast("🤡")
+}
+::;moai::
+{
+    SendRmLast("🗿")
+}
+
 
 ; Text
 ::;lorem::
 {
-    SendText "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit."
+    A_Clipboard := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit."
+
+    SendInput("{Ctrl Down}v{Ctrl Up}")
 }
 
 ; System info shorthands
-::s;date::
+::;date::
 {
 	Send FormatTime(, "dd.MM.yyyy")
 }
-::s;time::
+::;time::
 {
 	Send FormatTime(, "HH:mm")
 }
@@ -409,8 +428,13 @@ Suspense(message)
 }
 ::r;hash::
 {
+    length := RunDialogue("length")
+    if length == "`b"
+        return
+    length := Integer(length)
+
 	hash := ""
-	Loop 32
+	Loop length
 	{
 		value := Random(0, 15)
 		hash .= (value < 10) ? value : Chr(value + 87)
@@ -433,20 +457,42 @@ Suspense(message)
 }
 ::r;bin::
 {
-    loop 32
+    length := RunDialogue("length")
+    if length == "`b"
+        return
+    length := Integer(length)
+
+    loop length
     {
         SendText Random(0, 1)
     }
 }
-::r;ipaddress::
+::r;ip::
 {
     SendText Random(0, 255) "." Random(0, 255) "." Random(0, 255) "." Random(0, 255)
 }
 ::r;text::
 {
-    Loop Random(25, 50)
+    length := RunDialogue("length")
+    if length == "`b"
+        return
+    length := Integer(length)
+
+    Loop length
     {
         SendText Chr(Random(32, 126))
+    }
+}
+::r;letters::
+{
+    length := RunDialogue("length")
+    if length == "`b"
+        return
+    length := Integer(length)
+
+    Loop length
+    {
+        SendText Chr(Random(97, 122))
     }
 }
 ::r;word::
@@ -505,4 +551,10 @@ GitCommitM()
 	SendText "git add ."
 	SendInput "{Enter}"
 	GitCommitM()
+}
+
+::;expl::
+{
+    SendText "explorer.exe ."
+    SendInput("{Enter}")
 }
