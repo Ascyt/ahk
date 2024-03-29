@@ -45,7 +45,6 @@ SendRmLast(text)
 :*:;imo::in my opinion
 
 ; Stuff that is a pain to spell
-:*:;def::definitely
 :*:;misc::miscellaneous
 
 ; Symbols
