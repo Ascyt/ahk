@@ -144,10 +144,18 @@ RunDialogue()
 	Line := OutputObj.Read()
 	OutputObj.Close()
 
-	if Line != "`b"
+	if Line == "`b"
 	{
-		Run "python.exe program_shortcuts.py " Line
+		return
 	}
+
+	if Line == "timer"
+	{
+		Run "./timer.exe"
+		return
+	}
+
+	Run "python.exe program_shortcuts.py " Line
 }
 
 CapsLock & ':: 
