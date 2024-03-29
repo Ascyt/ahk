@@ -45,6 +45,16 @@ CustomTooltip(content)
     }
 }
 
+while true 
+{
+    CustomTooltip("Press RightCtrl or LMB to start the stopwatch.")
+
+    if GetKeyState("RCtrl", "P") || GetKeyState("LButton", "P")
+    {
+        break
+    }
+}
+
 TrayTip ("Timer started. RightCtrl to stop.")
 
 timeStarted := A_TickCount
