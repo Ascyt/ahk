@@ -155,6 +155,13 @@ RunDialogue()
 		return
 	}
 
+	if Line == "sw"
+	{
+		Run "./stopwatch.exe"
+		return
+	}
+
+
 	Run "python.exe program_shortcuts.py " Line
 }
 
