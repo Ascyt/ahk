@@ -66,7 +66,7 @@ A_MaxHotkeysPerInterval := 300
     }
     CapsLock & i::
     {
-        SendCommand "/home h"
+        SendCommand "/home s"
     }
 
     CapsLock & q::

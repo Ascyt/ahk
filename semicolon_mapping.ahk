@@ -343,7 +343,7 @@ Suspense(message)
 }
 
 ; Random stuff
-::r;num::
+::r;n::
 {
     bounds := RunDialogue("bounds")
     if bounds == "`b"
@@ -355,7 +355,7 @@ Suspense(message)
     
     SendText Random(numberA, numberB)
 }
-::r;choice::
+::r;c::
 {
     options := RunDialogue("options")
     if options == "`b"
@@ -456,7 +456,7 @@ Suspense(message)
 }
 
 ; Commands and system shortcuts
-::;calc::
+::;c::
 {
     expression := RunDialogue("calc")
     if expression == "`b"
