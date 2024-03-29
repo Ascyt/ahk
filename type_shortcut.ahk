@@ -51,13 +51,14 @@ SendClipboard()
 RemoveLast()
 {
     global keyList
-    keyList := SubStr(keyList, 1, StrLen(keyList) - 1)
 
     global useTextInput
-    if useTextInput
+    if useTextInput && StrLen(keyList) > 0
     {
         SendInput("{Shift down}{Backspace}{Shift up}")
     }
+
+    keyList := SubStr(keyList, 1, StrLen(keyList) - 1)
 }
 RemoveUntilSpace()
 {
@@ -77,13 +78,14 @@ RemoveUntilSpace()
 RemoveAmount(amount)
 {
     global keyList
-    keyList := SubStr(keyList, 1, StrLen(keyList) - amount)
 
     global useTextInput
     if useTextInput
     {
-        SendInput("{Shift down}{Backspace " amount "}{Shift up}")
+        SendInput("{Shift down}{Backspace " Min(StrLen(keyList), amount) "}{Shift up}")
     }
+
+    keyList := SubStr(keyList, 1, StrLen(keyList) - amount)
 }
 ClearAll()
 {
@@ -225,6 +227,15 @@ RButton::ExitStop()
 MButton::ExitCopy()
 
 ^v::SendClipboard()
+
+Left::Return
+Right::Return
+Up::Return
+Down::Return
+CapsLock & a::Return
+CapsLock & e::Return
+CapsLock & ,::Return
+CapsLock & o::Return
 
 ArgObj := FileOpen(".\type_shortcut_args.txt", "r")
 args := StrSplit(ArgObj.Read(), "`n")
