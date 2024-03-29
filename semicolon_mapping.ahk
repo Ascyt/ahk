@@ -365,7 +365,7 @@ Suspense(message)
 ::r;n::
 {
     bounds := RunDialogue("bounds")
-    if bounds == "`b"
+    if bounds == "`b" || bounds == ""
         return
 
     bounds := StrSplit(bounds, " ")
@@ -377,7 +377,7 @@ Suspense(message)
 ::r;c::
 {
     options := RunDialogue("options")
-    if options == "`b"
+    if options == "`b" || options == ""
         return
 
     options := StrSplit(options, " ")
@@ -458,7 +458,7 @@ Suspense(message)
 ::r;bin::
 {
     length := RunDialogue("length")
-    if length == "`b"
+    if length == "`b" || length == ""
         return
     length := Integer(length)
 
@@ -474,7 +474,7 @@ Suspense(message)
 ::r;text::
 {
     length := RunDialogue("length")
-    if length == "`b"
+    if length == "`b" || length == ""
         return
     length := Integer(length)
 
@@ -486,7 +486,7 @@ Suspense(message)
 ::r;letters::
 {
     length := RunDialogue("length")
-    if length == "`b"
+    if length == "`b" || length == ""
         return
     length := Integer(length)
 
@@ -505,7 +505,7 @@ Suspense(message)
 ::;c::
 {
     expression := RunDialogue("calc")
-    if expression == "`b"
+    if expression == "`b" || expression == ""
         return
 
     SendText "..."
