@@ -35,6 +35,26 @@ OnPress(key)
             SendText "}"
             SendInput("{Shift down}{Backspace}{Shift up}")
         }
+        if key == "<"
+        {
+            SendText ">"
+            SendInput("{Shift down}{Backspace}{Shift up}")
+        }
+        if key == "`""
+        {
+            SendText "`""
+            SendInput("{Shift down}{Backspace}{Shift up}")
+        }
+        if key == "'"
+        {
+            SendText "'"
+            SendInput("{Shift down}{Backspace}{Shift up}")
+        }
+        if key == "``"
+        {
+            SendText "``"
+            SendInput("{Shift down}{Backspace}{Shift up}")
+        }
     }
 }
 SendClipboard()
@@ -197,18 +217,27 @@ z::OnPress("z")
 +0::OnPress(")")
 
 /::OnPress("/")
++/::OnPress("?")
 .::OnPress(".")
++.::OnPress(">")
 ,::OnPress(",")
++,::OnPress("<")
 `;::OnPress(";")
 +`;::OnPress(":")
 '::OnPress("'")
++'::OnPress("`"")
 [::OnPress("[")
++[::OnPress("{")
 ]::OnPress("]")
++]::OnPress("}")
 \::OnPress("\")
++\::OnPress("|")
 -::OnPress("-")
++-::OnPress("_")
 =::OnPress("=")
 +=::OnPress("+")
 `::OnPress("``")
++`::OnPress("~")
 
 Space::OnPress(" ")
 BackSpace::RemoveLast()
