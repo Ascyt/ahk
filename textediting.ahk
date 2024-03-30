@@ -78,6 +78,7 @@ FindNext(txt)
 
 FindPrevious(txt) 
 {
+    SendInput "{}"
     SendInput "{Ctrl down}{Shift down}{Home}{Shift up}{Ctrl up}"
     Sleep 20
     SendInput "{Ctrl down}{c}{Ctrl up}"
@@ -132,7 +133,7 @@ FindFirstPair(firstPair, secondPair)
     content := StrReplace(A_Clipboard, "`r", "")
     
     delta := 1
-    i := StrLen(content)
+    i := StrLen(content) 
     
     While (i > 0)
     {
@@ -148,7 +149,7 @@ FindFirstPair(firstPair, secondPair)
         i--
     }
     
-    return 0
+    return -1
 }
 
 SelectInside() 
@@ -179,7 +180,7 @@ SelectInside()
 
     posA := FindFirstPair(a, b)
 
-    if (posA <= 0) 
+    if (posA < 0) 
         return
     
     Sleep 20
