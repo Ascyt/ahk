@@ -107,6 +107,68 @@ A_MaxHotkeysPerInterval := 300
         SendInput "{Space up}"
     }
 
+    CapsLock & c::
+    {
+        contents := ""
+        lastClipboard := ""
+
+        index := 1
+        while (index <= 10)
+        {
+            SendInput "{Ctrl down}a{Ctrl up}"
+            Sleep 75
+            SendInput "{Ctrl down}j{Ctrl up}"
+            Sleep 75
+
+            if lastClipboard == A_Clipboard
+            {
+                break
+            }
+            lastClipboard := A_Clipboard
+
+            contents .= A_Clipboard . "`n`n================`n`n"
+            SendInput "{PgDn}"
+            Sleep 75
+            index++
+        }
+
+        A_Clipboard := contents
+    }
+
+    PasteSinglePage(contents)
+    {
+        contents := StrSplit(contents, "§")
+        A_Clipboard := "§" ; Because it has to be pasted in using ctrl+v and cannot simply be typed
+
+        index := 1
+        while (index <= contents.Length)
+        {
+            SendText contents[index]
+            if index < contents.Length
+            {
+                SendInput "{Ctrl down}k{Ctrl up}"
+            }
+            index++
+        }
+    }
+
+    CapsLock & v::
+    {
+        fullContents := A_Clipboard
+        contents := StrSplit(fullContents, "`n`n================`n`n")
+
+        index := 1
+        while (index <= contents.Length)
+        {
+            PasteSinglePage(contents[index])
+            Sleep 75
+            SendInput "{PgDn}"
+            index++
+        }
+
+        A_Clipboard := fullContents
+    }
+
     CapsLock & p::
     {
         SendCommand "/sethome __beacon_temp"
