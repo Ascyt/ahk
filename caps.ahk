@@ -2,6 +2,27 @@
 #SingleInstance
 A_MaxHotkeysPerInterval := 300
 
+lastTooltip := ""
+lastMouseX := 0
+lastMouseY := 0
+CustomTooltip(content)
+{
+    global lastTooltip, lastMouseX, lastMouseY
+
+    mouseX := 0
+    mouseY := 0
+    MouseGetPos (&mouseX, &mouseY)
+
+    if (content != lastTooltip || lastMouseX != mouseX || lastMouseY != mouseY)
+    {
+        ToolTip(content)
+
+        lastTooltip := content
+        lastMouseX := mouseX
+        lastMouseY := mouseY
+    }
+}
+
 CapsLock::
 {
 	SetCapsLockState false
@@ -108,16 +129,46 @@ CapsLock & Alt::
 }
 
 ; German Umlaute
-CapsLock & g::SendText "ä"
-CapsLock & m::SendText "Ä"
+umlautMode := false
+SetUmlautMode(value)
+{
+	global umlautMode
 
-CapsLock & c::SendText "ö"
-CapsLock & w::SendText "Ö"
+	umlautMode := value
 
-CapsLock & r::SendText "ü"
-CapsLock & v::SendText "Ü"
+	if umlautMode
+	{
+		CustomTooltip "UMLAUT"
+	}
+	else
+	{
+		ToolTip
+	}
+}
 
-CapsLock & -::SendText "ß"
+CapsLock & d::
+{
+	SetUmlautMode(!umlautMode)
+}
+SendUmlaut(key)
+{
+	global umlautMode
+
+	SendText key
+
+	SetUmlautMode(false)
+}
+
+#HotIf umlautMode
+{
+	a::SendUmlaut("ä")
+	+a::SendUmlaut("Ä")
+	o::SendUmlaut("ö")
+	+o::SendUmlaut("Ö")
+	u::SendUmlaut("ü")
+	+u::SendUmlaut("Ü")
+	s::SendUmlaut("ß")
+}
 
 ; Mouse shortcuts
 CapsLock & LButton::^v
