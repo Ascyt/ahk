@@ -133,7 +133,7 @@ A_MaxHotkeysPerInterval := 300
             index++
         }
 
-        A_Clipboard := contents.SubStr(1, contents.Length - StrLen(SEPERATOR))
+        A_Clipboard := SubStr(contents, 1, StrLen(contents) - StrLen(SEPERATOR))
     }
 
     PasteSinglePage(contents)
