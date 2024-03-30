@@ -114,12 +114,12 @@ A_MaxHotkeysPerInterval := 300
         SEPERATOR := "`n`n################################`n`n"
 
         index := 1
-        while (index <= 10)
+        while (index <= 50)
         {
             SendInput "{Ctrl down}a{Ctrl up}"
-            Sleep 75
+            Sleep 10
             SendInput "{Ctrl down}j{Ctrl up}"
-            Sleep 75
+            Sleep 10
 
             if lastClipboard == A_Clipboard
             {
@@ -129,7 +129,7 @@ A_MaxHotkeysPerInterval := 300
 
             contents .= A_Clipboard . SEPERATOR
             SendInput "{PgDn}"
-            Sleep 75
+            Sleep 100
             index++
         }
 
@@ -149,8 +149,9 @@ A_MaxHotkeysPerInterval := 300
             SendText contents[index]
             if index < contents.Length
             {
-                Sleep 10
+                Sleep 15
                 SendInput "{Ctrl down}k{Ctrl up}"
+                Sleep 15
             }
             index++
         }
