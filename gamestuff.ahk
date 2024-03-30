@@ -35,12 +35,76 @@ A_MaxHotkeysPerInterval := 300
         SendCommand "/itemlore add &8&oCheck it out using &2&o/warp ascyt-casino&8&o!"
     }
 
+    
     SendCommand(command)
+    {
+        global firstCommandBeforeWait, commandCountBeforeWait
+
+        SendInput "{Enter}"
+        Sleep 75
+
+        SendText command
+        SendInput "{Enter}"
+    }
+
+    GetTabInfo(command)
     {
         SendInput "{Enter}"
         Sleep 75
         SendText command
-        SendInput "{Enter}"
+        Sleep 150
+        SendInput "{Tab}"
+        Sleep 75
+        SendInput "{Ctrl down}a{Ctrl up}"
+        Sleep 75
+        SendInput "{Ctrl down}j{Ctrl up}"
+        Sleep 75
+        SendInput "{Esc}"
+
+        return SubStr(A_Clipboard, StrLen(command) + 1)
+    }
+
+    :*:m;copy::
+    {
+        SendInput "{Esc}"
+        Sleep 75
+
+        ; Get item name
+        itemName := GetTabInfo("/itemname ")
+
+        ; Get all item lores
+        itemLores := []
+        loresCount := 10
+        index := 1
+        while (index <= loresCount)
+        {
+            itemLore := GetTabInfo("/itemlore set " . index . " ")
+            if (itemLore == "")
+            {
+                break
+            }
+            itemLores.Push(itemLore)
+            index++
+        }
+
+        ; Move to next item
+        SendInput "{WheelDown}"
+
+        ; Set item name
+        SendCommand ("/itemname " itemName) 
+        
+        ; Set all item lores
+        index := 1
+        while (index <= itemLores.Length)
+        {
+            Sleep 2500
+            SendCommand ("/itemlore add " itemLores[index])
+            index++
+        }
+
+        SendInput "{Space down}"
+        Sleep 75
+        SendInput "{Space up}"
     }
 
     CapsLock & p::
