@@ -23,19 +23,44 @@ RunDialogue(arg)
 
 #HotIf !GetKeyState("Shift")
 {
-    CapsLock & f::FindNext()
+    CapsLock & f::MoveNext()
 }
 #HotIf GetKeyState("Shift")
 {
-    CapsLock & f::FindPrevious()
+    CapsLock & f::MovePrevious()
 }
 
-FindNext() 
+MoveNext()
 {
     txt := RunDialogue("next")
     if txt == "`b" || txt == ""
         return
+
+    position := FindNext(txt)
+
+    if (position > 0) {
+        SendInput "{Right " . (position - 1) . "}"
+    }
+
+    SendInput "{Ctrl down}{Up 10}{Ctrl up}"
+}
+MovePrevious()
+{
+    txt := RunDialogue("prev")
+    if txt == "`b" || txt == ""
+        return
     
+    position := FindPrevious(txt)
+
+    if (position > 0) {
+        SendInput "{Left " . (position) . "}"
+    }
+
+    SendInput "{Ctrl down}{Down 10}{Ctrl up}"
+}
+
+FindNext(txt) 
+{
     SendInput "{Ctrl down}{Shift down}{End}{Shift up}{Ctrl up}"
     Sleep 10
     SendInput "{Ctrl down}{c}{Ctrl up}"
@@ -45,17 +70,12 @@ FindNext()
     content := StrReplace(A_Clipboard, "`r", "")
     
     position := InStr(content, txt, true, 1)
-    if (position > 0) {
-        SendInput "{Right " . (position - 1) . "}"
-    }
+    
+    return position
 }
 
-FindPrevious() 
+FindPrevious(txt) 
 {
-    txt := RunDialogue("prev")
-    if txt == "`b" || txt == ""
-        return
-    
     SendInput "{Ctrl down}{Shift down}{Home}{Shift up}{Ctrl up}"
     Sleep 10
     SendInput "{Ctrl down}{c}{Ctrl up}"
@@ -65,7 +85,11 @@ FindPrevious()
     content := StrReplace(A_Clipboard, "`r", "")
     
     position := InStr(content, txt, true, -1)
-    if (position > 0) {
-        SendInput "{Left " . (StrLen(content) - position) + 1 - StrLen(txt) . "}"
-    }
+    position := (StrLen(content) - position) + 1 - StrLen(txt)
+    return position
+}
+
+SelectInside() 
+{
+
 }
