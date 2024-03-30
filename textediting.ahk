@@ -57,8 +57,6 @@ MovePrevious()
         SendInput "{Left " . (position) . "}"
     }
 
-    Sleep 10
-
     SendInput "{Ctrl down}{Down 10}{Ctrl up}"
 }
 
@@ -77,6 +75,7 @@ FindNext(txt)
     return position
 }
 
+
 FindPrevious(txt) 
 {
     SendInput "{Ctrl down}{Shift down}{Home}{Shift up}{Ctrl up}"
@@ -90,6 +89,66 @@ FindPrevious(txt)
     position := InStr(content, txt, true, -1)
     position := (StrLen(content) - position) + 1 - StrLen(txt)
     return position
+}
+
+FindSecondPair(secondPair, firstPair) 
+{
+    if secondPair == firstPair
+        return FindNext(secondPair)
+
+    SendInput "{Ctrl down}{Shift down}{End}{Shift up}{Ctrl up}"
+    Sleep 10
+    SendInput "{Ctrl down}{c}{Ctrl up}"
+    Sleep 10
+    SendInput "{Left}"
+
+    content := StrReplace(A_Clipboard, "`r", "")
+    
+    delta := 1
+    For i, char in StrSplit(content, "") 
+    {
+        if char == firstPair
+            delta++
+        if char == secondPair
+            delta--
+
+        if delta == 0
+            return i
+    }
+    
+    return 0
+}
+FindFirstPair(firstPair, secondPair) 
+{
+    if firstPair == secondPair
+        return FindPrevious(firstPair)
+
+    SendInput "{Ctrl down}{Shift down}{Home}{Shift up}{Ctrl up}"
+    Sleep 10
+    SendInput "{Ctrl down}{c}{Ctrl up}"
+    Sleep 10
+    SendInput "{Right}"
+
+    content := StrReplace(A_Clipboard, "`r", "")
+    
+    delta := 1
+    i := StrLen(content)
+    
+    While (i > 0)
+    {
+        char := SubStr(content, i, 1)
+        if char == secondPair
+            delta++
+        if char == firstPair
+            delta--
+
+        if delta == 0
+            return StrLen(content) - i
+        
+        i--
+    }
+    
+    return 0
 }
 
 SelectInside() 
@@ -118,19 +177,23 @@ SelectInside()
     if b == ""
         return
 
-    posA := FindPrevious(a)
+    posA := FindFirstPair(a, b)
 
     if (posA <= 0) 
         return
+    
+    Sleep 15
 
     SendInput "{Left " . (posA) . "}"
 
-    Sleep 10
+    Sleep 100
 
-    posB := FindNext(b)
+    posB := FindSecondPair(b, a)
 
     if (posB <= 0) 
         return
+
+    Sleep 15
 
     SendInput "{Shift down}{Right " . (posB - 1) . "}{Shift up}"
 
