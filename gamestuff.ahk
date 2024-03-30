@@ -111,7 +111,7 @@ A_MaxHotkeysPerInterval := 300
     {
         contents := ""
         lastClipboard := ""
-        SEPERATOR := "`n`n================`n`n"
+        SEPERATOR := "`n`n################################`n`n`n"
 
         index := 1
         while (index <= 10)
@@ -127,7 +127,7 @@ A_MaxHotkeysPerInterval := 300
             }
             lastClipboard := A_Clipboard
 
-            contents .= A_Clipboard . "`n`n================`n`n"
+            contents .= A_Clipboard . SEPERATOR
             SendInput "{PgDn}"
             Sleep 75
             index++
@@ -141,12 +141,15 @@ A_MaxHotkeysPerInterval := 300
         contents := StrSplit(contents, "§")
         A_Clipboard := "§" ; Because it has to be pasted in using ctrl+v and cannot simply be typed
 
+        SendInput "{Ctrl down}a{Ctrl up}"
+
         index := 1
         while (index <= contents.Length)
         {
             SendText contents[index]
             if index < contents.Length
             {
+                Sleep 10
                 SendInput "{Ctrl down}k{Ctrl up}"
             }
             index++
@@ -155,8 +158,8 @@ A_MaxHotkeysPerInterval := 300
 
     CapsLock & v::
     {
-        fullContents := A_Clipboard
-        contents := StrSplit(fullContents, "`n`n================`n`n")
+        fullContents := StrReplace(A_Clipboard, "`r", "")
+        contents := StrSplit(fullContents, "`n`n################################`n`n`n")
 
         index := 1
         while (index <= contents.Length)
