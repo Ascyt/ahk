@@ -63,9 +63,9 @@ MovePrevious()
 FindNext(txt) 
 {
     SendInput "{Ctrl down}{Shift down}{End}{Shift up}{Ctrl up}"
-    Sleep 10
+    Sleep 20
     SendInput "{Ctrl down}{c}{Ctrl up}"
-    Sleep 10
+    Sleep 20
     SendInput "{Left}"
 
     content := StrReplace(A_Clipboard, "`r", "")
@@ -79,9 +79,9 @@ FindNext(txt)
 FindPrevious(txt) 
 {
     SendInput "{Ctrl down}{Shift down}{Home}{Shift up}{Ctrl up}"
-    Sleep 10
+    Sleep 20
     SendInput "{Ctrl down}{c}{Ctrl up}"
-    Sleep 10
+    Sleep 20
     SendInput "{Right}"
 
     content := StrReplace(A_Clipboard, "`r", "")
@@ -97,9 +97,9 @@ FindSecondPair(secondPair, firstPair)
         return FindNext(secondPair)
 
     SendInput "{Ctrl down}{Shift down}{End}{Shift up}{Ctrl up}"
-    Sleep 10
+    Sleep 20
     SendInput "{Ctrl down}{c}{Ctrl up}"
-    Sleep 10
+    Sleep 20
     SendInput "{Left}"
 
     content := StrReplace(A_Clipboard, "`r", "")
@@ -124,9 +124,9 @@ FindFirstPair(firstPair, secondPair)
         return FindPrevious(firstPair)
 
     SendInput "{Ctrl down}{Shift down}{Home}{Shift up}{Ctrl up}"
-    Sleep 10
+    Sleep 20
     SendInput "{Ctrl down}{c}{Ctrl up}"
-    Sleep 10
+    Sleep 20
     SendInput "{Right}"
 
     content := StrReplace(A_Clipboard, "`r", "")
@@ -182,7 +182,7 @@ SelectInside()
     if (posA <= 0) 
         return
     
-    Sleep 15
+    Sleep 20
 
     SendInput "{Left " . (posA) . "}"
 
@@ -193,7 +193,7 @@ SelectInside()
     if (posB <= 0) 
         return
 
-    Sleep 15
+    Sleep 20
 
     SendInput "{Shift down}{Right " . (posB - 1) . "}{Shift up}"
 

@@ -1,5 +1,5 @@
 #Requires AutoHotkey v2.0
-#SingleInstance
+#SingleInstance force
 A_MaxHotkeysPerInterval := 300
 
 lastTooltip := ""
