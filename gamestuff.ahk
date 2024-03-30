@@ -111,7 +111,7 @@ A_MaxHotkeysPerInterval := 300
     {
         contents := ""
         lastClipboard := ""
-        SEPERATOR := "`n`n################################`n`n`n"
+        SEPERATOR := "`n`n################################`n`n"
 
         index := 1
         while (index <= 10)
@@ -159,7 +159,7 @@ A_MaxHotkeysPerInterval := 300
     CapsLock & v::
     {
         fullContents := StrReplace(A_Clipboard, "`r", "")
-        contents := StrSplit(fullContents, "`n`n################################`n`n`n")
+        contents := StrSplit(fullContents, "`n`n################################`n`n")
 
         index := 1
         while (index <= contents.Length)
