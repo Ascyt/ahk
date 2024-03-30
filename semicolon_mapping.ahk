@@ -22,10 +22,10 @@ RunDialogue(arg)
 }
 
 ; Send without space
-SendRmLast(text) 
+SendRmLast(txt) 
 {
 	SendInput("{Backspace}")
-	SendText text
+	SendText txt
 }
 
 ; Personal shortcuts
@@ -548,53 +548,53 @@ Suspense(message)
 }
 :*:;count::
 {
-    text := RunDialogue("text")
-    if text == "`b" || text == ""
+    txt := RunDialogue("text")
+    if txt == "`b" || txt == ""
         return
 
-    SendText StrLen(text)
+    SendText StrLen(txt)
 }
 :*:;reverse::
 {
-    text := RunDialogue("text")
-    if text == "`b" || text == ""
+    txt := RunDialogue("text")
+    if txt == "`b" || txt == ""
         return
         
     reversedText := ""
-    Loop StrLen(text)
+    Loop StrLen(txt)
     {
-        reversedText .= SubStr(text, -A_Index, 1)
+        reversedText .= SubStr(txt, -A_Index, 1)
     }
     SendText reversedText
 }
 :*:;lower::
 {
-    text := RunDialogue("text")
-    if text == "`b" || text == ""
+    txt := RunDialogue("text")
+    if txt == "`b" || txt == ""
         return
 
-    SendText StrLower(text)
+    SendText StrLower(txt)
 }
 :*:;upper::
 {
-    text := RunDialogue("text")
-    if text == "`b" || text == ""
+    txt := RunDialogue("text")
+    if txt == "`b" || txt == ""
         return
 
-    SendText StrUpper(text)
+    SendText StrUpper(txt)
 }
 :*:;title::
 {
-    text := RunDialogue("text")
-    if text == "`b" || text == ""
+    txt := RunDialogue("text")
+    if txt == "`b" || txt == ""
         return
 
-    SendText StrTitle(text)
+    SendText StrTitle(txt)
 }
 :*:;replace::
 {
-    text := RunDialogue("text")
-    if text == "`b" || text == ""
+    txt := RunDialogue("text")
+    if txt == "`b" || txt == ""
         return
 
     replace := RunDialogue("replace")
@@ -605,12 +605,12 @@ Suspense(message)
     if with == "`b" || with == ""
         return
 
-    SendText StrReplace(text, replace, with)
+    SendText StrReplace(txt, replace, with)
 }
 :*:;repeat::
 {
-    text := RunDialogue("text")
-    if text == "`b" || text == ""
+    txt := RunDialogue("text")
+    if txt == "`b" || txt == ""
         return
 
     times := RunDialogue("times")
@@ -618,7 +618,12 @@ Suspense(message)
         return
     times := Integer(times)
 
-    SendText StrRepeat(text, times)
+    repeatedTxt := ""
+    Loop times
+    {
+        repeatedTxt .= txt
+    }
+    SendText repeatedTxt
 }
 
 :*:;home::
