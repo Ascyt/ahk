@@ -24,6 +24,7 @@ RunDialogue(arg)
 #HotIf !GetKeyState("Shift")
 {
     CapsLock & f::MoveNext()
+    CapsLock & b::SelectInside()
 }
 #HotIf GetKeyState("Shift")
 {
@@ -55,6 +56,8 @@ MovePrevious()
     if (position > 0) {
         SendInput "{Left " . (position) . "}"
     }
+
+    Sleep 10
 
     SendInput "{Ctrl down}{Down 10}{Ctrl up}"
 }
@@ -91,5 +94,45 @@ FindPrevious(txt)
 
 SelectInside() 
 {
+    a := RunDialogue("inside")
+    if a == "`b" || a == ""
+        return
 
+    b := ""
+    Switch a
+    {
+        Case "(":
+            b := ")"
+        Case "[":
+            b := "]"
+        Case "{":
+            b := "}"
+        Case "<":
+            b := ">"
+        Case "'":
+            b := "'"
+        Case "`"":
+            b := "`""
+    }
+
+    if b == ""
+        return
+
+    posA := FindPrevious(a)
+
+    if (posA <= 0) 
+        return
+
+    SendInput "{Left " . (posA) . "}"
+
+    Sleep 10
+
+    posB := FindNext(b)
+
+    if (posB <= 0) 
+        return
+
+    SendInput "{Shift down}{Right " . (posB - 1) . "}{Shift up}"
+
+    SendInput "{Ctrl down}{Up 10}{Ctrl up}"
 }
