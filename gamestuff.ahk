@@ -111,6 +111,7 @@ A_MaxHotkeysPerInterval := 300
     {
         contents := ""
         lastClipboard := ""
+        SEPERATOR := "`n`n================`n`n"
 
         index := 1
         while (index <= 10)
@@ -132,7 +133,7 @@ A_MaxHotkeysPerInterval := 300
             index++
         }
 
-        A_Clipboard := contents
+        A_Clipboard := contents.SubStr(1, contents.Length - StrLen(SEPERATOR))
     }
 
     PasteSinglePage(contents)
