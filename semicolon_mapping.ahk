@@ -559,8 +559,13 @@ Suspense(message)
     text := RunDialogue("text")
     if text == "`b" || text == ""
         return
-
-    SendText StrReverse(text)
+        
+    reversedText := ""
+    Loop StrLen(text)
+    {
+        reversedText .= SubStr(text, -A_Index, 1)
+    }
+    SendText reversedText
 }
 :*:;lower::
 {
