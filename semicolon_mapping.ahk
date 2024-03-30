@@ -546,6 +546,76 @@ Suspense(message)
     
     SendText Output
 }
+:*:;count::
+{
+    text := RunDialogue("text")
+    if text == "`b" || text == ""
+        return
+
+    SendText StrLen(text)
+}
+:*:;reverse::
+{
+    text := RunDialogue("text")
+    if text == "`b" || text == ""
+        return
+
+    SendText StrReverse(text)
+}
+:*:;lower::
+{
+    text := RunDialogue("text")
+    if text == "`b" || text == ""
+        return
+
+    SendText StrLower(text)
+}
+:*:;upper::
+{
+    text := RunDialogue("text")
+    if text == "`b" || text == ""
+        return
+
+    SendText StrUpper(text)
+}
+:*:;title::
+{
+    text := RunDialogue("text")
+    if text == "`b" || text == ""
+        return
+
+    SendText StrTitle(text)
+}
+:*:;replace::
+{
+    text := RunDialogue("text")
+    if text == "`b" || text == ""
+        return
+
+    replace := RunDialogue("replace")
+    if replace == "`b" || replace == ""
+        return
+
+    with := RunDialogue("with")
+    if with == "`b" || with == ""
+        return
+
+    SendText StrReplace(text, replace, with)
+}
+:*:;repeat::
+{
+    text := RunDialogue("text")
+    if text == "`b" || text == ""
+        return
+
+    times := RunDialogue("times")
+    if times == "`b" || times == ""
+        return
+    times := Integer(times)
+
+    SendText StrRepeat(text, times)
+}
+
 :*:;home::
 {
 	SendText "%USERPROFILE%/"
