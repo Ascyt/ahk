@@ -129,30 +129,6 @@ SetUmlautMode(value)
 	}
 }
 
-CapsLock & d::
-{
-	SetUmlautMode(!umlautMode)
-}
-SendUmlaut(key)
-{
-	global umlautMode
-
-	SendText key
-
-	SetUmlautMode(false)
-}
-
-#HotIf umlautMode
-{
-	a::SendUmlaut("ä")
-	+a::SendUmlaut("Ä")
-	o::SendUmlaut("ö")
-	+o::SendUmlaut("Ö")
-	u::SendUmlaut("ü")
-	+u::SendUmlaut("Ü")
-	s::SendUmlaut("ß")
-}
-
 ; Mouse shortcuts
 CapsLock & LButton::^v
 CapsLock & RButton::^c
@@ -202,4 +178,28 @@ RunDialogue()
 CapsLock & ':: 
 {
 	RunDialogue()
+}
+
+CapsLock & d::
+{
+	SetUmlautMode(!umlautMode)
+}
+SendUmlaut(key)
+{
+	global umlautMode
+
+	SendText key
+
+	SetUmlautMode(false)
+}
+
+#HotIf umlautMode
+{
+	a::SendUmlaut("ä")
+	+a::SendUmlaut("Ä")
+	o::SendUmlaut("ö")
+	+o::SendUmlaut("Ö")
+	u::SendUmlaut("ü")
+	+u::SendUmlaut("Ü")
+	s::SendUmlaut("ß")
 }
