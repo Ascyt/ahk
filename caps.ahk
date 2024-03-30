@@ -5,23 +5,6 @@ A_MaxHotkeysPerInterval := 300
 lastTooltip := ""
 lastMouseX := 0
 lastMouseY := 0
-CustomTooltip(content)
-{
-    global lastTooltip, lastMouseX, lastMouseY
-
-    mouseX := 0
-    mouseY := 0
-    MouseGetPos (&mouseX, &mouseY)
-
-    if (content != lastTooltip || lastMouseX != mouseX || lastMouseY != mouseY)
-    {
-        ToolTip(content)
-
-        lastTooltip := content
-        lastMouseX := mouseX
-        lastMouseY := mouseY
-    }
-}
 
 CapsLock::
 {
@@ -138,7 +121,7 @@ SetUmlautMode(value)
 
 	if umlautMode
 	{
-		CustomTooltip "UMLAUT"
+		Tooltip "UMLAUT"
 	}
 	else
 	{
