@@ -3,8 +3,8 @@
 
 mouseMode := true
 
-CapsLock & .::ToggleScript(true)
 CapsLock::ToggleScript(false)
+CapsLock & .::ToggleScript(true)
 
 ToggleScript(toMouseMode)
 {
