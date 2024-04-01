@@ -51,11 +51,12 @@ while true
 
     if GetKeyState("RCtrl", "P") || GetKeyState("LButton", "P")
     {
+        KeyWait "RCtrl"
         break
     }
 }
 
-TrayTip ("Timer started. RightCtrl to stop.")
+TrayTip ("Stopwatch started. RightCtrl to stop.")
 
 timeStarted := A_TickCount
 
@@ -67,7 +68,7 @@ while true
     {
         finalTime := FormatTime(A_TickCount - timeStarted)
         TrayTip
-        TrayTip ("Timer stopped.`nFinal time: " finalTime)
+        TrayTip ("Stopwatch stopped.`nFinal time: " finalTime)
         A_Clipboard := finalTime
 
         ExitApp
