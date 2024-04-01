@@ -1,13 +1,13 @@
 #Requires AutoHotkey v2.0
 #SingleInstance force
 
-RunDialogue(arg)
+RunDialogue(arg, useSingleChar)
 {
     SendText "{  }"
     SendInput("{Left 2}")
 
     ArgObj := FileOpen(".\type_shortcut_args.txt", "w")
-    ArgObj.Write(arg "`n1")
+    ArgObj.Write(arg "`n1" "`n" (useSingleChar?"1":"0")) 
     ArgObj.Close()
 
 	RunWait "./type_shortcut.exe"
@@ -33,7 +33,7 @@ RunDialogue(arg)
 
 MoveNext()
 {
-    txt := RunDialogue("next")
+    txt := RunDialogue("next", false)
     if txt == "`b" || txt == ""
         return
 
@@ -47,7 +47,7 @@ MoveNext()
 }
 MovePrevious()
 {
-    txt := RunDialogue("prev")
+    txt := RunDialogue("prev", false)
     if txt == "`b" || txt == ""
         return
     
@@ -154,7 +154,7 @@ FindFirstPair(firstPair, secondPair)
 
 SelectInside() 
 {
-    a := RunDialogue("inside")
+    a := RunDialogue("inside", true)
     if a == "`b" || a == ""
         return
 

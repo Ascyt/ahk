@@ -14,6 +14,12 @@ OnPress(key)
 {
     global keyList
     keyList .= key
+    
+    global maxLength
+    if maxLength > 0 && StrLen(keyList) >= maxLength
+    {
+        ExitConfirm()
+    }
 
     global useTextInput
     if useTextInput
@@ -59,10 +65,17 @@ OnPress(key)
 }
 SendClipboard()
 {
-    global keyList
-    global useTextInput
+    global keyList, useTextInput, maxLength
 
     keyList .= A_Clipboard
+    if maxLength > 0 && StrLen(keyList) >= maxLength
+    {
+        keyList := SubStr(keyList, 1, maxLength)
+
+        ExitConfirm()
+    }
+
+
     if useTextInput
     {
         SendText(A_Clipboard)
@@ -269,8 +282,9 @@ CapsLock & o::Return
 ArgObj := FileOpen(".\type_shortcut_args.txt", "r")
 args := StrSplit(ArgObj.Read(), "`n")
 name := args[1]
-
 useTextInput := args[2] == "1" 
+maxLength := args.Length >= 3 ? args[3] : -1
+
 if useTextInput
 {
     SendText(name " > []")
