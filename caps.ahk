@@ -180,7 +180,7 @@ CapsLock & '::
 	RunDialogue()
 }
 
-CapsLock & d::
+CapsLock & m::
 {
 	SetUmlautMode(!umlautMode)
 }
