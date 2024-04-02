@@ -324,7 +324,10 @@ SendRmLast(txt)
 {
     SendRmLast("🗿")
 }
-
+:*:;crying::
+{
+    SendRmLast("😭")
+}
 
 ; Text
 :*:;lorem::
