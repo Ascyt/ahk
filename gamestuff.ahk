@@ -129,7 +129,7 @@ A_MaxHotkeysPerInterval := 300
 
             contents .= A_Clipboard . SEPERATOR
             SendInput "{PgDn}"
-            Sleep 150
+            Sleep 200
             index++
         }
 
