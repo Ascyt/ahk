@@ -140,6 +140,8 @@ CapsLock & m::
 		case "s":
 			SendInput "ß"
 	}
+
+	SetCapsLockState false
 }
 
 #HotIf WinActive("ahk_class CASCADIA_HOSTING_WINDOW_CLASS")
