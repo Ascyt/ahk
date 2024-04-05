@@ -180,5 +180,5 @@ FormattedClipboard := StrReplace(FormattedClipboard, "\n", "`n")
 FormattedClipboard := StrReplace(FormattedClipboard, "\b", "\")
 
 A_Clipboard := FormattedClipboard
-SendInput "^v"
+SendInput "{Ctrl Down}v{Ctrl Up}"
 ExitApp

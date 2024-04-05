@@ -57,6 +57,6 @@ CapsLock & v::
     FormattedClipboard := StrReplace(FormattedClipboard, "\b", "\")
 
     A_Clipboard := FormattedClipboard
-    SendInput "^v"
+    SendInput "{Ctrl Down}v{Ctrl Up}"
     return
 }
