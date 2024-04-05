@@ -6,3 +6,4 @@
 ::peolpe::people
 ::lamo::lmao
 ::psuh::push
+::enoguh::enough
