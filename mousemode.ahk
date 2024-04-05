@@ -41,11 +41,11 @@ f::mouseToFraction(2/3.0, 0)
     }
     e::
     {
-        MouseMove 0, -256, 0, "R"
+        MouseMove 0, 256, 0, "R"
     }
     t::
     {
-        MouseMove 0, 256, 0, "R"
+        MouseMove 0, -256, 0, "R"
     }
 
     Space::RButton
@@ -63,11 +63,11 @@ f::mouseToFraction(2/3.0, 0)
     }
     e::
     {
-        MouseMove 0, -64, 0, "R"
+        MouseMove 0, 64, 0, "R"
     }
     t::
     {
-        MouseMove 0, 64, 0, "R"
+        MouseMove 0, -64, 0, "R"
     }
 
     Space::LButton
@@ -85,11 +85,11 @@ f::mouseToFraction(2/3.0, 0)
     }
     e::
     {
-        MouseMove 0, -16, 0, "R"
+        MouseMove 0, 16, 0, "R"
     }
     t::
     {
-        MouseMove 0, 16, 0, "R"
+        MouseMove 0, -16, 0, "R"
     }
     
     Space::MButton
@@ -107,11 +107,11 @@ f::mouseToFraction(2/3.0, 0)
     }
     e::
     {
-        MouseMove 0, -1, 0, "R"
+        MouseMove 0, 1, 0, "R"
     }
     t::
     {
-        MouseMove 0, 1, 0, "R"
+        MouseMove 0, -1, 0, "R"
     }
 
     Space::SendInput("{LButton Down}")
