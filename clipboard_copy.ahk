@@ -17,12 +17,16 @@ RunDialogue(arg)
     return Line
 }
 
-Copy()
+CopyFromText()
 {
-    
     A_Clipboard := ""
     SendInput "^c"
     ClipWait
+    CopyFromClipboard()
+}
+
+CopyFromClipboard()
+{
     Clipboard := A_Clipboard
     Clipboard := StrReplace(Clipboard, "\", "\b")
     Clipboard := StrReplace(Clipboard, "`r`n", "`n")
@@ -35,9 +39,16 @@ Copy()
     ClipboardFile.Write(Name "\:" Clipboard "`n")
     ClipboardFile.Close()
 }
-CapsLock & c::Copy()
+CapsLock & c::CopyFromText()
 CapsLock & x::
 {
-    Copy()
+    CopyFromText()
     SendInput "{Backspace}"
+}
+CapsLock & i::
+{
+    CopyFromClipboard()
+
+    TrayTip
+    TrayTip "Copied " "`"" SubStr(A_Clipboard, 1, 50) "`""
 }
