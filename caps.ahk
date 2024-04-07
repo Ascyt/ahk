@@ -189,3 +189,8 @@ CapsLock & n::
 {
 	SendInput "{Backspace 5}"
 }
+
+Loop 
+{
+	SetCapsLockState false
+}
