@@ -96,6 +96,67 @@ ReplaceText(from, to)
 
 	A_Clipboard := StrReplace(A_Clipboard, from, to)
 	SendInput "^v"
+
+	A_Clipboard := OldClipboard
+}
+UpperText()
+{
+	OldClipboard := A_Clipboard
+
+	A_Clipboard := ""
+	SendInput "^x"
+	ClipWait
+
+	A_Clipboard := StrUpper(A_Clipboard)
+	SendInput "^v"
+
+	A_Clipboard := OldClipboard
+}
+LowerText()
+{
+	OldClipboard := A_Clipboard
+
+	A_Clipboard := ""
+	SendInput "^x"
+	ClipWait
+
+	A_Clipboard := StrLower(A_Clipboard)
+	SendInput "^v"
+
+	A_Clipboard := OldClipboard
+}
+ReverseText()
+{
+	OldClipboard := A_Clipboard
+
+	A_Clipboard := ""
+	SendInput "^x"
+	ClipWait
+
+	txt := A_Clipboard
+	reversedText := ""
+    Loop StrLen(txt)
+    {
+        reversedText .= SubStr(txt, -A_Index, 1)
+    }
+	A_Clipboard := reversedText
+
+	SendInput "^v"
+
+	A_Clipboard := OldClipboard
+}
+CountText()
+{
+	TrayTip
+	OldClipboard := A_Clipboard
+
+	A_Clipboard := ""
+	SendInput "^c"
+	ClipWait
+
+	TrayTip StrLen(A_Clipboard)
+
+	A_Clipboard := OldClipboard
 }
 
 ; Open special run dialogue
@@ -139,6 +200,26 @@ SpecialRunDialogue()
 			return
 
 		ReplaceText(from, to)
+		return
+	}
+	if Line == "upper"
+	{
+		UpperText()
+		return
+	}
+	if Line == "lower"
+	{
+		LowerText()
+		return
+	}
+	if Line == "reverse"
+	{
+		ReverseText()
+		return
+	}
+	if Line == "count"
+	{
+		CountText()
 		return
 	}
 
