@@ -25,6 +25,20 @@ RunDialogue(arg, useSingleChar)
 
     return Line
 }
+RunDialogueAnywhere(arg, useSingleChar)
+{
+    ArgObj := FileOpen(".\type_shortcut_args.txt", "w")
+    ArgObj.Write(arg "`n0" "`n" (useSingleChar?"1":"0")) 
+    ArgObj.Close()
+
+	RunWait "./type_shortcut.exe"
+
+	OutputObj := FileOpen(".\type_shortcut_output.txt", "r")
+	Line := OutputObj.Read()
+	OutputObj.Close()
+
+	return Line
+}
 
 CapsLock::
 {
@@ -72,6 +86,17 @@ CapsLock & WheelRight::Delete
 CapsLock & XButton1::^z
 CapsLock & XButton2::^y
 
+ReplaceText(from, to)
+{
+	OldClipboard := A_Clipboard
+
+	A_Clipboard := ""
+	SendInput "^x"
+	ClipWait
+
+	A_Clipboard := StrReplace(A_Clipboard, from, to)
+	SendInput "^v"
+}
 
 ; Open special run dialogue
 SpecialRunDialogue()
@@ -100,6 +125,20 @@ SpecialRunDialogue()
 	if Line == "sw"
 	{
 		Run "./stopwatch.exe"
+		return
+	}
+
+	if Line == "replace"
+	{
+		from := RunDialogueAnywhere("from", false)
+		if from == "`b" || from == ""
+			return
+
+		to := RunDialogueAnywhere("to", false)
+		if to == "`b" || to == ""
+			return
+
+		ReplaceText(from, to)
 		return
 	}
 
