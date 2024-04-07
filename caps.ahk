@@ -154,7 +154,7 @@ CountText()
 	SendInput "^c"
 	ClipWait
 
-	TrayTip StrLen(A_Clipboard)
+	TrayTip StrLen(StrReplace(A_Clipboard, "`r`n", "`n")) " characters in selection"
 
 	A_Clipboard := OldClipboard
 }
