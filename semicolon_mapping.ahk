@@ -348,7 +348,7 @@ SendRmLast(txt)
 }
 :*:;formattedtime::
 {
-    Send FormatTime(, "yyyy-MM-dd_HH-mm-ss")
+    Send FormatTime(, "yyyy-MM-dd_HH-mm-ss_") A_MSec
 }
 
 Suspense(message) 
