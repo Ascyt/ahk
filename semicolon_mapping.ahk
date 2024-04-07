@@ -662,6 +662,31 @@ Suspense(message)
     }
     SendText repeatedTxt
 }
+:*:;progressbar::
+{
+    percentage := RunDialogue("percentage")
+    if percentage == "`b" || percentage == ""
+        return
+        
+    percentage := Float(percentage) / 100
+
+    length := RunDialogue("length")
+    if length == "`b" || length == ""
+        return
+
+    length := Integer(length)
+
+    progress := ""
+    Loop length
+    {
+        if (A_Index / length) <= percentage
+            progress .= "█"
+        else
+            progress .= "░"
+    }
+
+    SendText progress
+}
 
 :*:;home::
 {
