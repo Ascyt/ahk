@@ -346,6 +346,10 @@ SendRmLast(txt)
 {
 	Send FormatTime(, "HH:mm")
 }
+:*:;formattedtime::
+{
+    Send FormatTime(, "yyyy-MM-dd_HH-mm-ss")
+}
 
 Suspense(message) 
 {
