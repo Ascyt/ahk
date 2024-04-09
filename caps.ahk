@@ -234,7 +234,7 @@ CapsLock & '::
 
 CapsLock & m::
 {
-	character := RunDialogue("umlaut", true)
+	character := RunDialogueAnywhere("umlaut", true)
 
 	switch character
 	{
