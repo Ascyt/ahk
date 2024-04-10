@@ -258,7 +258,7 @@ BackSpace::RemoveLast()
 CapsLock & H::RemoveLast()
 Capslock & T::RemoveUntilSpace()
 CapsLock & N::RemoveAmount(5)
-CapsLock & S::ClearAll()
+CapsLock & U::ClearAll()
 
 Enter::ExitConfirm()
 +Enter::ExitCopy()
