@@ -91,12 +91,13 @@ ReplaceText(from, to)
 	OldClipboard := A_Clipboard
 
 	SendInput "^x"
-	Sleep 15
+	Sleep 10
 
 	A_Clipboard := StrReplace(A_Clipboard, from, to)
 
-	Sleep 15
+	Sleep 10
 	SendInput "^v"
+	Sleep 10
 
 	A_Clipboard := OldClipboard
 }
@@ -106,11 +107,12 @@ UpperText()
 
 	SendInput "^x"
 	
-	Sleep 15
+	Sleep 10
 
 	A_Clipboard := StrUpper(A_Clipboard)
-	Sleep 15
+	Sleep 10
 	SendInput "^v"
+	Sleep 10
 
 	A_Clipboard := OldClipboard
 }
@@ -119,11 +121,12 @@ LowerText()
 	OldClipboard := A_Clipboard
 
 	SendInput "^x"
-	Sleep 15
+	Sleep 10
 
 	A_Clipboard := StrLower(A_Clipboard)
-	Sleep 15
+	Sleep 10
 	SendInput "^v"
+	Sleep 10
 
 	A_Clipboard := OldClipboard
 }
@@ -132,7 +135,7 @@ ReverseText()
 	OldClipboard := A_Clipboard
 
 	SendInput "^x"
-	Sleep 15
+	Sleep 10
 
 	txt := A_Clipboard
 	reversedText := ""
@@ -142,8 +145,9 @@ ReverseText()
     }
 	A_Clipboard := reversedText
 
-	Sleep 15
+	Sleep 10
 	SendInput "^v"
+	Sleep 10
 
 	A_Clipboard := OldClipboard
 }
@@ -153,7 +157,7 @@ CountText()
 	OldClipboard := A_Clipboard
 
 	SendInput "^c"
-	Sleep 15
+	Sleep 10
 
 	TrayTip StrLen(StrReplace(A_Clipboard, "`r`n", "`n")) " characters in selection"
 
