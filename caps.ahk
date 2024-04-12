@@ -163,6 +163,13 @@ CountText()
 
 	A_Clipboard := OldClipboard
 }
+RepeatKey(key, times) 
+{
+	Loop times
+	{
+		SendInput "{" key "}"
+	}
+}
 
 ; Open special run dialogue
 SpecialRunDialogue()
@@ -225,6 +232,19 @@ SpecialRunDialogue()
 	if Line == "count"
 	{
 		CountText()
+		return
+	}
+	if Line == "key"
+	{
+		key := RunDialogueAnywhere("key", false)
+		if key == "`b" || key == ""
+			return
+
+		amount := RunDialogueAnywhere("amount", false)
+		if amount == "`b" || amount == ""
+			return
+
+		RepeatKey(key, amount)
 		return
 	}
 
