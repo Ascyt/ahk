@@ -7,3 +7,4 @@
 ::lamo::lmao
 ::psuh::push
 ::enoguh::enough
+::abotu::about

@@ -90,12 +90,14 @@ ReplaceText(from, to)
 {
 	OldClipboard := A_Clipboard
 
-	A_Clipboard := ""
 	SendInput "^x"
-	ClipWait
+	Sleep 10
 
 	A_Clipboard := StrReplace(A_Clipboard, from, to)
+
+	Sleep 10
 	SendInput "^v"
+	Sleep 10
 
 	A_Clipboard := OldClipboard
 }
@@ -103,12 +105,14 @@ UpperText()
 {
 	OldClipboard := A_Clipboard
 
-	A_Clipboard := ""
 	SendInput "^x"
-	ClipWait
+	
+	Sleep 10
 
 	A_Clipboard := StrUpper(A_Clipboard)
+	Sleep 10
 	SendInput "^v"
+	Sleep 10
 
 	A_Clipboard := OldClipboard
 }
@@ -116,12 +120,13 @@ LowerText()
 {
 	OldClipboard := A_Clipboard
 
-	A_Clipboard := ""
 	SendInput "^x"
-	ClipWait
+	Sleep 10
 
 	A_Clipboard := StrLower(A_Clipboard)
+	Sleep 10
 	SendInput "^v"
+	Sleep 10
 
 	A_Clipboard := OldClipboard
 }
@@ -129,9 +134,8 @@ ReverseText()
 {
 	OldClipboard := A_Clipboard
 
-	A_Clipboard := ""
 	SendInput "^x"
-	ClipWait
+	Sleep 10
 
 	txt := A_Clipboard
 	reversedText := ""
@@ -141,7 +145,9 @@ ReverseText()
     }
 	A_Clipboard := reversedText
 
+	Sleep 10
 	SendInput "^v"
+	Sleep 10
 
 	A_Clipboard := OldClipboard
 }
@@ -150,13 +156,19 @@ CountText()
 	TrayTip
 	OldClipboard := A_Clipboard
 
-	A_Clipboard := ""
 	SendInput "^c"
-	ClipWait
+	Sleep 10
 
 	TrayTip StrLen(StrReplace(A_Clipboard, "`r`n", "`n")) " characters in selection"
 
 	A_Clipboard := OldClipboard
+}
+RepeatKey(key, times) 
+{
+	Loop times
+	{
+		SendInput "{" key "}"
+	}
 }
 
 ; Open special run dialogue
@@ -222,6 +234,19 @@ SpecialRunDialogue()
 		CountText()
 		return
 	}
+	if Line == "key"
+	{
+		key := RunDialogueAnywhere("key", false)
+		if key == "`b" || key == ""
+			return
+
+		amount := RunDialogueAnywhere("amount", false)
+		if amount == "`b" || amount == ""
+			return
+
+		RepeatKey(key, amount)
+		return
+	}
 
 
 	Run "python.exe program_shortcuts.py " Line
@@ -234,7 +259,7 @@ CapsLock & '::
 
 CapsLock & m::
 {
-	character := RunDialogue("umlaut", true)
+	character := RunDialogueAnywhere("umlaut", true)
 
 	switch character
 	{
@@ -269,9 +294,4 @@ CapsLock & t::
 CapsLock & n:: 
 {
 	SendInput "{Backspace 5}"
-}
-
-Loop 
-{
-	SetCapsLockState false
 }
