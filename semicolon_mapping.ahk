@@ -459,21 +459,6 @@ Suspense(message)
 {
     Send Random(-2147483648, 2147483647)
 }
-:*:r;hash::
-{
-    length := RunDialogue("length")
-    if length == "`b"
-        return
-    length := Integer(length)
-
-	hash := ""
-	Loop length
-	{
-		value := Random(0, 15)
-		hash .= (value < 10) ? value : Chr(value + 87)
-	}
-	Send hash
-}
 :*:r;color::
 {
     color := "#"
@@ -486,7 +471,18 @@ Suspense(message)
 }
 :*:r;hex::
 {
-    SendText "0x" Random(0, 0xFFFFFFFF)
+    length := RunDialogue("length")
+    if length == "`b" || length == ""
+        return
+    length := Integer(length)
+
+    hex := ""
+    Loop length
+    {
+        value := Random(0, 15)
+        hex .= (value < 10) ? value : Chr(value + 87)
+    }
+    SendText hex
 }
 :*:r;bin::
 {
