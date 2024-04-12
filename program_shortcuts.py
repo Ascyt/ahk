@@ -47,6 +47,43 @@ commands = {
     '': 'exit',
 }
 
+def print_and_copy(value):
+    print(value)
+    pyperclip.copy(value)
+
+base_conversion_arguments = ['bin', 'oct', 'dec', 'hex']
+def base_conversion(args):
+    args = args.split(' ')
+    from_base = args[0]
+    to_base = args[1]
+    value = args[2]
+
+    # Convert the value to decimal
+    if from_base == 'bin':
+        dec_value = int(value, 2)
+    elif from_base == 'oct':
+        dec_value = int(value, 8)
+    elif from_base == 'dec':
+        dec_value = int(value, 10)
+    elif from_base == 'hex':
+        dec_value = int(value, 16)
+    else:
+        print("Invalid from_base argument")
+
+    # Convert the decimal value to the desired base
+    if to_base == 'bin':
+        print_and_copy(bin(dec_value).replace("0b", ""))
+    elif to_base == 'oct':
+        print_and_copy(oct(dec_value).replace("0o", ""))
+    elif to_base == 'dec':
+        print_and_copy(str(dec_value))
+    elif to_base == 'hex':
+        print_and_copy(hex(dec_value).replace("0x", ""))
+    else:
+        print("Invalid to_base argument")
+
+    return 0
+
 def randomizer(args): 
     args = args.split(' ')
 
@@ -114,6 +151,10 @@ while repeat:
             repeat = True
             continue
 
+    if arg in base_conversion_arguments:
+        repeat = base_conversion(full_arg)
+        repeat = True
+        continue
 
     extra_args_first = extra_args.split(' ')[0] if ' ' in extra_args else extra_args
     if extra_args_first == 'h':
