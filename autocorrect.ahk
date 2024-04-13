@@ -1,7 +1,7 @@
 #Requires AutoHotkey v2.0
 #SingleInstance force
 
-:*:gamil::mail
+:*:gamil::gmail
 
 ::peolpe::people
 ::lamo::lmao
@@ -12,3 +12,4 @@
 ::thign::thing
 ::thigns::things
 ::mcuh::much
+::becasue::because
