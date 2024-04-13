@@ -295,3 +295,10 @@ CapsLock & n::
 {
 	SendInput "{Backspace 5}"
 }
+
+CapsLockOff()
+{
+	SetCapsLockState false
+}
+
+SetTimer CapsLockOff, 10
