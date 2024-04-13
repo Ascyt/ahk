@@ -8,3 +8,7 @@
 ::psuh::push
 ::enoguh::enough
 ::abotu::about
+::anythnig::anything
+::thign::thing
+::thigns::things
+::mcuh::much
