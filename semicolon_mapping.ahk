@@ -257,6 +257,31 @@ SendRmLast(txt)
 {
     SendRmLast("↓")
 }
+:*:doublerarrow::
+{
+    SendRmLast("⇒")
+}
+:*:doublelarrow::
+{
+    SendRmLast("⇐")
+}
+:*:doubleuarrow::
+{
+    SendRmLast("⇑")
+}
+:*:doubledarrow::
+{
+    SendRmLast("⇓")
+}
+:*:;lrarrow::
+{
+    SendRmLast("↔")
+}
+:*:;udarrow::
+{
+    SendRmLast("↕")
+}
+
 :*:;ldoubleangle::
 {
     SendRmLast("«")
