@@ -168,6 +168,7 @@ RepeatKey(key, times)
 	Loop times
 	{
 		SendInput "{" key "}"
+		Sleep 10
 	}
 }
 
