@@ -290,7 +290,7 @@ SendRmLast(txt)
 }
 :*:;nerd::
 {
-	SendRmLast("🤓")
+	SendRmLast("🤓☝️")
 }
 :*:;tu::
 {
