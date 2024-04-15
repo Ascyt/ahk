@@ -79,11 +79,11 @@ startTime := A_TickCount
 
 if msTotal > 0
 {
-    TrayTip ("Timer started for " FormatTime(msTotal) "`n[ RightCtrl to show time ]`n[ CapsLock + BackSpace to cancel ]")
+    TrayTip ("Timer started for " FormatTime(msTotal) "`n[ RightCtrl/Alt+BackSpace to show time ]`n[ CapsLock + BackSpace to cancel ]")
 
     while (A_TickCount - startTime) < msTotal
     {
-        if GetKeyState("RCtrl")
+        if GetKeyState("RCtrl") || (GetKeyState("Alt") && GetKeyState("BackSpace"))
         {
             CustomToolTip (FormatTime(msTotal - (A_TickCount - startTime)))
         }
