@@ -52,6 +52,7 @@ while true
     if GetKeyState("RCtrl", "P") || (GetKeyState("Alt") && GetKeyState("Backspace", "P")) || GetKeyState("LButton", "P")
     {
         KeyWait "RCtrl"
+        KeyWait "Alt"
         break
     }
 }
