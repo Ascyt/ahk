@@ -209,8 +209,8 @@ SpecialRunDialogue()
 			return
 
 		to := RunDialogueAnywhere("to", false)
-		if to == "`b" || to == ""
-			return
+		if to == "`b" 
+			to := ""
 
 		ReplaceText(from, to)
 		return
