@@ -13,3 +13,9 @@
 ::thigns::things
 ::mcuh::much
 ::becasue::because
+::colud::could
+::thign::thing
+::somethign::something
+::anythign::anything
+::ot::to
+::teh::the
