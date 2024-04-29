@@ -20,3 +20,4 @@
 ::ot::to
 ::teh::the
 ::mabye::maybe
+::oyu::you
