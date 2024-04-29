@@ -19,3 +19,4 @@
 ::anythign::anything
 ::ot::to
 ::teh::the
+::mabye::maybe
