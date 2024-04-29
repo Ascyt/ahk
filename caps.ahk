@@ -91,13 +91,13 @@ ReplaceText(from, to)
 	OldClipboard := A_Clipboard
 
 	SendInput "^x"
-	Sleep 25
+	Sleep 50
 
 	A_Clipboard := StrReplace(A_Clipboard, from, to)
 
-	Sleep 25
+	Sleep 50
 	SendInput "^v"
-	Sleep 25
+	Sleep 50
 
 	A_Clipboard := OldClipboard
 }
@@ -107,12 +107,12 @@ UpperText()
 
 	SendInput "^x"
 	
-	Sleep 25
+	Sleep 50
 
 	A_Clipboard := StrUpper(A_Clipboard)
-	Sleep 25
+	Sleep 50
 	SendInput "^v"
-	Sleep 25
+	Sleep 50
 
 	A_Clipboard := OldClipboard
 }
@@ -121,12 +121,12 @@ LowerText()
 	OldClipboard := A_Clipboard
 
 	SendInput "^x"
-	Sleep 25
+	Sleep 50
 
 	A_Clipboard := StrLower(A_Clipboard)
-	Sleep 25
+	Sleep 50
 	SendInput "^v"
-	Sleep 25
+	Sleep 50
 
 	A_Clipboard := OldClipboard
 }
@@ -135,7 +135,7 @@ ReverseText()
 	OldClipboard := A_Clipboard
 
 	SendInput "^x"
-	Sleep 25
+	Sleep 50
 
 	txt := A_Clipboard
 	reversedText := ""
@@ -145,9 +145,9 @@ ReverseText()
     }
 	A_Clipboard := reversedText
 
-	Sleep 25
+	Sleep 50
 	SendInput "^v"
-	Sleep 25
+	Sleep 50
 
 	A_Clipboard := OldClipboard
 }
@@ -157,7 +157,7 @@ CountText()
 	OldClipboard := A_Clipboard
 
 	SendInput "^c"
-	Sleep 25
+	Sleep 50
 
 	TrayTip StrLen(StrReplace(A_Clipboard, "`r`n", "`n")) " characters in selection"
 
@@ -168,7 +168,7 @@ RepeatKey(key, times)
 	Loop times
 	{
 		SendInput "{" key "}"
-		Sleep 25
+		Sleep 50
 	}
 }
 
@@ -302,4 +302,4 @@ CapsLockOff()
 	SetCapsLockState false
 }
 
-SetTimer CapsLockOff, 25
+SetTimer CapsLockOff, 50
