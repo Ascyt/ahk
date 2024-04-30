@@ -255,10 +255,10 @@ z::OnPress("z")
 Space::OnPress(" ")
 BackSpace::RemoveLast()
 ^BackSpace::RemoveUntilSpace()
-CapsLock & H::RemoveLast()
-Capslock & T::RemoveUntilSpace()
-CapsLock & N::RemoveAmount(5)
-CapsLock & U::ClearAll()
+F24 & H::RemoveLast()
+F24 & T::RemoveUntilSpace()
+F24 & N::RemoveAmount(5)
+F24 & U::ClearAll()
 
 Enter::ExitConfirm()
 +Enter::ExitCopy()
@@ -274,10 +274,10 @@ Left::Return
 Right::Return
 Up::Return
 Down::Return
-CapsLock & a::Return
-CapsLock & e::Return
-CapsLock & ,::Return
-CapsLock & o::Return
+F24 & a::Return
+F24 & e::Return
+F24 & ,::Return
+F24 & o::Return
 
 ArgObj := FileOpen(".\type_shortcut_args.txt", "r")
 args := StrSplit(ArgObj.Read(), "`n")
@@ -328,4 +328,5 @@ else if stop
 OutputObj := FileOpen(".\type_shortcut_output.txt", "w")
 OutputObj.Write(output)
 OutputObj.Close()
+
 ExitApp

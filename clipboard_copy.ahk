@@ -39,13 +39,13 @@ CopyFromClipboard()
     ClipboardFile.Write(Name "\:" Clipboard "`n")
     ClipboardFile.Close()
 }
-CapsLock & c::CopyFromText()
-CapsLock & x::
+F24 & c::CopyFromText()
+F24 & x::
 {
     CopyFromText()
     SendInput "{Backspace}"
 }
-CapsLock & i::
+F24 & i::
 {
     CopyFromClipboard()
 

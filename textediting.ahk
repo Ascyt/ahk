@@ -23,12 +23,12 @@ RunDialogue(arg, useSingleChar)
 
 #HotIf !GetKeyState("Shift")
 {
-    CapsLock & f::MoveNext()
-    CapsLock & b::SelectInside()
+    F24 & f::MoveNext()
+    F24 & b::SelectInside()
 }
 #HotIf GetKeyState("Shift")
 {
-    CapsLock & f::MovePrevious()
+    F24 & f::MovePrevious()
 }
 
 MoveNext()

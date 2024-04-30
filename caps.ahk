@@ -6,64 +6,23 @@ lastTooltip := ""
 lastMouseX := 0
 lastMouseY := 0
 
-RunDialogue(arg, useSingleChar)
-{
-	SendText "{  }"
-    SendInput("{Left 2}")
-
-    ArgObj := FileOpen(".\type_shortcut_args.txt", "w")
-    ArgObj.Write(arg "`n1" "`n" (useSingleChar?"1":"0")) 
-    ArgObj.Close()
-
-	RunWait "./type_shortcut.exe"
-
-	OutputObj := FileOpen(".\type_shortcut_output.txt", "r")
-	Line := OutputObj.Read()
-	OutputObj.Close()
-
-    SendInput("{Delete 2}{Backspace 2}")
-
-    return Line
-}
-RunDialogueAnywhere(arg, useSingleChar)
-{
-    ArgObj := FileOpen(".\type_shortcut_args.txt", "w")
-    ArgObj.Write(arg "`n0" "`n" (useSingleChar?"1":"0")) 
-    ArgObj.Close()
-
-	RunWait "./type_shortcut.exe"
-
-	OutputObj := FileOpen(".\type_shortcut_output.txt", "r")
-	Line := OutputObj.Read()
-	OutputObj.Close()
-
-	return Line
-}
-
-CapsLock::
-{
-	SetCapsLockState false
-}
-
-!CapsLock::CapsLock
-
-CapsLock & u::
+F24 & u::
 {
 	SendInput "{End}{Shift down}{Home}{Shift up}"
 }
 
 ; Arrow keys
-CapsLock & a::Left
-CapsLock & `;::^Left
-CapsLock & e::Right
-CapsLock & j::^Right
-CapsLock & ,::Up
-CapsLock & o::Down
+F24 & a::Left
+F24 & `;::^Left
+F24 & e::Right
+F24 & j::^Right
+F24 & ,::Up
+F24 & o::Down
 ; Other faster keys
-CapsLock & 1::Home
-CapsLock & 2::End
+F24 & 1::Home
+F24 & 2::End
 
-CapsLock & Alt:: 
+F24 & Alt:: 
 {
     if !GetKeyState("Shift", "P")
     {
@@ -76,230 +35,70 @@ CapsLock & Alt::
 }
 
 ; Mouse shortcuts
-CapsLock & LButton::^v
-CapsLock & RButton::^c
-CapsLock & MButton::^x
-CapsLock & WheelDown::Right
-CapsLock & WheelUp::Left
-CapsLock & WheelLeft::Backspace
-CapsLock & WheelRight::Delete
-CapsLock & XButton1::^z
-CapsLock & XButton2::^y
+F24 & LButton::^v
+F24 & RButton::^c
 
-ReplaceText(from, to)
+F24 & MButton::^x
+F24 & WheelDown::Right
+F24 & WheelUp::Left
+F24 & WheelLeft::Backspace
+F24 & WheelRight::Delete
+F24 & XButton1::^z
+F24 & XButton2::^y
+
+F24 & '::
 {
-	OldClipboard := A_Clipboard
-
-	SendInput "^x"
-	Sleep 50
-
-	A_Clipboard := StrReplace(A_Clipboard, from, to)
-
-	Sleep 50
-	SendInput "^v"
-	Sleep 50
-
-	A_Clipboard := OldClipboard
-}
-UpperText()
-{
-	OldClipboard := A_Clipboard
-
-	SendInput "^x"
-	
-	Sleep 50
-
-	A_Clipboard := StrUpper(A_Clipboard)
-	Sleep 50
-	SendInput "^v"
-	Sleep 50
-
-	A_Clipboard := OldClipboard
-}
-LowerText()
-{
-	OldClipboard := A_Clipboard
-
-	SendInput "^x"
-	Sleep 50
-
-	A_Clipboard := StrLower(A_Clipboard)
-	Sleep 50
-	SendInput "^v"
-	Sleep 50
-
-	A_Clipboard := OldClipboard
-}
-ReverseText()
-{
-	OldClipboard := A_Clipboard
-
-	SendInput "^x"
-	Sleep 50
-
-	txt := A_Clipboard
-	reversedText := ""
-    Loop StrLen(txt)
-    {
-        reversedText .= SubStr(txt, -A_Index, 1)
-    }
-	A_Clipboard := reversedText
-
-	Sleep 50
-	SendInput "^v"
-	Sleep 50
-
-	A_Clipboard := OldClipboard
-}
-CountText()
-{
-	TrayTip
-	OldClipboard := A_Clipboard
-
-	SendInput "^c"
-	Sleep 50
-
-	TrayTip StrLen(StrReplace(A_Clipboard, "`r`n", "`n")) " characters in selection"
-
-	A_Clipboard := OldClipboard
-}
-RepeatKey(key, times) 
-{
-	Loop times
-	{
-		SendInput "{" key "}"
-		Sleep 50
-	}
+    Run "./special_dialogue.exe run"
 }
 
-; Open special run dialogue
-SpecialRunDialogue()
+F24 & m::
 {
-    ArgObj := FileOpen(".\type_shortcut_args.txt", "w")
-    ArgObj.Write("RUN`n0")
-    ArgObj.Close()
-
-	RunWait "./type_shortcut.exe"
-
-	OutputObj := FileOpen(".\type_shortcut_output.txt", "r")
-	Line := OutputObj.Read()
-	OutputObj.Close()
-
-	if Line == "`b"
-	{
-		return
-	}
-
-	if Line == "timer"
-	{
-		Run "./timer.exe"
-		return
-	}
-
-	if Line == "sw"
-	{
-		Run "./stopwatch.exe"
-		return
-	}
-
-	if Line == "replace"
-	{
-		from := RunDialogueAnywhere("from", false)
-		if from == "`b" || from == ""
-			return
-
-		to := RunDialogueAnywhere("to", false)
-		if to == "`b" 
-			to := ""
-
-		ReplaceText(from, to)
-		return
-	}
-	if Line == "upper"
-	{
-		UpperText()
-		return
-	}
-	if Line == "lower"
-	{
-		LowerText()
-		return
-	}
-	if Line == "reverse"
-	{
-		ReverseText()
-		return
-	}
-	if Line == "count"
-	{
-		CountText()
-		return
-	}
-	if Line == "key"
-	{
-		key := RunDialogueAnywhere("key", false)
-		if key == "`b" || key == ""
-			return
-
-		amount := RunDialogueAnywhere("amount", false)
-		if amount == "`b" || amount == ""
-			return
-
-		RepeatKey(key, amount)
-		return
-	}
-
-
-	Run "python.exe program_shortcuts.py " Line
-}
-
-CapsLock & ':: 
-{
-	SpecialRunDialogue()
-}
-
-CapsLock & m::
-{
-	character := RunDialogueAnywhere("umlaut", true)
-
-	switch character
-	{
-		case "a":
-			SendInput "ä"
-		case "A":
-			SendInput "Ä"
-		case "o":
-			SendInput "ö"
-		case "O":
-			SendInput "Ö"
-		case "u":
-			SendInput "ü"
-		case "U":
-			SendInput "Ü"
-		case "s":
-			SendInput "ß"
-	}
-
-	SetCapsLockState false
+    Run "./special_dialogue.exe umlaut"
 }
 
 ; Homerow right
-CapsLock & h::
+F24 & h::
 {
 	SendInput "{Backspace}"
 }
-CapsLock & t::
+F24 & t::
 {
 	SendInput "{Ctrl down}{Backspace}{Ctrl up}"
 }
-CapsLock & n:: 
+F24 & n:: 
 {
 	SendInput "{Backspace 5}"
 }
 
-CapsLockOff()
+mouseMode := false
+ToggleMousemode(toMouseMode)
 {
-	SetCapsLockState false
+    global mouseMode
+
+    if mouseMode == toMouseMode
+        return
+
+    if mouseMode
+    {
+        ProcessClose "mousemode.exe"
+
+        ToolTip "..."
+        KeyWait "F24"
+
+        mouseMode := false
+        ToolTip "KEY"
+        SetTimer () => ToolTip(), -1000
+    }
+    else
+    {
+        run "mousemode.exe"
+        
+        mouseMode := true
+        ToolTip "MOUSE"
+        SetTimer () => ToolTip(), -1000
+    }
 }
 
-SetTimer CapsLockOff, 50
+F24 & .::ToggleMouseMode(!mouseMode)
+
+SetCapsLockState false
