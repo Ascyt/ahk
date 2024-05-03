@@ -79,11 +79,11 @@ startTime := A_TickCount
 
 if msTotal > 0
 {
-    TrayTip ("Timer started for " FormatTime(msTotal) "`n[ RightCtrl to show time ]`n[ CapsLock + BackSpace to cancel ]")
+    TrayTip ("Timer started for " FormatTime(msTotal) "`n[ RightCtrl/Alt+BackSpace to show time ]`n[ F24 + BackSpace to cancel ]")
 
     while (A_TickCount - startTime) < msTotal
     {
-        if GetKeyState("RCtrl")
+        if GetKeyState("RCtrl") || (GetKeyState("Alt") && GetKeyState("BackSpace"))
         {
             CustomToolTip (FormatTime(msTotal - (A_TickCount - startTime)))
         }
@@ -95,7 +95,7 @@ if msTotal > 0
             lastMouseY := 0
         }
 
-        if GetKeyState("CapsLock") && GetKeyState("BackSpace")
+        if GetKeyState("F24") && GetKeyState("BackSpace")
         {
             TrayTip
             TrayTip "Timer cancelled."

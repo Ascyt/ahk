@@ -17,12 +17,12 @@ RunDialogue(arg)
     return Line
 }
 
-CapsLock & d::
+F24 & d::
 {
     Run "./clipboard_select.exe"
 }
 
-CapsLock & v::
+F24 & v::
 {
     ClipboardFile := FileOpen("./clipboard.txt", "r")
 

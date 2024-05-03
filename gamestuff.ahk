@@ -107,7 +107,7 @@ A_MaxHotkeysPerInterval := 300
         SendInput "{Space up}"
     }
 
-    CapsLock & c::
+    F24 & c::
     {
         contents := ""
         lastClipboard := ""
@@ -157,7 +157,7 @@ A_MaxHotkeysPerInterval := 300
         }
     }
 
-    CapsLock & v::
+    F24 & v::
     {
         fullContents := StrReplace(A_Clipboard, "`r", "")
         contents := StrSplit(fullContents, "`n`n################################`n`n")
@@ -174,7 +174,7 @@ A_MaxHotkeysPerInterval := 300
         A_Clipboard := fullContents
     }
 
-    CapsLock & p::
+    F24 & p::
     {
         SendCommand "/sethome __beacon_temp"
 
@@ -187,20 +187,20 @@ A_MaxHotkeysPerInterval := 300
         SendCommand "/rmhome __beacon_temp"
     }
 
-    CapsLock & 3::
+    F24 & 3::
     {
         SendCommand "/sethome __temp"
     }
-    CapsLock & 4::
+    F24 & 4::
     {
         SendCommand "/home __temp"
     }
-    CapsLock & i::
+    F24 & i::
     {
         SendCommand "/home s"
     }
 
-    CapsLock & q::
+    F24 & q::
     {
         SendCommand "/home d"
     }

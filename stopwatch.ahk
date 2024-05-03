@@ -47,16 +47,17 @@ CustomTooltip(content)
 
 while true 
 {
-    CustomTooltip("Press RightCtrl or LMB to start the stopwatch.")
+    CustomTooltip("Press RightCtrl, Alt+BackSpace or LMB to start the stopwatch.")
 
-    if GetKeyState("RCtrl", "P") || GetKeyState("LButton", "P")
+    if GetKeyState("RCtrl", "P") || (GetKeyState("Alt") && GetKeyState("Backspace", "P")) || GetKeyState("LButton", "P")
     {
         KeyWait "RCtrl"
+        KeyWait "Alt"
         break
     }
 }
 
-TrayTip ("Stopwatch started. RightCtrl to stop.")
+TrayTip ("Stopwatch started. RightCtrl or Alt+BackSpace to stop.")
 
 timeStarted := A_TickCount
 
@@ -64,7 +65,7 @@ while true
 {
     CustomToolTip (FormatTime(A_TickCount - timeStarted))
 
-    if GetKeyState("RCtrl")
+    if GetKeyState("RCtrl") || (GetKeyState("Alt") && GetKeyState("BackSpace"))
     {
         finalTime := FormatTime(A_TickCount - timeStarted)
         TrayTip

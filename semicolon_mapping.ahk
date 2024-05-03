@@ -32,6 +32,7 @@ SendRmLast(txt)
 :*:;mail::account@ascyt.com
 :*:;website::https://ascyt.com/
 :*:;gh::https://github.com/Ascyt/
+:*:;img::https://img.ascyt.com/assets/
 
 ; Shortcuts for faster writing
 :*:;sth::something
