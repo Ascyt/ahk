@@ -1,6 +1,6 @@
 #Requires AutoHotkey v2.0
 #SingleInstance force
-A_MaxHotkeysPerInterval := 300
+A_MaxHotkeysPerInterval := 1000
 
 lastTooltip := ""
 lastMouseX := 0
