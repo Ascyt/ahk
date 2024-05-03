@@ -101,4 +101,9 @@ ToggleMousemode(toMouseMode)
 
 F24 & .::ToggleMouseMode(!mouseMode)
 
+#HotIf mouseMode 
+{
+	F24::ToggleMousemode(false)
+}
+
 SetCapsLockState false

@@ -204,4 +204,22 @@ A_MaxHotkeysPerInterval := 300
     {
         SendCommand "/home d"
     }
+
+
+    F24 & u::
+    {
+        SendInput "{End}{Shift down}{Home}{Shift up}"
+    }
+    F24 & h::
+    {
+        SendInput "{Backspace}"
+    }
+    F24 & t::
+    {
+        SendInput "{Ctrl down}{Backspace}{Ctrl up}"
+    }
+    F24 & n:: 
+    {
+        SendInput "{Backspace 5}"
+    }
 }
