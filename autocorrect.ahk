@@ -21,3 +21,5 @@
 ::teh::the
 ::mabye::maybe
 ::oyu::you
+::wolud::would
+::woudl::would
