@@ -1,25 +1,38 @@
 #Requires AutoHotkey v2.0
 #SingleInstance
 
-^+Space::ToggleScript()
+USE_TOOLTIP := true
 
-running := false
+is_running := false
 
-ToggleScript()
+ToggleScript(running)
 {
-    global running
+    global USE_TOOLTIP
+
     if (running)
     {
-        ProcessClose "8kt.exe"
-        running := false
-        ToolTip "❌8KT OFF❌"
+        Run "8kt.exe"
+        if USE_TOOLTIP
+            Run "8kttooltip.exe"
+
+        ToolTip "✅8KT ON✅"
         SetTimer () => ToolTip(), -1000
     }
     else
     {
-        Run "8kt.exe"
-        running := true
-        ToolTip "✅8KT ON✅"
+        ProcessClose "8kt.exe"
+        ProcessClose "8kttooltip.exe"
+        ToolTip "❌8KT OFF❌"
         SetTimer () => ToolTip(), -1000
     }
+
+    global is_running
+    is_running := running
+}
+
+^+Space::ToggleScript(!is_running)
+
+#HotIf (is_running)
+{
+    Escape::ToggleScript(false)
 }
