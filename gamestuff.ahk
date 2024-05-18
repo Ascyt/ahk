@@ -5,6 +5,7 @@ A_MaxHotkeysPerInterval := 300
 #HotIf WinActive("ahk_exe javaw.exe")
 {
     XButton2::j
+    XButton1::k
 
     :*:m;sh::
     {
@@ -184,7 +185,7 @@ A_MaxHotkeysPerInterval := 300
 
         SendCommand "/home __beacon_temp"
 
-        SendCommand "/rmhome __beacon_temp"
+        SendCommand "/delhome __beacon_temp"
     }
 
     F24 & 3::
