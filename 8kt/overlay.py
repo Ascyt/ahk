@@ -183,7 +183,7 @@ class OverlayText(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    svg_path = 'C:/Users/filip/Pictures/Inkscape/8kt/default.svg'  
+    svg_path = 'assets/default.svg'  
     default_overlay = OverlayDefault(svg_path)
     default_overlay.show()
 
@@ -193,7 +193,7 @@ if __name__ == '__main__':
     key_overlays = []
 
     for i in range(len(keys)):
-        key_svg_path = f'C:/Users/filip/Pictures/Inkscape/8kt/{keys[i]}.svg'  
+        key_svg_path = f'assets/{keys[i]}.svg'  
         key_overlays.append(OverlayKey(key_svg_path + '', i + 0))
         key_overlays[i].show()
 
