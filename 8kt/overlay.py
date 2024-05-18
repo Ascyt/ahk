@@ -114,7 +114,7 @@ class OverlayText(QWidget):
         # Center the window on the screen
         screen_geometry = QApplication.desktop().screenGeometry()
         x = int((screen_geometry.width() - (self.width() * 1.25)) * posX)
-        y = int((screen_geometry.height() - self.height()) * posY)
+        y = int((screen_geometry.height() - (self.height())) * posY)
         self.move(x, y)
 
     def paintEvent(self, event):
@@ -130,7 +130,7 @@ class OverlayText(QWidget):
     def getTextContents(self, contents):
         mapping = {
             '00000': ' \'-',
-            '00001': '🞀"_',
+            '00001': '🞀"─',
             '00010': 'tah',
             '00011': 'TAH',
             '00100': 'esr',
