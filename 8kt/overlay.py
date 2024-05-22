@@ -105,7 +105,7 @@ class OverlayText(QWidget):
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         # Set the font and calculate the size of the text
-        self.font = QFont('Courier New', 12)
+        self.font = QFont('Courier New', int(self.width() / 60))
         self.font.setLetterSpacing(QFont.AbsoluteSpacing, 10)
         self.font_metrics = QFontMetrics(self.font)
         text_size = self.font_metrics.size(0, '000')
