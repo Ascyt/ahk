@@ -105,15 +105,15 @@ class OverlayText(QWidget):
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         # Set the font and calculate the size of the text
-        self.font = QFont('Courier New', int(self.width() / 60))
-        self.font.setLetterSpacing(QFont.AbsoluteSpacing, 10)
+        self.font = QFont('Courier New', int(self.width() / 55))
+        self.font.setLetterSpacing(QFont.AbsoluteSpacing, 11)
         self.font_metrics = QFontMetrics(self.font)
         text_size = self.font_metrics.size(0, '000')
         self.resize(text_size.width(), text_size.height())
 
         # Center the window on the screen
         screen_geometry = QApplication.desktop().screenGeometry()
-        x = int((screen_geometry.width() - (self.width() * 1.25)) * posX)
+        x = int((screen_geometry.width() - (self.width() * 1.22)) * posX)
         y = int((screen_geometry.height() - (self.height())) * posY)
         self.move(x, y)
 
