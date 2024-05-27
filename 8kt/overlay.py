@@ -6,7 +6,7 @@ from PyQt5.QtSvg import QSvgRenderer
 import time
 
 posX = 0.99
-posY = 0.95
+posY = 0.925
 
 class OverlayDefault(QWidget):
     def __init__(self, svg_path):
