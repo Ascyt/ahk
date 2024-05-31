@@ -190,6 +190,7 @@ A_MaxHotkeysPerInterval := 300
 
     F24 & 3::
     {
+        SendCommand "/delhome __temp"
         SendCommand "/sethome __temp"
     }
     F24 & 4::
