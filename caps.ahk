@@ -37,8 +37,7 @@ F24 & Alt::
 ; Mouse shortcuts
 F24 & LButton::^v
 F24 & RButton::^c
-
-F24 & MButton::^x
+F24 & MButton::Enter
 F24 & WheelDown::Right
 F24 & WheelUp::Left
 F24 & WheelLeft::Backspace
