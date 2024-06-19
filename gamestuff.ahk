@@ -1,11 +1,23 @@
 #Requires AutoHotkey v2.0
-#SingleInstance
+#SingleInstance force
 A_MaxHotkeysPerInterval := 300
+
+InCommand := false
 
 #HotIf WinActive("ahk_exe javaw.exe")
 {
-    XButton2::j
-    XButton1::k
+    XButton1::[
+        
+    #HotIf GetKeyState("XButton2")
+    {
+        o::h
+        e::t
+        ,::g
+        .::c
+        '::f
+        `;::b
+        q::m
+    }
 
     :*:m;sh::
     {
@@ -190,6 +202,7 @@ A_MaxHotkeysPerInterval := 300
 
     F24 & 3::
     {
+        SendCommand "/delhome __temp"
         SendCommand "/sethome __temp"
     }
     F24 & 4::
@@ -222,5 +235,42 @@ A_MaxHotkeysPerInterval := 300
     F24 & n:: 
     {
         SendInput "{Backspace 5}"
+    }
+
+    /::
+    {
+        global InCommand
+
+        InCommand := true
+        SendInput "{/}"
+    }
+    Up::
+    {
+        global InCommand
+
+        InCommand := true
+        SendInput "{Up}"
+    }
+
+    Enter::
+    {
+        global InCommand
+
+        if InCommand
+        {
+            SendInput "{Enter}"
+            InCommand := false
+            return
+        }
+
+        InCommand := false
+
+        SendText " &f</&cAscyt&f>"
+
+        SendInput "{Home}"
+
+        SendText "&b"
+
+        SendInput "{Enter}"
     }
 }
