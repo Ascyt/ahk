@@ -362,6 +362,12 @@ SendRmLast(txt)
 
     SendInput("{Ctrl Down}v{Ctrl Up}")
 }
+:*:;dumplings::
+{
+    A_Clipboard := "ང་ཚོ་ཁྱོད་རའི་རང་གི་སྤྲོ་མོ་ཡིན། ང་ཚོ་ནི་སྤྲོ་མོ་མི་མང་པོ་དང་མི་འབྲེལ་བའི་དོན་དུ་འབད་དེ་ཡོད། ཁྱོད་རའི་དོན་དུ་མི་འདུག་པའི་མོག་མོག་གི་དོན་དུ་འབད་དེ་ཡོད། ཁྱོད་རའི་དོན་དུ་མི་འདུག་པའི་མོག་མོག་གི་དོན་དུ་འབད་དེ་ཡོད།ད་རེས་ཁྱོད་རའི་དོན་དུ་མི་འདུག་པའི་མོག་མོག་གི་དོན་དུ་འབད་དེ་ཡོད།"
+
+    SendInput("{Ctrl Down}v{Ctrl Up}")
+}
 
 ; System info shorthands
 :*:;date::
@@ -548,6 +554,41 @@ Suspense(message)
     Loop length
     {
         SendText Chr(Random(97, 122))
+    }
+}
+; Returns true if the element is in the array
+ContainsElement(arr, element) ; It's needed because AutoHotkey doesn't have a built-in function for this it seems
+{
+    for _, value in arr
+    {
+        if value == element
+            return true
+    }
+    return false
+}
+:*:r;tibetan::
+{
+    length := RunDialogue("length")
+    if length == "`b" || length == ""
+        return
+    length := Integer(length)
+
+    disallowedChars := [0x0F48, 0x0F6D, 0x0F6E, 0x0F6F, 0x0F70, 0x0F98, 0x0FBD, 0x0FCD, 0x0FD5, 0xFD6, 0x0FD7, 0x0FD8]
+
+    Loop length
+    {
+        if (Random(0.0, 1.0) < 0.1)
+        {
+            SendText " "
+            continue
+        }
+
+        char := Random(0x0F40, 0x0FDA)
+        while ContainsElement(disallowedChars, char)
+        {
+            char := Random(0x0F40, 0x0FDA)
+        }
+        SendText Chr(char)
     }
 }
 :*:r;normal::
