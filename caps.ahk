@@ -68,6 +68,10 @@ F24 & n::
 {
 	SendInput "{Backspace 5}"
 }
+F24 & s::
+{
+    SendInput "{Shift down}{Home}{Shift up}{Backspace}"
+}
 
 mouseMode := false
 ToggleMousemode(toMouseMode)
