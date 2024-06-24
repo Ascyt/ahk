@@ -149,7 +149,7 @@ SpecialRunDialogue()
 		return
 	}
 
-	if Line == "replace"
+	if Line == "r"
 	{
 		from := RunDialogueAnywhere("from", false)
 		if from == "`b" || from == ""
