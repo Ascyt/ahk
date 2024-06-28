@@ -52,7 +52,45 @@ F24 & '::
 
 F24 & m::
 {
-    Run "./special_dialogue.exe umlaut"
+    ; Run "./special_dialogue.exe umlaut"
+    lastClipboard := A_Clipboard
+    SendInput "{Shift down}{Left}{Shift up}{Ctrl down}c{Ctrl up}"
+
+    timeToLive := 1000
+    while timeToLive > 0 && A_Clipboard == lastClipboard
+    {
+        timeToLive -= 10
+        Sleep 10
+    }
+    character := A_Clipboard
+
+    if StrLen(character) > 1
+    {
+        MsgBox "Character is too long (" . character . ")"
+        return
+    }
+
+    switch character 
+    {
+        case "a":
+            SendInput "ä"
+        case "A":
+            SendInput "Ä"
+        case "o":
+            SendInput "ö"
+        case "O":
+            SendInput "Ö"
+        case "u":
+            SendInput "ü"
+        case "U":
+            SendInput "Ü"
+        case "s":
+            SendInput "ß"
+        default:
+            SendInput character
+    }
+
+    A_Clipboard := lastClipboard
 }
 
 ; Homerow right
