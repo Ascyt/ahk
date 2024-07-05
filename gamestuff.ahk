@@ -3,8 +3,15 @@
 A_MaxHotkeysPerInterval := 300
 
 InCommand := false
+IsEnabled := true
 
-#HotIf WinActive("ahk_exe javaw.exe")
+^!Space::
+{
+    global IsEnabled
+    IsEnabled := !IsEnabled
+}
+
+#HotIf WinActive("ahk_exe javaw.exe") && IsEnabled
 {
     XButton1::[
         
@@ -272,5 +279,25 @@ InCommand := false
         SendText "&b"
 
         SendInput "{Enter}"
+    }
+}
+
+#HotIf WinActive("ahk_exe TS4_x64.exe") && IsEnabled
+{
+    Space::0
+
+    !WheelUp::PgUp
+    !WheelDown::PgDn
+
+    `;::
+    {
+        PosX := 0
+        PosY := 0
+
+        MouseGetPos &PosX, &PosY
+
+        MouseClick "Left", 2537, 71, 1, 0
+
+        MouseMove PosX, PosY, 0
     }
 }
