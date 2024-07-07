@@ -13,17 +13,23 @@ IsEnabled := true
 
 #HotIf WinActive("ahk_exe javaw.exe") && IsEnabled
 {
-    XButton1::[
-        
-    #HotIf GetKeyState("XButton2")
+    XButton1::F18
+    XButton2::F13
+
+    #HotIf GetKeyState("F13") 
     {
-        o::h
-        e::t
-        ,::g
-        .::c
-        '::f
-        `;::b
-        q::m
+        .::F14
+        p::F15
+        u::F16
+        j::F17
+    }
+
+    #HotIf GetKeyState("F18") 
+    {
+        .::F19
+        p::F20
+        u::F21
+        j::F22
     }
 
     :*:m;sh::
