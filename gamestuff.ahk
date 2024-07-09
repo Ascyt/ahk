@@ -31,7 +31,10 @@ IsEnabled := true
         u::F21
         j::F22
     }
+}
 
+#HotIf WinActive("ahk_exe javaw.exe") && IsEnabled
+{
     :*:m;sh::
     {
         SendText "/sethome "
@@ -265,27 +268,27 @@ IsEnabled := true
         SendInput "{Up}"
     }
 
-    Enter::
-    {
-        global InCommand
+    ;Enter::
+    ;{
+    ;    global InCommand
 
-        if InCommand
-        {
-            SendInput "{Enter}"
-            InCommand := false
-            return
-        }
+    ;    if InCommand
+    ;    {
+    ;        SendInput "{Enter}"
+    ;        InCommand := false
+    ;        return
+    ;    }
 
-        InCommand := false
+    ;    InCommand := false
 
-        SendText " &f</&cAscyt&f>"
+    ;    SendText " &f</&cAscyt&f>"
 
-        SendInput "{Home}"
+    ;    SendInput "{Home}"
 
-        SendText "&b"
+    ;    SendText "&b"
 
-        SendInput "{Enter}"
-    }
+    ;    SendInput "{Enter}"
+    ;}
 }
 
 #HotIf WinActive("ahk_exe TS4_x64.exe") && IsEnabled
