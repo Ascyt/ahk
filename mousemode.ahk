@@ -2,6 +2,8 @@
 r::WheelDown
 a::return
 s::return
+o::return
+n::return
 
 mouseToFraction(xFract, yFract)
 {
@@ -12,46 +14,8 @@ mouseToFraction(xFract, yFract)
     MouseMove x, y, 0   
 }
 
-'::mouseToFraction(0, 0)
-/::mouseToFraction(1, 0)
-`;::mouseToFraction(0, 1)
-z::mouseToFraction(1, 1)
 
-x::mouseToFraction(0.5, 0.5)
-
-i::mouseToFraction(0, 0.5)
-d::mouseToFraction(1, 0.5)
-
-k::mouseToFraction(1/3.0, 1)
-b::mouseToFraction(2/3.0, 1)
-
-y::mouseToFraction(1/3.0, 0)
-f::mouseToFraction(2/3.0, 0)
-
-
-#HotIf GetKeyState("a") && !GetKeyState("s")
-{
-    u::
-    {
-        MouseMove 256, 0, 0, "R"
-    }
-    h::
-    {
-        MouseMove -256, 0, 0, "R"
-    }
-    e::
-    {
-        MouseMove 0, 256, 0, "R"
-    }
-    t::
-    {
-        MouseMove 0, -256, 0, "R"
-    }
-
-    Space::RButton
-}
-
-#HotIf !GetKeyState("a") && !GetKeyState("s")
+#HotIf !GetKeyState("a") && !GetKeyState("o") && !GetKeyState("n") && !GetKeyState("s")
 {
     u::
     {
@@ -73,7 +37,72 @@ f::mouseToFraction(2/3.0, 0)
     Space::LButton
 }
 
-#HotIf !GetKeyState("a") && GetKeyState("s")
+#HotIf GetKeyState("a") && !GetKeyState("o") && !GetKeyState("n") && !GetKeyState("s")
+{
+    u::
+    {
+        MouseMove 256, 0, 0, "R"
+    }
+    h::
+    {
+        MouseMove -256, 0, 0, "R"
+    }
+    e::
+    {
+        MouseMove 0, 256, 0, "R"
+    }
+    t::
+    {
+        MouseMove 0, -256, 0, "R"
+    }
+
+    Space::RButton
+}
+
+#HotIf !GetKeyState("a") && GetKeyState("o") && !GetKeyState("n") && !GetKeyState("s")
+{
+    Space::MButton
+}
+
+
+#HotIf GetKeyState("a") && GetKeyState("o") && !GetKeyState("n") && !GetKeyState("s")
+{
+    u::
+    {
+        MouseMove 1024, 0, 0, "R"
+    }
+    h::
+    {
+        MouseMove -1024, 0, 0, "R"
+    }
+    e::
+    {
+        MouseMove 0, 1024, 0, "R"
+    }
+    t::
+    {
+        MouseMove 0, -1024, 0, "R"
+    }
+}
+
+#HotIf !GetKeyState("a") && !GetKeyState("o") && GetKeyState("n") && !GetKeyState("s")
+{
+}
+
+#HotIf GetKeyState("a") && !GetKeyState("o") && GetKeyState("n") && !GetKeyState("s")
+{
+}
+
+#HotIf !GetKeyState("a") && GetKeyState("o") && GetKeyState("n") && !GetKeyState("s")
+{
+    e::WheelDown
+    t::WheelUp
+}
+#HotIf GetKeyState("a") && GetKeyState("o") && GetKeyState("n") && !GetKeyState("s")
+{
+}
+
+#HotIf !GetKeyState("a") && !GetKeyState("o") && !GetKeyState("n") && GetKeyState("s")
 {
     u::
     {
@@ -91,11 +120,74 @@ f::mouseToFraction(2/3.0, 0)
     {
         MouseMove 0, -16, 0, "R"
     }
+
     
-    Space::MButton
+    Space::
+    {
+        if (GetKeyState("LButton")) 
+        {
+            SendInput "{LButton up}"
+        }
+        else
+        {
+            SendInput "{LButton down}"
+        }
+    }
 }
 
-#HotIf GetKeyState("a") && GetKeyState("s")
+#HotIf GetKeyState("a") && !GetKeyState("o") && !GetKeyState("n") && GetKeyState("s")
+{
+    u::
+    {
+        mouseToFraction(0.75, 0.5)
+    }
+    h::
+    {
+        mouseToFraction(0.25, 0.5)
+    }
+    e::
+    {
+        mouseToFraction(0.5, 0.75)
+    }
+    t::
+    {
+        mouseToFraction(0.5, 0.25)
+    }
+    
+    Space::
+    {
+        if (GetKeyState("RButton")) 
+        {
+            SendInput "{RButton up}"
+        }
+        else
+        {
+            SendInput "{RButton down}"
+        }
+    }
+}
+
+
+#HotIf !GetKeyState("a") && GetKeyState("o") && !GetKeyState("n") && GetKeyState("s")
+{
+    Space::
+    {
+        if (GetKeyState("MButton")) 
+        {
+            SendInput "{MButton up}"
+        }
+        else
+        {
+            SendInput "{MButton down}"
+        }
+    }
+}
+
+#HotIf GetKeyState("a") && GetKeyState("o") && !GetKeyState("n") && GetKeyState("s")
+{
+}
+
+#HotIf !GetKeyState("a") && !GetKeyState("o") && GetKeyState("n") && GetKeyState("s")
 {
     u::
     {
@@ -113,6 +205,17 @@ f::mouseToFraction(2/3.0, 0)
     {
         MouseMove 0, -1, 0, "R"
     }
+}
 
-    Space::SendInput("{LButton Down}")
+#HotIf GetKeyState("a") && !GetKeyState("o") && GetKeyState("n") && GetKeyState("s")
+{
+}
+
+
+#HotIf !GetKeyState("a") && GetKeyState("o") && GetKeyState("n") && GetKeyState("s")
+{
+}
+
+#HotIf GetKeyState("a") && GetKeyState("o") && GetKeyState("n") && GetKeyState("s")
+{
 }
