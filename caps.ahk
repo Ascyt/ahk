@@ -6,31 +6,89 @@ lastTooltip := ""
 lastMouseX := 0
 lastMouseY := 0
 
-F24 & u::
-{
-	SendInput "{End}{Shift down}{Home}{Shift up}"
-}
-
 ; Arrow keys
-F24 & a::Left
-F24 & `;::^Left
-F24 & e::Right
-F24 & j::^Right
-F24 & ,::Up
-F24 & o::Down
-; Other faster keys
-F24 & 1::Home
-F24 & 2::End
-
-F24 & Alt:: 
+F24 & a::
 {
-    if !GetKeyState("Shift", "P")
+    if GetKeyState("Shift", "P")
     {
-        SendInput "{End}{Enter}"
+        SendInput ("{Shift down}")
+    }
+
+    if !GetKeyState("Alt", "P")
+    {
+        SendInput "{Left}"
     }
     else
     {
-        SendInput "{Home}{Enter}{Up}"
+        SendInput "{Ctrl down}{Left}{Ctrl up}"
+    }
+
+    if GetKeyState("Shift", "P")
+    {
+        SendInput ("{Shift up}")
+    }
+}
+F24 & e::
+{
+    if GetKeyState("Shift", "P")
+    {
+        SendInput ("{Shift down}")
+    }
+
+    if !GetKeyState("Alt", "P")
+    {
+        SendInput "{Right}"
+    }
+    else
+    {
+        SendInput "{Ctrl down}{Right}{Ctrl up}"
+    }
+    
+    if GetKeyState("Shift", "P")
+    {
+        SendInput ("{Shift up}")
+    }
+}
+F24 & ,::
+{
+    if GetKeyState("Shift", "P")
+    {
+        SendInput ("{Shift down}")
+    }
+
+    if !GetKeyState("Alt", "P")
+    {
+        SendInput "{Up}"
+    }
+    else
+    {
+        SendInput "{Home}"
+    }
+
+    if GetKeyState("Shift", "P")
+    {
+        SendInput ("{Shift up}")
+    }
+}
+F24 & o::
+{
+    if GetKeyState("Shift", "P")
+    {
+        SendInput ("{Shift down}")
+    }
+    
+    if !GetKeyState("Alt", "P")
+    {
+        SendInput "{Down}"
+    }
+    else
+    {
+        SendInput "{End}"
+    }
+
+    if GetKeyState("Shift", "P")
+    {
+        SendInput ("{Shift up}")
     }
 }
 
@@ -44,6 +102,9 @@ F24 & WheelLeft::Backspace
 F24 & WheelRight::Delete
 F24 & XButton1::^z
 F24 & XButton2::^y
+
+; Other shortcuts
+F24 & j::SendInput "{End}{Enter}"
 
 F24 & '::
 {
@@ -96,15 +157,36 @@ F24 & m::
 ; Homerow right
 F24 & h::
 {
-	SendInput "{Backspace}"
+    if !GetKeyState("Alt", "P")
+    {
+        SendInput "{Backspace}"
+    }
+    else
+    {
+        SendInput "{Shift down}{Left}{Shift up}"
+    }
 }
 F24 & t::
 {
-	SendInput "{Ctrl down}{Backspace}{Ctrl up}"
+    if !GetKeyState("Alt", "P")
+    {
+        SendInput "{Ctrl down}{Backspace}{Ctrl up}"
+    }
+    else
+    {
+        SendInput "{Shift down}{Ctrl down}{Left}{Ctrl up}{Shift up}"
+    }
 }
 F24 & n:: 
 {
-	SendInput "{Backspace 5}"
+    if !GetKeyState("Alt", "P")
+    {
+	    SendInput "{Backspace 4}"
+    }
+    else
+    {
+	    SendInput "{Shift down}{Left 4}{Shift up}"
+    }
 }
 F24 & s::
 {
@@ -140,7 +222,7 @@ ToggleMousemode(toMouseMode)
     }
 }
 
-F24 & .::ToggleMouseMode(!mouseMode)
+F24 & u::ToggleMouseMode(!mouseMode)
 
 #HotIf mouseMode 
 {

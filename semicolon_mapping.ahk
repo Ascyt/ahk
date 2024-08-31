@@ -354,6 +354,10 @@ SendRmLast(txt)
 {
     SendRmLast("😭")
 }
+:*:;amogus::
+{
+    SendRmLast("ඞ")
+}
 
 ; Text
 :*:;lorem::

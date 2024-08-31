@@ -235,6 +235,11 @@ IsEnabled := true
         SendCommand "/home d"
     }
 
+    F24 & 1::
+    {
+        SendCommand "/back"
+    }
+
 
     F24 & u::
     {

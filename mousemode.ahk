@@ -1,5 +1,5 @@
-n::WheelUp
-o::WheelDown
+,::WheelUp
+r::WheelDown
 a::return
 s::return
 
