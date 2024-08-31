@@ -14,7 +14,6 @@ mouseToFraction(xFract, yFract)
     MouseMove x, y, 0   
 }
 
-
 #HotIf !GetKeyState("a") && !GetKeyState("o") && !GetKeyState("n") && !GetKeyState("s")
 {
     u::
@@ -139,19 +138,19 @@ mouseToFraction(xFract, yFract)
 {
     u::
     {
-        mouseToFraction(0.75, 0.5)
+        mouseToFraction(1, 0.5)
     }
     h::
     {
-        mouseToFraction(0.25, 0.5)
+        mouseToFraction(0, 0.5)
     }
     e::
     {
-        mouseToFraction(0.5, 0.75)
+        mouseToFraction(0.5, 1)
     }
     t::
     {
-        mouseToFraction(0.5, 0.25)
+        mouseToFraction(0.5, 0)
     }
     
     Space::
