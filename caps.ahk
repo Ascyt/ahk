@@ -76,7 +76,7 @@ F24 & o::
     {
         SendInput ("{Shift down}")
     }
-    
+
     if !GetKeyState("Alt", "P")
     {
         SendInput "{Down}"
@@ -190,7 +190,14 @@ F24 & n::
 }
 F24 & s::
 {
-    SendInput "{Shift down}{Home}{Shift up}{Backspace}"
+    if !GetKeyState("Alt", "P")
+    {
+        SendInput "{Shift down}{Home}{Shift up}{Backspace}"
+    }
+    else
+    {
+        SendInput "{Shift down}{Home}{Shift up}"
+    }
 }
 
 mouseMode := false
