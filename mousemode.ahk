@@ -96,6 +96,8 @@ mouseToFraction(xFract, yFract)
 {
     e::WheelDown
     t::WheelUp
+    u::XButton1
+    h::XButton2
 }
 #HotIf GetKeyState("a") && GetKeyState("o") && GetKeyState("n") && !GetKeyState("s")
 {
