@@ -175,8 +175,11 @@ ClipboardFile := FileOpen("./clipboard.txt", "w")
 ClipboardFile.Write(NewClipboardContents)
 ClipboardFile.Close()
 
-if !selectorSuccess
+if !selectorSuccess 
+{
+    Run "./caps.exe"
     ExitApp 
+}
 FormattedClipboard := splitLine[2]
 FormattedClipboard := StrReplace(FormattedClipboard, "\n", "`n")
 FormattedClipboard := StrReplace(FormattedClipboard, "\b", "\")

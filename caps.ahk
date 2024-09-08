@@ -12,13 +12,6 @@ F24 & c::
     Run "./clipboard_copy.exe"
     ExitApp ; Gets started again
 }
-F24 & i::
-{
-    Run "./clipboard_copy.exe"
-    TrayTip
-    TrayTip "Copied " "`"" SubStr(A_Clipboard, 1, 50) "`""
-    ExitApp ; Gets started again
-}
 
 
 ; Custom clipboard paste

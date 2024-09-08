@@ -21,7 +21,14 @@ oldClipboard := A_Clipboard
 
 A_Clipboard := ""
 SendInput "^c"
-ClipWait
+ClipWait 1
+
+if (A_Clipboard = "")
+{
+    A_Clipboard := oldClipboard
+    TrayTip
+    TrayTip SubStr(A_Clipboard, 1, 50)
+}
 
 Clipboard := A_Clipboard
 Clipboard := StrReplace(Clipboard, "\", "\b")
