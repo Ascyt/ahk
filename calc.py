@@ -25,8 +25,21 @@ for arg in args:
 
 args = new_args
 
+# Variables from clipboard.txt
+with open('clipboard.txt', 'r') as f:
+    clipboard_lines = f.read().splitlines()
+
+for line in clipboard_lines:
+    parts = line.split('\\:')
+    if parts[0] == '\\-':
+        parts[0] = '-'
+
+    for i in range(len(args)):
+        args[i] = args[i].replace('$' + parts[0], parts[1])
+
 current = None
 
+# Calculate
 for arg in args:
     current_arg = (str(current) + arg if 'x' not in arg else arg.replace('x', str(current))) if current != None else arg
     current = eval(current_arg)
