@@ -1,6 +1,4 @@
-#Requires AutoHotkey v2.0
 #SingleInstance force
-A_MaxHotkeysPerInterval := 300
 
 RunDialogue(arg)
 {
@@ -17,46 +15,48 @@ RunDialogue(arg)
     return Line
 }
 
-F24 & d::
+altPressed := GetKeyState("Alt")
+
+oldClipboard := A_Clipboard
+
+ClipboardFile := FileOpen("./clipboard.txt", "r")
+
+ClipboardContents := ClipboardFile.Read()
+Name := altPressed ? StrReplace(RunDialogue("clip.get"), "\", "\b") : "\-"
+ClipboardLines := StrSplit(ClipboardContents, "`n")
+
+splitLineFound := false
+index := ClipboardLines.Length
+while index > 0
 {
-    Run "./clipboard_select.exe"
+    splitLine := StrSplit(ClipboardLines[index], "\:")
+
+    if (splitLine.Length > 1 && splitLine[1] = Name)
+    {
+        splitLineFound := splitLine
+        break
+    }
+    index--
 }
 
-F24 & v::
+if splitLineFound == false 
 {
-    ClipboardFile := FileOpen("./clipboard.txt", "r")
-
-    ClipboardContents := ClipboardFile.Read()
-    Name := GetKeyState("Shift") ? StrReplace(RunDialogue("clip.get"), "\", "\b") : "\-"
-    ClipboardLines := StrSplit(ClipboardContents, "`n")
-
-    splitLineFound := false
-    index := ClipboardLines.Length
-    while index > 0
-    {
-        splitLine := StrSplit(ClipboardLines[index], "\:")
-
-        if (splitLine.Length > 1 && splitLine[1] = Name)
-        {
-            splitLineFound := splitLine
-            break
-        }
-        index--
-    }
-
-    if splitLineFound == false 
-    {
-        TrayTip
-        TrayTip("Element `"" Name "`" not found")
-        return
-    }
-    
-    ClipboardFile.Close()
-    FormattedClipboard := splitLine[2]
-    FormattedClipboard := StrReplace(FormattedClipboard, "\n", "`n")
-    FormattedClipboard := StrReplace(FormattedClipboard, "\b", "\")
-
-    A_Clipboard := FormattedClipboard
-    SendInput "{Ctrl Down}v{Ctrl Up}"
+    TrayTip
+    TrayTip("Element `"" Name "`" not found")
+    Run "./caps.exe"
     return
 }
+
+ClipboardFile.Close()
+FormattedClipboard := splitLine[2]
+FormattedClipboard := StrReplace(FormattedClipboard, "\n", "`n")
+FormattedClipboard := StrReplace(FormattedClipboard, "\b", "\")
+
+A_Clipboard := FormattedClipboard
+SendInput "{Ctrl Down}v{Ctrl Up}"
+
+A_Clipboard := oldClipboard
+
+Run "./caps.exe"
+
+ExitApp

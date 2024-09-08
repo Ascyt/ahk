@@ -1,6 +1,4 @@
-#Requires AutoHotkey v2.0
 #SingleInstance force
-A_MaxHotkeysPerInterval := 300
 
 RunDialogue(arg)
 {
@@ -17,38 +15,28 @@ RunDialogue(arg)
     return Line
 }
 
-CopyFromText()
-{
-    A_Clipboard := ""
-    SendInput "^c"
-    ClipWait
-    CopyFromClipboard()
-}
+altPressed := GetKeyState("Alt")
 
-CopyFromClipboard()
-{
-    Clipboard := A_Clipboard
-    Clipboard := StrReplace(Clipboard, "\", "\b")
-    Clipboard := StrReplace(Clipboard, "`r`n", "`n")
-    Clipboard := StrReplace(Clipboard, "`n", "\n")
+oldClipboard := A_Clipboard
 
-    ClipboardFile := FileOpen("./clipboard.txt", "a")
+A_Clipboard := ""
+SendInput "^c"
+ClipWait
 
-    Name := GetKeyState("Shift") ? StrReplace(RunDialogue("clip.add"), "\", "\b") : "\-"
-    
-    ClipboardFile.Write(Name "\:" Clipboard "`n")
-    ClipboardFile.Close()
-}
-F24 & c::CopyFromText()
-F24 & x::
-{
-    CopyFromText()
-    SendInput "{Backspace}"
-}
-F24 & i::
-{
-    CopyFromClipboard()
+Clipboard := A_Clipboard
+Clipboard := StrReplace(Clipboard, "\", "\b")
+Clipboard := StrReplace(Clipboard, "`r`n", "`n")
+Clipboard := StrReplace(Clipboard, "`n", "\n")
 
-    TrayTip
-    TrayTip "Copied " "`"" SubStr(A_Clipboard, 1, 50) "`""
-}
+ClipboardFile := FileOpen("./clipboard.txt", "a")
+
+Name := altPressed ? StrReplace(RunDialogue("clip.add"), "\", "\b") : "\-"
+
+ClipboardFile.Write(Name "\:" Clipboard "`n")
+ClipboardFile.Close()
+
+A_Clipboard := oldClipboard
+
+Run "./caps.exe"
+
+ExitApp

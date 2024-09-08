@@ -6,6 +6,33 @@ lastTooltip := ""
 lastMouseX := 0
 lastMouseY := 0
 
+; Custom clipboard copy
+F24 & c::
+{
+    Run "./clipboard_copy.exe"
+    ExitApp ; Gets started again
+}
+F24 & i::
+{
+    Run "./clipboard_copy.exe"
+    TrayTip
+    TrayTip "Copied " "`"" SubStr(A_Clipboard, 1, 50) "`""
+    ExitApp ; Gets started again
+}
+
+
+; Custom clipboard paste
+F24 & d::
+{
+    Run "./clipboard_select.exe"
+    ExitApp ; Gets started again
+}
+F24 & v::
+{
+    Run "./clipboard_paste.exe"
+    ExitApp ; Gets started again
+}
+
 ; Arrow keys
 F24 & a::
 {

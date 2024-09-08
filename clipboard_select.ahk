@@ -136,6 +136,8 @@ if ClipboardContents == ""
 {
     TrayTip
     TrayTip "Clipboard is empty."
+
+    Run "./caps.exe"
     ExitApp
 }
 
@@ -181,4 +183,7 @@ FormattedClipboard := StrReplace(FormattedClipboard, "\b", "\")
 
 A_Clipboard := FormattedClipboard
 SendInput "{Ctrl Down}v{Ctrl Up}"
+
+Run "./caps.exe"
+
 ExitApp
