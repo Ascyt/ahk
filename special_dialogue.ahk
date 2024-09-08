@@ -66,6 +66,29 @@ ReverseText()
 
 	A_Clipboard := OldClipboard
 }
+CalculateText() 
+{
+	OldClipboard := A_Clipboard
+
+	SendInput "^x"
+	Sleep 50
+
+	txt := A_Clipboard
+
+	RunWait("python.exe calc.py " txt, , "Hide")
+
+	OutputObj := FileOpen(".\calc_output.txt", "r")
+	Line := OutputObj.Read()
+	OutputObj.Close()
+
+	A_Clipboard := Line
+
+	Sleep 50
+	SendInput "^v"
+	Sleep 50
+
+	A_Clipboard := OldClipboard
+}
 CountText()
 {
 	TrayTip
@@ -180,6 +203,11 @@ SpecialRunDialogue()
 	if Line == "count"
 	{
 		CountText()
+		return
+	}
+	if Line == "calc"
+	{
+		CalculateText()
 		return
 	}
 	if Line == "key"

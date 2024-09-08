@@ -2,6 +2,8 @@ from math import *
 import os
 
 full_arg = ' '.join(os.sys.argv[1:]) if len(os.sys.argv) > 1 else input('> ')
+full_arg = full_arg.replace(' ', '')
+full_arg = full_arg.replace('^', '**')
 
 with open('calc_output.txt', 'w') as f:
     f.write("ERROR")
