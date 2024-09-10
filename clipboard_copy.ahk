@@ -16,6 +16,7 @@ RunDialogue(arg)
 }
 
 altPressed := GetKeyState("Alt")
+Name := altPressed ? StrReplace(RunDialogue("clip.add"), "\", "\b") : "\-"
 
 oldClipboard := A_Clipboard
 
@@ -36,8 +37,6 @@ Clipboard := StrReplace(Clipboard, "`r`n", "`n")
 Clipboard := StrReplace(Clipboard, "`n", "\n")
 
 ClipboardFile := FileOpen("./clipboard.txt", "a")
-
-Name := altPressed ? StrReplace(RunDialogue("clip.add"), "\", "\b") : "\-"
 
 ClipboardFile.Write(Name "\:" Clipboard "`n")
 ClipboardFile.Close()

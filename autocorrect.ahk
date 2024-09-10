@@ -23,3 +23,5 @@
 ::oyu::you
 ::wolud::would
 ::woudl::would
+::knwo::know
+::jsut::just

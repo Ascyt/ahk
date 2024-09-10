@@ -16,13 +16,13 @@ RunDialogue(arg)
 }
 
 altPressed := GetKeyState("Alt")
+Name := altPressed ? StrReplace(RunDialogue("clip.get"), "\", "\b") : "\-"
 
 oldClipboard := A_Clipboard
 
 ClipboardFile := FileOpen("./clipboard.txt", "r")
 
 ClipboardContents := ClipboardFile.Read()
-Name := altPressed ? StrReplace(RunDialogue("clip.get"), "\", "\b") : "\-"
 ClipboardLines := StrSplit(ClipboardContents, "`n")
 
 splitLineFound := false
