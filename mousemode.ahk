@@ -33,7 +33,17 @@ mouseToFraction(xFract, yFract)
         MouseMove 0, -64, 0, "R"
     }
 
-    Space::LButton
+    Space::
+    {
+        if (GetKeyState("LButton")) 
+        {
+            SendInput "{LButton up}"
+        }
+        else
+        {
+            SendInput "{LButton}"
+        }
+    }
 }
 
 #HotIf GetKeyState("a") && !GetKeyState("o") && !GetKeyState("n") && !GetKeyState("s")
@@ -55,12 +65,32 @@ mouseToFraction(xFract, yFract)
         MouseMove 0, -256, 0, "R"
     }
 
-    Space::RButton
+    Space::
+    {
+        if (GetKeyState("RButton")) 
+        {
+            SendInput "{RButton up}"
+        }
+        else
+        {
+            SendInput "{RButton}"
+        }
+    }
 }
 
 #HotIf !GetKeyState("a") && GetKeyState("o") && !GetKeyState("n") && !GetKeyState("s")
 {
-    Space::MButton
+    Space::
+    {
+        if (GetKeyState("MButton")) 
+        {
+            SendInput "{MButton up}"
+        }
+        else
+        {
+            SendInput "{MButton}"
+        }
+    }
 }
 
 
