@@ -9,6 +9,8 @@ IsEnabled := true
 {
     global IsEnabled
     IsEnabled := !IsEnabled
+    ToolTip IsEnabled ? "✅GAMESTUFF ON✅" : "❌GAMESTUFF OFF❌"
+    SetTimer () => ToolTip(), -1000
 }
 
 #HotIf WinActive("ahk_exe javaw.exe") && IsEnabled
