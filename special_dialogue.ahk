@@ -261,6 +261,8 @@ switch arg
         SpecialRunDialogue()
 	case "umlaut":
 		UmlautDialogue()
+	case "calc":
+		CalculateText()
     default:
         TrayTip "Error", "Invalid argument: " arg, 1
 }

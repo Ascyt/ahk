@@ -131,6 +131,11 @@ F24 & '::
     Run "./special_dialogue.exe run"
 }
 
+F24 & b::
+{
+    Run "./special_dialogue.exe calc"
+}
+
 F24 & m::
 {
     ; Run "./special_dialogue.exe umlaut"
