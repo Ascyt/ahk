@@ -74,12 +74,17 @@ try:
         line = line.replace('\n', '')
         
         equals_index = line.find('=')
+        # Find the first equals sign that is not part of a comparison
+        while equals_index != -1 and equals_index < len(line)-1 and (line[equals_index+1] == '=' or (equals_index > 0 and line[equals_index-1] == '!')):
+            equals_index = line.find('=', equals_index+2)
         line_with_whitespaces = line[:equals_index] if equals_index != -1 else line
         var_index = line.find('#')
         line_with_whitespaces = line_with_whitespaces[:var_index] if var_index != -1 else line_with_whitespaces
 
         line = line.replace(' ', '')
         
+        line = line.replace('==', '`is`')
+        line = line.replace('!=', '`isnot`')
         line = line.replace('||', ' or ')
         line = line.replace('&&', ' and ')
         line = line.replace('!', ' not ')
@@ -91,7 +96,6 @@ try:
         line = line.replace('`and`', '&')
         line = line.replace('`not`', '~')
         line = line.replace('`xor`', '^')
-        line = line.replace('`', '')
 
         equals_index = line.find('=')
         var_index = line.find('#')
@@ -109,7 +113,7 @@ try:
         for var in variables:
             var_replaced_line = var_replaced_line.replace('$' + var, str(variables[var]))
 
-        calculated_line = get_result(var_replaced_line)
+        calculated_line = get_result(var_replaced_line.replace('`is`', '==').replace('`isnot`', '!='))
         if (var_index != -1):
             variables[variable_name] = calculated_line
 
