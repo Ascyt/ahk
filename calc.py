@@ -66,13 +66,32 @@ try:
         line = lines[i]
 
         if line.strip() == '':
+            calculated_lines.append('')
             continue
 
-        line = line.replace(' ', '')
         line = line.replace('\t', '')
         line = line.replace('\r', '')
         line = line.replace('\n', '')
+        
+        equals_index = line.find('=')
+        line_with_whitespaces = line[:equals_index] if equals_index != -1 else line
+        var_index = line.find('#')
+        line_with_whitespaces = line_with_whitespaces[:var_index] if var_index != -1 else line_with_whitespaces
+
+        line = line.replace(' ', '')
+        
+        line = line.replace('||', ' or ')
+        line = line.replace('&&', ' and ')
+        line = line.replace('!', ' not ')
+        line = line.replace('|', '')
+        line = line.replace('&', '')
+        line = line.replace('~', '')
         line = line.replace('^', '**')
+        line = line.replace('`or`', '|')
+        line = line.replace('`and`', '&')
+        line = line.replace('`not`', '~')
+        line = line.replace('`xor`', '^')
+        line = line.replace('`', '')
 
         equals_index = line.find('=')
         var_index = line.find('#')
@@ -94,10 +113,13 @@ try:
         if (var_index != -1):
             variables[variable_name] = calculated_line
 
-        if equals_index != -1:
-            calculated_line = line + ' =' + str(calculated_line)
-        if var_index != -1:
-            calculated_line = str(calculated_line) + ' #' + variable_name 
+        if equals_index == -1 and var_index != -1:
+            calculated_line = line_with_whitespaces.strip() + ' #' + variable_name
+        else:
+            if equals_index != -1:
+                calculated_line = line_with_whitespaces.strip() + ' =' + str(calculated_line)
+            if var_index != -1:
+                calculated_line = str(calculated_line) + ' #' + variable_name 
 
         calculated_lines.append(str(calculated_line))
 except Exception as e:
