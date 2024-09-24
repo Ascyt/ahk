@@ -133,6 +133,10 @@ F24 & '::
 
 F24 & b::
 {
+    if GetKeyState("Alt", "P")
+    {
+        SendInput "^a"
+    }
     Run "./special_dialogue.exe calc"
 }
 
