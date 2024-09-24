@@ -65,8 +65,8 @@ try:
     for i in range(len(lines)):
         line = lines[i]
 
-        if line.strip() == '':
-            calculated_lines.append('')
+        if line.strip() == '' or line.startswith("@"):
+            calculated_lines.append(line)
             continue
 
         line = line.replace('\t', '')
