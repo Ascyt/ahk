@@ -3,6 +3,7 @@ import os
 import traceback
 
 recent_eval = 'None'
+recent_line = 0
 
 def get_result(line):
     global recent_eval
@@ -64,6 +65,8 @@ try:
 
     for i in range(len(lines)):
         line = lines[i]
+
+        recent_line = i+1
 
         line = line.replace('\r', '')
         line = line.replace('\n', '')
@@ -131,7 +134,9 @@ try:
 
         calculated_lines.append(str(calculated_line))
 except Exception as e:
-    full_exception = traceback.format_exc() + '\n' + 'Recent eval: \'' + str(recent_eval) + '\''
+    full_exception = traceback.format_exc() + '\n' + \
+    f'Recent eval: \'{recent_eval}\'\n' + \
+    f'On line: {recent_line}'
 
     with open('calc_output.txt', 'w') as f:
         f.write(full_exception)
