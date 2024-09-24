@@ -65,13 +65,14 @@ try:
     for i in range(len(lines)):
         line = lines[i]
 
+        line = line.replace('\r', '')
+        line = line.replace('\n', '')
+
         if line.strip() == '' or line.startswith("@"):
             calculated_lines.append(line)
             continue
 
         line = line.replace('\t', '')
-        line = line.replace('\r', '')
-        line = line.replace('\n', '')
         
         equals_index = line.find('=')
         # Find the first equals sign that is not part of a comparison
@@ -110,6 +111,9 @@ try:
             line = line[:equals_index]
         
         var_replaced_line = line
+        # Make sure longest item is first
+        variables = dict(sorted(variables.items(), key=lambda item: len(item[0]), reverse=True))
+
         for var in variables:
             var_replaced_line = var_replaced_line.replace('$' + var, str(variables[var]))
 
