@@ -69,8 +69,6 @@ IsEnabled := true
     
     SendCommand(command)
     {
-        global firstCommandBeforeWait, commandCountBeforeWait
-
         SendInput "{Enter}"
         Sleep 75
 
