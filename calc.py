@@ -188,7 +188,7 @@ try:
 
     variables = {}
     functions = {
-        'square': ['$x*$x',['x']],
+        #'square': ['$x*$x',['x']],
     }
 
     calculated_lines = []
