@@ -144,6 +144,7 @@ def execute_line(line):
             
             arg_parts.append(arg_string)
             arg_parts = [arg.strip() for arg in arg_parts]
+            arg_parts = [f'({arg})' for arg in arg_parts]
             arg_names = functions[func][1]
             func_body = functions[func][0]
             for i in range(len(arg_parts)):
