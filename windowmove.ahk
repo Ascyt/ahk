@@ -55,8 +55,11 @@ ResizeWindow()
 }
 
 #RButton::ResizeWindow()
-+#RButton::ResizeWindow()
+#+RButton::ResizeWindow()
 
 #WheelDown::#Down
-+#WheelDown::WinMinimize("A")
+#+WheelDown::WinMinimize("A")
 #WheelUp::WinMaximize("A")
+
+^+WheelDown::^PgDn
+^+WheelUp::^PgUp
