@@ -7,6 +7,11 @@ CoordMode "Mouse", "Screen"
 #MButton::!F4
 
 #LButton:: {
+    if WinGetMinMax("A") != 0
+    {
+        WinRestore("A")
+    }
+    
     MouseGetPos(&StartMouseX, &StartMouseY)
     OldMouseX := StartMouseX
     OldMouseY := StartMouseY
@@ -29,6 +34,11 @@ CoordMode "Mouse", "Screen"
 
 ResizeWindow() 
 {
+    if WinGetMinMax("A") != 0
+    {
+        WinRestore("A")
+    }
+
     MouseGetPos(&StartMouseX, &StartMouseY)
     WinGetPos(&X, &Y, &Width, &Height, "A")
     OldMouseX := StartMouseX
