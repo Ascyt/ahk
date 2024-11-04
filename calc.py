@@ -8,6 +8,17 @@ recent_line = 0
 def get_result(line):
     global recent_eval
 
+    # 0:5 = 0, 5
+    # 0::5 = 0, 1, 2, 3, 4, 5
+
+    while True:
+        pos = line.find(':')
+        if pos == -1:
+            break
+
+        
+
+def get_result_single(line):
     args = line.split(';')
 
     # 0.8'3 = 0.8333333333333333
@@ -22,18 +33,6 @@ def get_result(line):
             new_args.append(arg)
 
     args = new_args
-
-    ## Variables from clipboard.txt
-    #with open('clipboard.txt', 'r') as f:
-    #    clipboard_lines = f.read().splitlines()
-#
-    #for line in clipboard_lines:
-    #    parts = line.split('\\:')
-    #    if parts[0] == '\\-':
-    #        parts[0] = '-'
-#
-    #    for i in range(len(args)):
-    #        args[i] = args[i].replace('$$' + parts[0], parts[1])
 
     current = None
 
