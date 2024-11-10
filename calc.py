@@ -5,20 +5,78 @@ import traceback
 recent_eval = 'None'
 recent_line = 0
 
+def get_bracket_inside(line, index):
+    start = index
+    balance = 0
+    for i in range(index, len(line)):
+        if line[i] == '[':
+            balance += 1
+        elif line[i] == ']':
+            balance -= 1
+        if balance == 0:
+            return line[start+1:i], i
+    raise Exception('Bracket not closed')
+
+def split_top_level_commas(line):
+    parts = []
+    current_part = ''
+    balance = 0
+    for c in line:
+        if c == '[':
+            balance +=1
+            current_part += c
+        elif c == ']':
+            balance -=1
+            current_part += c
+        elif c == ',' and balance == 0:
+            parts.append(current_part)
+            current_part = ''
+        else:
+            current_part += c
+    if current_part:
+        parts.append(current_part)
+    return parts
+
+def get_bracket_parts_with_recursion(line):
+    parts = split_top_level_commas(line)
+    all_parts = []
+    for part in parts:
+        if '[' in part:
+            # Need to expand further
+            expanded_parts = expand_line(part)
+            all_parts.extend(expanded_parts)
+        elif ':' in part:
+            # Process range
+            start, end = part.split(':')
+            start, end = int(start), int(end)
+            if start > end:
+                raise Exception('Start index is greater than end index')
+            for j in range(start, end+1):
+                all_parts.append(str(j))
+        else:
+            all_parts.append(part)
+    return all_parts
+
+def expand_line(line):
+    if '[' not in line:
+        return [line]
+    index = line.index('[')
+    inside, end_index = get_bracket_inside(line, index)
+    parts = get_bracket_parts_with_recursion(inside)
+    expanded_lines = []
+    for part in parts:
+        new_line = line[:index] + str(part) + line[end_index+1:]
+        expanded_lines.extend(expand_line(new_line))
+    return expanded_lines
+
+#print(expand_line('[-[0,5:6],10]+[1,2]'))
+#exit()
+
+def get_result_list(line):
+    expanded_lines = expand_line(line)
+    return [get_result(expanded_line) for expanded_line in expanded_lines]
+
 def get_result(line):
-    global recent_eval
-
-    # 0:5 = 0, 5
-    # 0::5 = 0, 1, 2, 3, 4, 5
-
-    while True:
-        pos = line.find(':')
-        if pos == -1:
-            break
-
-        
-
-def get_result_single(line):
     args = line.split(';')
 
     # 0.8'3 = 0.8333333333333333
@@ -161,7 +219,12 @@ def execute_line(line):
         calculated_line = line
     else:
         # Line calculation
-        calculated_line = get_result(var_replaced_line)
+        calculated_line_list = get_result_list(var_replaced_line)
+        if len(calculated_line_list) == 1:
+            calculated_line = calculated_line_list[0]
+        else:
+            calculated_line = str(calculated_line_list)
+
         if var_index != -1:
             variables[variable_name] = calculated_line
 
