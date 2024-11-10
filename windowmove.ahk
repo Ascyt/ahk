@@ -73,3 +73,5 @@ ResizeWindow()
 
 ^+WheelDown::^PgDn
 ^+WheelUp::^PgUp
+
+#c::!F4
