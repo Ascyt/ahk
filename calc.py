@@ -69,14 +69,10 @@ def expand_line(line):
         expanded_lines.extend(expand_line(new_line))
     return expanded_lines
 
-#print(expand_line('[-[0,5:6],10]+[1,2]'))
+#print(expand_line('$f([1:2,3])'))
 #exit()
 
-def get_result_list(line):
-    expanded_lines = expand_line(line)
-    return [get_result(expanded_line) for expanded_line in expanded_lines]
-
-def get_result(line):
+def get_result_single(line):
     args = line.split(';')
 
     # 0.8'3 = 0.8333333333333333
@@ -99,32 +95,74 @@ def get_result(line):
         current_arg = (str(current) + arg if 'x' not in arg else arg.replace('x', str(current))) if current != None else arg
         global recent_eval
         recent_eval = current_arg
+        print('eval: ' + current_arg)
 
         current = eval(current_arg)
     
     return current
 
-def execute_line(line):
+def get_full_line_result(line):
     global variables, functions
-    line = line.replace('\r', '')
-    line = line.replace('\n', '')
 
     if line.strip() == '' or line.startswith("@"):
-        calculated_lines.append(line)
-        return None
+        return line
+    
+    trimmed_line = line.strip()
+
+    equals_index = trimmed_line.find('=')
+    # Find the first equals sign that is not part of a comparison
+    while equals_index != -1 and equals_index < len(trimmed_line)-1 and (trimmed_line[equals_index+1] == '=' or (equals_index > 0 and trimmed_line[equals_index-1] == '!')):
+        equals_index = trimmed_line.find('=', equals_index+2)
+    
+    if equals_index != -1:
+        trimmed_line = trimmed_line[:equals_index].strip()
+    
+    var_index = trimmed_line.find('#')
+
+    if var_index != -1:
+        variable_name = trimmed_line[var_index+1:]
+        if variable_name.startswith('$'):
+            variable_name = variable_name[1:]
+
+        trimmed_line = trimmed_line[:var_index].strip()
+    
+    if var_index != -1 and ('(' in variable_name and variable_name.endswith(')')):
+        # Function definition
+        function_name = variable_name[:variable_name.find('(')]
+        function_args = variable_name[len(function_name)+1:-1].replace(' ','').split(',')
+        functions[function_name] = [trimmed_line.strip(), function_args]
+        trimmed_line = trimmed_line.strip()
+        return trimmed_line + ' #' + function_name + '(' + ', '.join(function_args) + ')'
+
+    # Line calculation
+    trimmed_line = trimmed_line.strip()
+    expanded_lines = expand_line(trimmed_line)
+    calculated_lines = []
+    for expanded_line in expanded_lines:
+        calculated_lines.append(get_line_result(expanded_line))
+
+    final_result = str(calculated_lines) if len(calculated_lines) > 1 else calculated_lines[0]
+
+    if var_index != -1:
+        variables[variable_name] = final_result
+
+    if equals_index != -1 and var_index != -1:
+        return trimmed_line.strip() + ' #' + variable_name + ' =' + str(final_result)
+
+    if equals_index != -1:
+        return trimmed_line.strip() + ' =' + str(final_result)
+    
+    if var_index != -1:
+        return str(trimmed_line) + ' #' + variable_name 
+    
+    return final_result
+
+
+def get_line_result(line):
+    global variables, functions
 
     line = line.replace('\t', '')
-    
-    equals_index = line.find('=')
-    # Find the first equals sign that is not part of a comparison
-    while equals_index != -1 and equals_index < len(line)-1 and (line[equals_index+1] == '=' or (equals_index > 0 and line[equals_index-1] == '!')):
-        equals_index = line.find('=', equals_index+2)
-    line_with_whitespaces = line[:equals_index] if equals_index != -1 else line
-    var_index = line.find('#')
-    line_with_whitespaces = line_with_whitespaces[:var_index] if var_index != -1 else line_with_whitespaces
-
     line = line.replace(' ', '')
-    
     line = line.replace('==', '`is`')
     line = line.replace('!=', '`isnot`')
     line = line.replace('||', ' or ')
@@ -139,24 +177,12 @@ def execute_line(line):
     line = line.replace('`not`', '~')
     line = line.replace('`xor`', '^')
 
-    equals_index = line.find('=')
-    var_index = line.find('#')
-    if var_index != -1:
-        variable_name = line[var_index+1:]
-        if variable_name.startswith('$'):
-            variable_name = variable_name[1:]
-
-        line = line[:var_index]
-
-    if equals_index != -1:
-        line = line[:equals_index]
-    
     var_replaced_line = line
     # Make sure longest item is first
-    variables = dict(sorted(variables.items(), key=lambda item: len(item[0]), reverse=True))
+    sorted_variables = dict(sorted(variables.items(), key=lambda item: len(item[0]), reverse=True))
 
-    for var in variables:
-        var_replaced_line = var_replaced_line.replace('$' + var, str(variables[var]))
+    for var in sorted_variables:
+        var_replaced_line = var_replaced_line.replace('$' + var, str(sorted_variables[var]))
 
     for func in functions:
         func_pos = None
@@ -206,37 +232,12 @@ def execute_line(line):
             func_body = functions[func][0]
             for i in range(len(arg_parts)):
                 func_body = func_body.replace('$' + arg_names[i], arg_parts[i])
-            calculated_func = execute_line(func_body)
+            calculated_func = get_line_result(func_body)
             var_replaced_line = var_replaced_line[:func_pos] + str(calculated_func) + var_replaced_line[end_pos + 1:]
         
     var_replaced_line = var_replaced_line.replace('`is`', '==').replace('`isnot`', '!=')
 
-    if var_index != -1 and ('(' in variable_name and variable_name.endswith(')')):
-        # Function definition
-        function_name = variable_name[:variable_name.find('(')]
-        function_args = variable_name[len(function_name)+1:-1].replace(' ','').split(',')
-        functions[function_name] = [line.strip(), function_args]
-        calculated_line = line
-    else:
-        # Line calculation
-        calculated_line_list = get_result_list(var_replaced_line)
-        if len(calculated_line_list) == 1:
-            calculated_line = calculated_line_list[0]
-        else:
-            calculated_line = str(calculated_line_list)
-
-        if var_index != -1:
-            variables[variable_name] = calculated_line
-
-    if equals_index == -1 and var_index != -1:
-        calculated_line = line_with_whitespaces.strip() + ' #' + variable_name
-    else:
-        if equals_index != -1:
-            calculated_line = line_with_whitespaces.strip() + ' =' + str(calculated_line)
-        if var_index != -1:
-            calculated_line = str(calculated_line) + ' #' + variable_name 
-
-    return calculated_line
+    return get_result_single(var_replaced_line)
 
 try: 
     use_arg = len(os.sys.argv) > 1
@@ -251,9 +252,12 @@ try:
     variables = {}
     functions = {
         #'square': ['$x*$x',['x']],
+        #'f': ['$x^2',['x']],
     }
 
     calculated_lines = []
+
+    full_arg = full_arg.replace('\r', '')
 
     lines = full_arg.split('\n')
 
@@ -262,9 +266,7 @@ try:
 
         recent_line = i+1
 
-        calculated_line = execute_line(line)
-        if calculated_line == None:
-            continue
+        calculated_line = get_full_line_result(line)
 
         calculated_lines.append(str(calculated_line))
 except Exception as e:
