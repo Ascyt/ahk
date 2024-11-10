@@ -134,9 +134,25 @@ def get_full_line_result(line):
         trimmed_line = trimmed_line.strip()
         return trimmed_line + ' #' + function_name + '(' + ', '.join(function_args) + ')'
 
+    # Make sure longest item is first
+    sorted_variables = dict(sorted(variables.items(), key=lambda item: len(item[0]), reverse=True))
+
     # Line calculation
-    trimmed_line = trimmed_line.strip()
-    expanded_lines = expand_line(trimmed_line)
+    calculate_line = trimmed_line.strip()
+
+    for var in sorted_variables:
+        if var not in calculate_line:
+            continue
+
+        # Only look at the list variables
+        if not isinstance(variables[var], str) or not variables[var].startswith('['):
+            continue 
+
+        calculate_line = calculate_line.replace('$' + var, str(sorted_variables[var]))
+
+    expanded_lines = expand_line(calculate_line)
+
+
     calculated_lines = []
     for expanded_line in expanded_lines:
         calculated_lines.append(get_line_result(expanded_line))
@@ -182,6 +198,13 @@ def get_line_result(line):
     sorted_variables = dict(sorted(variables.items(), key=lambda item: len(item[0]), reverse=True))
 
     for var in sorted_variables:
+        if var not in var_replaced_line:
+            continue
+
+        # Only look at the non-list variables
+        if isinstance(variables[var], str) and variables[var].startswith('['):
+            continue
+
         var_replaced_line = var_replaced_line.replace('$' + var, str(sorted_variables[var]))
 
     for func in functions:
