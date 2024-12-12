@@ -8,4 +8,22 @@ A_MaxHotkeysPerInterval := 1000
     {
         SendInput "{Ctrl down}l{Ctrl up}{Shift down}{Tab}{Tab}{Tab}{Tab}{F10}{Shift up}"
     }
+
+    !Left::
+    {
+        SendInput "{Ctrl down}{PgUp}{Ctrl up}"
+    }
+    !Right::
+    {
+        SendInput "{Ctrl down}{PgDn}{Ctrl up}"
+    }
+
+    !h::
+    {
+        SendInput "{Ctrl down}{PgUp}{Ctrl up}"
+    }
+    !u::
+    {
+        SendInput "{Ctrl down}{PgDn}{Ctrl up}"
+    }
 }
