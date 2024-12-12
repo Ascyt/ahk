@@ -4,10 +4,8 @@ A_MaxHotkeysPerInterval := 1000
 
 #HotIf WinActive("ahk_exe firefox.exe")
 {
-    ^+f::
+    !t::
     {
-        SendInput "{Ctrl down}l{Ctrl up}%{Space}"
-        KeyWait "Enter", "D"
-        SendInput "{Down}{Enter}"
+        SendInput "{Ctrl down}l{Ctrl up}{Shift down}{Tab}{Tab}{Tab}{Tab}{F10}{Shift up}"
     }
 }

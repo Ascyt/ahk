@@ -7,7 +7,8 @@ CoordMode "Mouse", "Screen"
 #MButton::!F4
 
 #LButton:: {
-    if WinGetMinMax("A") != 0
+    RestoreRequried := WinGetMinMax("A") != 0
+    if RestoreRequried
     {
         WinRestore("A")
     }
@@ -29,6 +30,11 @@ CoordMode "Mouse", "Screen"
         }
 
         MouseGetPos(&OldMouseX, &OldMouseY)
+    }
+
+    if RestoreRequried
+    {
+        WinMaximize("A")
     }
 }
 
