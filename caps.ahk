@@ -276,7 +276,7 @@ ToggleLockMode(toLockMode)
         KeyWait "F24"
 
         lockMode := false
-        ToolTip "FREE"
+        ToolTip "-"
         SetTimer () => ToolTip(), -1000
     }
     else
