@@ -260,9 +260,45 @@ ToggleMousemode(toMouseMode)
 
 F24 & u::ToggleMouseMode(!mouseMode)
 
+lockMode := false
+ToggleLockMode(toLockMode)
+{
+    global lockMode
+
+    if lockMode == toLockMode
+        return
+
+    if lockMode
+    {
+        ProcessClose "lockmode.exe"
+
+        ToolTip "..."
+        KeyWait "F24"
+
+        lockMode := false
+        ToolTip "FREE"
+        SetTimer () => ToolTip(), -1000
+    }
+    else
+    {
+        run "lockMode.exe"
+        
+        lockMode := true
+        ToolTip "LOCK"
+        SetTimer () => ToolTip(), -1000
+    }
+}
+
+F24 & l::ToggleLockMode(!lockMode)
+
 #HotIf mouseMode 
 {
 	F24::ToggleMousemode(false)
 }
+
+;#HotIf lockMode 
+;{
+;	F24::ToggleLockMode(false)
+;}
 
 SetCapsLockState false
