@@ -13,6 +13,8 @@ OnKeypress()
 
     KeypressHappened := True
 
+    Run "python.exe ./takepicture.py", , "Hide"
+
     MyGui := Gui("+AlwaysOnTop +Disabled -Resize")
 
     MyGui.BackColor := "White"
@@ -26,7 +28,7 @@ OnKeypress()
 
     TrayTip "you piece of shit"
 
-    Sleep 3000
+    Sleep 5000
 
     TrayTip
     SoundSetVolume volume
