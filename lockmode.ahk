@@ -14,6 +14,7 @@ OnKeypress()
     KeypressHappened := True
 
     Run "python.exe ./takepicture.py", , "Hide"
+    Sleep 3000
 
     MyGui := Gui("+AlwaysOnTop +Disabled -Resize")
 

@@ -1,5 +1,6 @@
 import cv2
 import os
+import time
 
 from datetime import datetime
 
@@ -23,6 +24,8 @@ def capture_and_save_image():
         cv2.imwrite(save_path, frame)
         print(f"Image saved to {save_path}")
 
+        time.sleep(3)
+        # Open the saved image using the default image viewer
         os.system(f"start {save_path}")
     else:
         print("Error: Could not read frame.")
