@@ -17,4 +17,9 @@ A_MaxHotkeysPerInterval := 1000
     {
         SendInput "{Ctrl down}{PgDn}{Ctrl up}"
     }
+
+    !w::
+    {
+        SendInput "{Ctrl down}w{Ctrl up}"
+    }
 }
