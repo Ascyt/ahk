@@ -5,13 +5,34 @@ s::return
 o::return
 n::return
 
-mouseToFraction(xFract, yFract)
+MouseToFraction(xFract, yFract)
 {
     WinGetPos , , &height, &width, "A"
 
     x := height * xFract
     y := width * yFract
     MouseMove x, y, 0   
+}
+
+
+DisableModifiersIfNecessary() 
+{
+    if (GetKeyState("Shift")) 
+    {
+        SendInput "{Shift up}"
+    }
+    if (GetKeyState("Ctrl")) 
+    {
+        SendInput "{Ctrl up}"
+    }
+    if (GetKeyState("Alt")) 
+    {
+        SendInput "{Alt up}"
+    }
+    if (GetKeyState("LWin")) 
+    {
+        SendInput "{LWin up}"
+    }
 }
 
 #HotIf !GetKeyState("a") && !GetKeyState("o") && !GetKeyState("n") && !GetKeyState("s")
@@ -38,10 +59,59 @@ mouseToFraction(xFract, yFract)
         if (GetKeyState("LButton")) 
         {
             SendInput "{LButton up}"
+            DisableModifiersIfNecessary()
         }
         else
         {
             SendInput "{LButton}"
+        }
+    }
+    +Space::
+    {
+        if (GetKeyState("LButton")) 
+        {
+            SendInput "{LButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Shift down}{LButton}{Shift up}"
+        }
+    }
+    ^Space::
+    {
+        if (GetKeyState("LButton")) 
+        {
+            SendInput "{LButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Ctrl down}{LButton}{Ctrl up}"
+        }
+    }
+    !Space::
+    {
+        if (GetKeyState("LButton")) 
+        {
+            SendInput "{LButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Alt down}{LButton}{Alt up}"
+        }
+    }
+    #Space::
+    {
+        if (GetKeyState("LButton")) 
+        {
+            SendInput "{LButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Win down}{LButton}{Win up}"
         }
     }
 }
@@ -76,6 +146,54 @@ mouseToFraction(xFract, yFract)
             SendInput "{RButton}"
         }
     }
+    +Space::
+    {
+        if (GetKeyState("RButton")) 
+        {
+            SendInput "{RButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Shift down}{RButton}{Shift up}"
+        }
+    }
+    ^Space::
+    {
+        if (GetKeyState("RButton")) 
+        {
+            SendInput "{RButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Ctrl down}{RButton}{Ctrl up}"
+        }
+    }
+    !Space::
+    {
+        if (GetKeyState("RButton")) 
+        {
+            SendInput "{RButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Alt down}{RButton}{Alt up}"
+        }
+    }
+    #Space::
+    {
+        if (GetKeyState("RButton")) 
+        {
+            SendInput "{RButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Win down}{RButton}{Win up}"
+        }
+    }
 }
 
 #HotIf !GetKeyState("a") && GetKeyState("o") && !GetKeyState("n") && !GetKeyState("s")
@@ -89,6 +207,54 @@ mouseToFraction(xFract, yFract)
         else
         {
             SendInput "{MButton}"
+        }
+    }
+    +Space::
+    {
+        if (GetKeyState("MButton")) 
+        {
+            SendInput "{MButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Shift down}{MButton}{Shift up}"
+        }
+    }
+    ^Space::
+    {
+        if (GetKeyState("MButton")) 
+        {
+            SendInput "{MButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Ctrl down}{MButton}{Ctrl up}"
+        }
+    }
+    !Space::
+    {
+        if (GetKeyState("MButton")) 
+        {
+            SendInput "{MButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Alt down}{MButton}{Alt up}"
+        }
+    }
+    #Space::
+    {
+        if (GetKeyState("MButton")) 
+        {
+            SendInput "{MButton up}"
+            DisableModifiersIfNecessary()
+        }
+        else
+        {
+            SendInput "{Win down}{MButton}{Win up}"
         }
     }
 }
@@ -158,6 +324,7 @@ mouseToFraction(xFract, yFract)
         if (GetKeyState("LButton")) 
         {
             SendInput "{LButton up}"
+            DisableModifiersIfNecessary()
         }
         else
         {
@@ -170,19 +337,19 @@ mouseToFraction(xFract, yFract)
 {
     u::
     {
-        mouseToFraction(1, 0.5)
+        MouseToFraction(1, 0.5)
     }
     h::
     {
-        mouseToFraction(0, 0.5)
+        MouseToFraction(0, 0.5)
     }
     e::
     {
-        mouseToFraction(0.5, 1)
+        MouseToFraction(0.5, 1)
     }
     t::
     {
-        mouseToFraction(0.5, 0)
+        MouseToFraction(0.5, 0)
     }
     
     Space::
@@ -190,6 +357,7 @@ mouseToFraction(xFract, yFract)
         if (GetKeyState("RButton")) 
         {
             SendInput "{RButton up}"
+            DisableModifiersIfNecessary()
         }
         else
         {
@@ -206,6 +374,7 @@ mouseToFraction(xFract, yFract)
         if (GetKeyState("MButton")) 
         {
             SendInput "{MButton up}"
+            DisableModifiersIfNecessary()
         }
         else
         {
