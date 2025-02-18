@@ -25,3 +25,6 @@
 ::woudl::would
 ::knwo::know
 ::jsut::just
+::wordl::world
+::thnig::thing
+::thnigs::things

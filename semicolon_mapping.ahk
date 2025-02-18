@@ -292,10 +292,139 @@ SendRmLast(txt)
     SendRmLast("»")
 }
 
-:*:;zws::
+:*:;zwsp::
 {
 	SendRmLast("​")
 }
+:*:;rlo::
+{
+    SendRmLast("‮")
+}
+:*:;lro::
+{
+    SendRmLast("‭")
+}
+:*:;001::
+{
+    SendRmLast("")
+}
+:*:;002::
+{
+    SendRmLast("")
+}
+:*:;003::
+{
+    SendRmLast("")
+}
+:*:;004::
+{
+    SendRmLast("")
+}
+:*:;005::
+{
+    SendRmLast("")
+}
+:*:;006::
+{
+    SendRmLast("")
+}
+:*:;007::
+{
+    SendRmLast("")
+}
+:*:;008::
+{
+    SendRmLast("")
+}
+:*:;009::
+{
+    SendRmLast("	")
+}
+:*:;010::
+{
+    SendRmLast("")
+}
+:*:;011::
+{
+    SendRmLast("")
+}
+:*:;012::
+{
+    SendRmLast("")
+}
+:*:;013::
+{
+    SendRmLast("")
+}
+:*:;014::
+{
+    SendRmLast("")
+}
+:*:;015::
+{
+    SendRmLast("")
+}
+:*:;016::
+{
+    SendRmLast("")
+}
+:*:;017::
+{
+    SendRmLast("")
+}
+:*:;018::
+{
+    SendRmLast("")
+}
+:*:;019::
+{
+    SendRmLast("")
+}
+:*:;020::
+{
+    SendRmLast("")
+}
+:*:;021::
+{
+    SendRmLast("")
+}
+:*:;022::
+{
+    SendRmLast("")
+}
+:*:;023::
+{
+    SendRmLast("")
+}
+:*:;024::
+{
+    SendRmLast("")
+}
+:*:;025::
+{
+    SendRmLast("")
+}
+:*:;026::
+{
+    SendRmLast("")
+}
+:*:;027::
+{
+    SendRmLast("")
+}
+:*:;028::
+{
+    SendRmLast("")
+}
+:*:;029::
+{
+    SendRmLast("")
+}
+:*:;delete::
+{
+    SendRmLast("")
+}
+
 :*:;spanishn::
 {
 	SendRmLast("ñ")
