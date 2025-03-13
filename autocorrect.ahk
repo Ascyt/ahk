@@ -28,3 +28,5 @@
 ::wordl::world
 ::thnig::thing
 ::thnigs::things
+::mayn::many
+::thsoe::those
