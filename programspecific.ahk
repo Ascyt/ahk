@@ -23,3 +23,10 @@ A_MaxHotkeysPerInterval := 1000
         SendInput "{Ctrl down}w{Ctrl up}"
     }
 }
+
+#HotIf WinActive("ahk_exe Cities.exe") 
+{
+    RButton::MButton
+
+    MButton::RButton
+}
