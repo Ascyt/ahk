@@ -289,16 +289,9 @@ ToggleLockMode(toLockMode)
     }
 }
 
-F24 & l::ToggleLockMode(!lockMode)
-
 #HotIf mouseMode 
 {
 	F24::ToggleMousemode(false)
 }
-
-;#HotIf lockMode 
-;{
-;	F24::ToggleLockMode(false)
-;}
 
 SetCapsLockState false
