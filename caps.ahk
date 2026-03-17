@@ -289,7 +289,7 @@ ToggleLockMode(toLockMode)
     }
 }
 
-F24 & l::ToggleLockMode(!lockMode)
+;F24 & l::ToggleLockMode(!lockMode)
 
 #HotIf mouseMode 
 {

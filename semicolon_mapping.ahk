@@ -22,9 +22,10 @@ RunDialogue(arg)
 }
 
 ; Send without space
-SendRmLast(txt) 
+Send(txt) 
 {
-	SendInput("{Backspace}")
+    Sleep 10
+    SendInput("{Backspace}")
 	SendText txt
 }
 
@@ -34,458 +35,447 @@ SendRmLast(txt)
 :*:;gh::https://github.com/Ascyt/
 :*:;img::https://img.ascyt.com/assets/
 
-; Shortcuts for faster writing
-:*:;sth::something
-:*:;ig::i guess
-:*:;idk::i don't know
-:*:;idc::i don't care
-:*:;wdym::what do you mean
-:*:;wby::what about you
-:*:;afaik::as far as i know
-:*:;iirc::if i remember correctly
-:*:;imo::in my opinion
-
 ; Stuff that is a pain to spell
 :*:;misc::miscellaneous
 
 ; Symbols
 :*:;euro::
 {
-	SendRmLast("€")
+	Send("€")
 }
 :*:;pound::
 {
-    SendRmLast("£")
+    Send("£")
 }
 :*:;tm::
 {
-	SendRmLast("™")
+	Send("™")
 }
 :*:;copyright::
 {
-	SendRmLast("©")
+	Send("©")
 }
 :*:;registered::
 {
-    SendRmLast("®")
+    Send("®")
 }
 :*:;pound::
 {
-    SendRmLast("£")
+    Send("£")
 }
 :*:;yen::
 {
-    SendRmLast("¥")
+    Send("¥")
 }
 :*:;section::
 {
-    SendRmLast("§")
+    Send("§")
 }
 :*:;degree::
 {
-    SendRmLast("°")
+    Send("°")
 }
 :*:;plusminus::
 {
-    SendRmLast("±")
+    Send("±")
 }
 :*:;micro::
 {
-    SendRmLast("µ")
+    Send("µ")
 }
 :*:;not::
 {
-    SendRmLast("¬")
+    Send("¬")
 }
 :*:;divide::
 {
-    SendRmLast("÷")
+    Send("÷")
 }
 :*:;multiply::
 {
-    SendRmLast("×")
+    Send("×")
 }
 :*:;square::
 {
-    SendRmLast("²")
+    Send("²")
 }
 :*:;cubed::
 {
-    SendRmLast("³")
+    Send("³")
 }
 :*:;sqrt::
 {
-    SendRmLast("√")
+    Send("√")
 }
 :*:;infinity::
 {
-    SendRmLast("∞")
+    Send("∞")
 }   
 :*:;integral::
 {
-    SendRmLast("∫")
+    Send("∫")
 }
 :*:;approx::
 {
-    SendRmLast("≈")
+    Send("≈")
 }
 :*:;neq::
 {
-    SendRmLast("≠")
+    Send("≠")
 }
 :*:;leq::
 {
-    SendRmLast("≤")
+    Send("≤")
 }
 :*:;geq::
 {
-    SendRmLast("≥")
+    Send("≥")
 }
 
 :*:;alpha::
 {
-    SendRmLast("α")
+    Send("α")
 }
 :*:;beta::
 {
-    SendRmLast("β")
+    Send("β")
 }
 :*:;gamma::
 {
-    SendRmLast("γ")
+    Send("γ")
 }
 :*:;delta::
 {
-    SendRmLast("δ")
+    Send("δ")
 }
 :*:;pi::
 {
-    SendRmLast("π")
+    Send("π")
 }
 
 :*:;ellipsis::
 {
-    SendRmLast("…")
+    Send("…")
 }
 :*:;bullet::
 {
-    SendRmLast("•")
+    Send("•")
 }
 :*:;middot::
 {
-    SendRmLast("·")
+    Send("·")
 }
 
 :*:;check::
 {
-    SendRmLast("✔")
+    Send("✔")
 }
 :*:;cross::
 {
-    SendRmLast("✖")
+    Send("✖")
 }
 :*:;star::
 {
-    SendRmLast("★")
+    Send("★")
 }
 :*:;ostar::
 {
-    SendRmLast("☆")
+    Send("☆")
 }
 
 :*:;circle::
 {
-    SendRmLast("○")
+    Send("○")
 }
 :*:;altcircle::
 {
-    SendRmLast("◎")
+    Send("◎")
 }
 :*:;square::
 {
-    SendRmLast("■")
+    Send("■")
 }
 :*:;osquare::
 {
-    SendRmLast("□")
+    Send("□")
 }
 :*:;otriangle::
 {
-    SendRmLast("△")
+    Send("△")
 }
 :*:;triangle::
 {
-    SendRmLast("▲")
+    Send("▲")
 }
 :*:;dotriangle::
 {
-    SendRmLast("▽")
+    Send("▽")
 }
 :*:;dtriangle::
 {
-    SendRmLast("▼")
+    Send("▼")
 }
 :*:;diamond::
 {
-    SendRmLast("◆")
+    Send("◆")
 }
 :*:;odiamond::
 {
-    SendRmLast("◇")
+    Send("◇")
 }
 :*:;ohexagon::
 {
-    SendRmLast("⬡")
+    Send("⬡")
 }
 :*:;hexagon::
 {
-    SendRmLast("⬢")
+    Send("⬢")
 }
 
 :*:;larrow::
 {
-    SendRmLast("←")
+    Send("←")
 }
 :*:;rarrow::
 {
-    SendRmLast("→")
+    Send("→")
 }
 :*:;uarrow::
 {
-    SendRmLast("↑")
+    Send("↑")
 }
 :*:;darrow::
 {
-    SendRmLast("↓")
+    Send("↓")
 }
 :*:drarrow::
 {
-    SendRmLast("⇒")
+    Send("⇒")
 }
 :*:dlarrow::
 {
-    SendRmLast("⇐")
+    Send("⇐")
 }
 :*:duarrow::
 {
-    SendRmLast("⇑")
+    Send("⇑")
 }
 :*:ddarrow::
 {
-    SendRmLast("⇓")
+    Send("⇓")
 }
 :*:;lrarrow::
 {
-    SendRmLast("↔")
+    Send("↔")
 }
 :*:;udarrow::
 {
-    SendRmLast("↕")
+    Send("↕")
 }
 
 :*:;ldoubleangle::
 {
-    SendRmLast("«")
+    Send("«")
 }
 :*:;rdoubleangle::
 {
-    SendRmLast("»")
+    Send("»")
 }
 
 :*:;zwsp::
 {
-	SendRmLast("​")
+	Send("​")
 }
 :*:;rlo::
 {
-    SendRmLast("‮")
+    Send("‮")
 }
 :*:;lro::
 {
-    SendRmLast("‭")
+    Send("‭")
 }
 :*:;001::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;002::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;003::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;004::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;005::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;006::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;007::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;008::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;009::
 {
-    SendRmLast("	")
+    Send("	")
 }
 :*:;010::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;011::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;012::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;013::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;014::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;015::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;016::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;017::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;018::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;019::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;020::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;021::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;022::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;023::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;024::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;025::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;026::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;027::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;028::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;029::
 {
-    SendRmLast("")
+    Send("")
 }
 :*:;delete::
 {
-    SendRmLast("")
+    Send("")
 }
 
 :*:;spanishn::
 {
-	SendRmLast("ñ")
+	Send("ñ")
 }
 :*:;thorn::
 {
-    SendRmLast("þ")
+    Send("þ")
 }
 :*:;thornup::
 {
-    SendRmLast("Þ")
+    Send("Þ")
 }
 
 ; Emojis
 :*:;skull::
 {
-	SendRmLast("💀")
+	Send("💀")
 }
 :*:;nerd::
 {
-	SendRmLast("🤓☝️")
+	Send("🤓☝️")
 }
 :*:;tu::
 {
-	SendRmLast("👍")
+	Send("👍")
 }
 :*:;td::
 {
-	SendRmLast("👎")
+	Send("👎")
 }
 :*:;standing::
 {
-    SendRmLast("🧍‍♂️")
+    Send("🧍‍♂️")
 }
 :*:;100::
 {
-    SendRmLast("💯")
+    Send("💯")
 }
 :*:;shrug::
 {
-    SendRmLast("¯\_(ツ)_/¯")
+    Send("¯\_(ツ)_/¯")
 }
 :*:;clap::
 {
-    SendRmLast("👏")
+    Send("👏")
 }
 :*:;clown::
 {
-    SendRmLast("🤡")
+    Send("🤡")
 }
 :*:;moai::
 {
-    SendRmLast("🗿")
+    Send("🗿")
 }
 :*:;crying::
 {
-    SendRmLast("😭")
+    Send("😭")
 }
 :*:;amogus::
 {
-    SendRmLast("ඞ")
+    Send("ඞ")
 }
 
 ; Text

@@ -11,11 +11,11 @@ A_MaxHotkeysPerInterval := 1000
 
     !h::
     {
-        SendInput "{Ctrl down}{PgUp}{Ctrl up}"
+        SendInput "{Ctrl down}{Alt down}{h}{Alt up}{Ctrl up}"
     }
     !u::
     {
-        SendInput "{Ctrl down}{PgDn}{Ctrl up}"
+        SendInput "{Ctrl down}{Alt down}{u}{Alt up}{Ctrl up}"
     }
 
     !w::
